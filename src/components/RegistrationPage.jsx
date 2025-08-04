@@ -126,7 +126,7 @@ function RegistrationPage({ onComplete }) {
           </div>
 
           <div className="registration-content">
-            <h2 className="page-title">Welcome to Hobby Log!</h2>
+            <h2 className="page-title">Welcome to Mind Mate!</h2>
             <p className="page-subtitle">Let's get to know you better</p>
 
             <div className="form-section">

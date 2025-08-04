@@ -503,7 +503,7 @@ function HobbyLogLandingPage({ startDemo }) {
               <h1 className="hero-title">Discover, Track, and Master Your Hobbies</h1>
               <p className="hero-description">
                 Find amazing hobby places around you, track your progress, and connect with fellow enthusiasts. 
-                Turn your interests into achievements with Hobby Log.
+                Turn your interests into achievements with Mind Mate.
               </p>
               <button className="cta-button" onClick={startDemo}>
                 <span>🚀</span>
@@ -533,7 +533,7 @@ function HobbyLogLandingPage({ startDemo }) {
 
         {/* Features Section */}
         <section className="features-section section">
-          <h2 className="section-title">Why Choose Hobby Log?</h2>
+          <h2 className="section-title">Why Choose Mind Mate?</h2>
           <p className="section-subtitle">Discover powerful features designed to elevate your hobby experience from simple tracking to meaningful growth.</p>
           <div className="features-grid">
             <div className="feature-card fade-in-up">
@@ -572,7 +572,7 @@ function HobbyLogLandingPage({ startDemo }) {
         {/* How It Works Section */}
         <section className="how-it-works-section section">
           <h2 className="section-title">Get Started in 3 Easy Steps</h2>
-          <p className="section-subtitle">Hobby Log is designed to be intuitive and fun, so you can start your journey without any hassle.</p>
+          <p className="section-subtitle">Mind Mate is designed to be intuitive and fun, so you can start your journey without any hassle.</p>
           <div className="steps-container">
             <div className="step fade-in-up">
               <div className="step-number">1</div>
@@ -652,7 +652,7 @@ function HobbyLogLandingPage({ startDemo }) {
         {/* CTA Section */}
         <section className="cta-section">
           <h2 className="fade-in-up">Ready to Start Your Hobby Journey?</h2>
-          <p className="fade-in-up" style={{animationDelay: '0.1s'}}>Join thousands of users who are already discovering new passions and achieving their goals with Hobby Log.</p>
+          <p className="fade-in-up" style={{animationDelay: '0.1s'}}>Join thousands of users who are already discovering new passions and achieving their goals with Mind Mate.</p>
           <div className="fade-in-up" style={{animationDelay: '0.2s'}}>
               <button className="cta-button large" onClick={startDemo}>
                 <span>🚀</span>
@@ -665,7 +665,7 @@ function HobbyLogLandingPage({ startDemo }) {
         <footer className="footer">
           <div className="footer-content">
             <div className="footer-section">
-              <h4>Hobby Log</h4>
+              <h4>Mind Mate</h4>
               <p>Your personal hobby exploration companion.</p>
             </div>
             <div className="footer-section">
@@ -696,7 +696,7 @@ function HobbyLogLandingPage({ startDemo }) {
             </div>
           </div>
           <div className="footer-bottom">
-            <p>&copy; {new Date().getFullYear()} Hobby Log. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} Mind Mate. All rights reserved.</p>
           </div>
         </footer>
       </div>
