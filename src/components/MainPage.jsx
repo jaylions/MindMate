@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-function MainPage({ MapsToMap, MapsToCommunity, MapsToShop, MapsToChallenges }) {
+function MainPage({ MapsToMap, MapsToCommunity, MapsToShop, MapsToChallenges, userData }) {
   const [showGoalSettings, setShowGoalSettings] = useState(false)
   const [goalFrequency, setGoalFrequency] = useState(3)
   const [goalPeriod, setGoalPeriod] = useState('days')
@@ -31,7 +31,9 @@ function MainPage({ MapsToMap, MapsToCommunity, MapsToShop, MapsToChallenges }) 
         {/* 캐릭터 섹션 */}
         <div className="character-section">
           <div className="character">
-            <div className="character-avatar">🐰</div>
+            <div className="character-avatar">
+              {userData?.selectedPet?.icon || '🐰'}
+            </div>
             <div className="character-heart">❤️</div>
           </div>
           <div className="progress-info">
@@ -39,7 +41,9 @@ function MainPage({ MapsToMap, MapsToCommunity, MapsToShop, MapsToChallenges }) 
               <span className="progress-number">100</span>
             </div>
             <div className="learning-info">
-              <h2 className="learning-title">Hobby Explorer</h2>
+              <h2 className="learning-title">
+                {userData?.userInfo?.nickname ? `${userData.userInfo.nickname}'s Journey` : 'Hobby Explorer'}
+              </h2>
               <div className="daily-goal">
                 Daily Goal: {getGoalText()}
                 <span className="dropdown" onClick={() => setShowGoalSettings(!showGoalSettings)}>▼</span>
