@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import './App.css'
-import IndexPage from './components/IndexPage'
 import RegistrationPage from './components/RegistrationPage'
 import PetSelectionPage from './components/PetSelectionPage'
 import LandingPage from './components/LandingPage'
@@ -11,11 +10,11 @@ import Shop from './components/Shop'
 import Challenges from './components/Challenges'
 
 function App() {
-  const [view, setView] = useState('index')
+  const [view, setView] = useState('landing')
   const [userData, setUserData] = useState(null)
 
   // Initial flow handlers
-  const handleSignup = () => {
+  const startDemo = () => {
     setView('registration')
   }
 
@@ -26,14 +25,10 @@ function App() {
 
   const handlePetSelectionComplete = (completeData) => {
     setUserData(completeData)
-    setView('landing')
-  }
-
-  // Original demo flow
-  const startDemo = () => {
     setView('main')
   }
 
+  // Navigation handlers
   const MapsToMap = () => {
     setView('map')
   }
@@ -56,8 +51,8 @@ function App() {
 
   return (
     <div className="App">
-      {view === 'index' && (
-        <IndexPage onSignup={handleSignup} />
+      {view === 'landing' && (
+        <LandingPage startDemo={startDemo} />
       )}
       {view === 'registration' && (
         <RegistrationPage onComplete={handleRegistrationComplete} />
@@ -68,9 +63,6 @@ function App() {
           sdtResults={userData?.sdtResults}
           onComplete={handlePetSelectionComplete}
         />
-      )}
-      {view === 'landing' && (
-        <LandingPage startDemo={startDemo} />
       )}
       {view === 'main' && (
         <MainPage 

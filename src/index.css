@@ -55,15 +55,27 @@ button:focus-visible {
 }
 
 /* 메인 앱 페이지들에만 모바일 크기 제한 적용 */
-.App .main-page,
-.App .map-view,
+.App .main-page {
+  max-width: 480px;
+  margin: 0 auto;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.App .map-view {
+  max-width: 480px;
+  margin: 0 auto;
+  height: 100vh;
+  overflow: hidden;
+}
+
 .App .community-page,
 .App .shop-page,
 .App .challenges-page {
   max-width: 480px;
   margin: 0 auto;
   height: 100vh;
-  overflow: hidden;
+  overflow-y: auto;
 }
 
 .main-page {
