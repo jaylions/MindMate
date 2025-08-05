@@ -135,10 +135,12 @@ function RegistrationPage({ onComplete }) {
                 <input
                   type="text"
                   id="nickname"
+                  name="nickname"
                   value={userInfo.nickname}
                   onChange={(e) => handleUserInfoChange('nickname', e.target.value)}
                   placeholder="Enter your nickname"
                   className="text-input"
+                  aria-label="Nickname"
                 />
               </div>
 

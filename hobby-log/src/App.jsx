@@ -71,7 +71,7 @@ function App() {
       )}
       {view === 'main' && (
         <MainPage 
-          MapsToMap={MapsToMap} 
+          MapsToMap={MapsToMap}
           MapsToCommunity={MapsToCommunity}
           MapsToShop={MapsToShop}
           MapsToChallenges={MapsToChallenges}
@@ -81,7 +81,7 @@ function App() {
       )}
       {view === 'map' && (
         <MapView 
-          MapsToMain={MapsToMain} 
+          MapsToMain={MapsToMain}
           MapsToCommunity={MapsToCommunity}
           MapsToShop={MapsToShop}
           MapsToProfile={MapsToProfile}
@@ -110,8 +110,8 @@ function App() {
         <ProfilePage
           userData={userData}
           MapsToMain={MapsToMain}
-          MapsToChallenges={MapsToChallenges}
           MapsToMap={MapsToMap}
+          MapsToChallenges={MapsToChallenges}
           MapsToCommunity={MapsToCommunity}
           MapsToShop={MapsToShop}
         />

@@ -248,10 +248,14 @@ function Community({ MapsToMain, MapsToMap, MapsToShop, MapsToProfile }) {
                 📊
               </button>
             </div>
+            <label htmlFor="activity-select" className="sr-only">Select Activity</label>
             <select 
+              id="activity-select"
+              name="activity-select"
               className="activity-select"
               value={selectedActivity}
               onChange={(e) => setSelectedActivity(e.target.value)}
+              aria-label="Select Activity"
             >
               <option value="all">All Activities</option>
               <option value="tennis">Tennis</option>

@@ -47,10 +47,10 @@ function Shop({ MapsToMain, MapsToMap, MapsToCommunity, MapsToProfile }) {
     },
     {
       id: 2,
-      name: "Custom Map Theme",
+      name: "Custom UI Theme",
       price: "50 coins",
       description: "Personalize your map appearance",
-      icon: "🗺️",
+      icon: "🎨",
       category: "themes"
     },
     {

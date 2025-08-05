@@ -79,8 +79,15 @@ function MainPage({ MapsToMap, MapsToCommunity, MapsToShop, MapsToChallenges, Ma
           <h3 className="chat-box-title">What did you do?</h3>
         </div>
         <div className="chat-box-input">
-          <input type="text" placeholder="Tell me about your day..." />
-          <button>Send</button>
+          <label htmlFor="daily-input" className="sr-only">Tell me about your day</label>
+          <input 
+            id="daily-input"
+            name="daily-input"
+            type="text" 
+            placeholder="Tell me about your day..." 
+            aria-label="Tell me about your day"
+          />
+          <button type="button">Send</button>
         </div>
       </div>
 

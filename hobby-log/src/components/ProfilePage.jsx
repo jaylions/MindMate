@@ -1,369 +1,326 @@
-import React, { useState } from 'react'
-import '../styles/ProfilePage.css'
+import React, { useState } from 'react';
+import '../styles/ProfilePage.css';
 
-function ProfilePage({ userData, MapsToMain, MapsToChallenges, MapsToMap, MapsToCommunity, MapsToShop }) {
-  const [sdtExpanded, setSdtExpanded] = useState(false)
-  const [showImageModal, setShowImageModal] = useState(false)
-  const [avatarImage, setAvatarImage] = useState(null)
-  const [previewImage, setPreviewImage] = useState(null)
-  const [editingField, setEditingField] = useState(null)
-  const [editingValue, setEditingValue] = useState('')
+// Reusable Components
+const SectionCard = ({ title, children }) => (
+  <div className="glass-card">
+    <h2 className="section-title">{title}</h2>
+    {children}
+  </div>
+);
+
+const InfoField = ({ label, value, onEdit, isEditing, onSave, onCancel, onChange }) => (
+  <div className="info-field">
+    <label>{label}</label>
+    <div className="field-container">
+      {isEditing ? (
+        <div className="edit-container">
+          <input 
+            id={`edit-${label.toLowerCase().replace(/\s+/g, '-')}`}
+            name={`edit-${label.toLowerCase().replace(/\s+/g, '-')}`}
+            type="text" 
+            value={value} 
+            onChange={onChange} 
+            className="edit-input"
+            aria-label={`Edit ${label}`}
+          />
+          <button className="save-btn" onClick={onSave}>✓</button>
+          <button className="cancel-btn" onClick={onCancel}>✕</button>
+        </div>
+      ) : (
+        <div className="field-display">
+          <span className="field-value">{value}</span>
+          {onEdit && <button className="edit-btn" onClick={onEdit}>✏️</button>}
+        </div>
+      )}
+    </div>
+  </div>
+);
+
+const PreferenceItem = ({ label, description, children }) => (
+  <div className="preference-item">
+    <div className="preference-info">
+      <div className="preference-label">{label}</div>
+      <div className="preference-desc">{description}</div>
+    </div>
+    {children}
+  </div>
+);
+
+// Main Sections
+const ProfileHeader = ({ nickname, openImageModal, avatarImage }) => (
+  <div className="profile-header-card">
+    <div className="avatar-container">
+      <div 
+        className="avatar large" 
+        style={avatarImage ? { backgroundImage: `url(${avatarImage})` } : {}}
+      >
+        {!avatarImage && (nickname?.[0]?.toUpperCase() || 'A')}
+      </div>
+      <button className="change-photo-btn" onClick={openImageModal}>📷</button>
+    </div>
+    <h1 className="profile-name">{nickname}</h1>
+    <p className="profile-email">user@example.com</p>
+  </div>
+);
+
+const PersonalInfoSection = ({ userSettings, setUserSettings }) => {
+  const [editingField, setEditingField] = useState(null);
+  const [editingValue, setEditingValue] = useState('');
+
+  const handleEdit = (field, value) => {
+    setEditingField(field);
+    setEditingValue(value);
+  };
+
+  const handleSave = (field) => {
+    setUserSettings({ ...userSettings, [field]: editingValue });
+    setEditingField(null);
+  };
+
+  return (
+    <SectionCard title="Personal Information">
+      <div className="info-fields">
+        <InfoField 
+          label="Display Name" 
+          value={editingField === 'nickname' ? editingValue : userSettings.nickname}
+          isEditing={editingField === 'nickname'}
+          onChange={(e) => setEditingValue(e.target.value)}
+          onEdit={() => handleEdit('nickname', userSettings.nickname)}
+          onSave={() => handleSave('nickname')}
+          onCancel={() => setEditingField(null)}
+        />
+        <InfoField 
+          label="Email" 
+          value={editingField === 'email' ? editingValue : userSettings.email}
+          isEditing={editingField === 'email'}
+          onChange={(e) => setEditingValue(e.target.value)}
+          onEdit={() => handleEdit('email', userSettings.email)}
+          onSave={() => handleSave('email')}
+          onCancel={() => setEditingField(null)}
+        />
+        <InfoField label="Member Since" value="March 2024" />
+      </div>
+    </SectionCard>
+  );
+};
+
+const PreferencesSection = ({ userSettings, setUserSettings }) => (
+  <SectionCard title="App Preferences">
+    <div className="preference-items">
+      <PreferenceItem label="Push Notifications" description="Receive updates about your pet and activities">
+        <label className="toggle-switch" htmlFor="notifications-toggle">
+          <input 
+            id="notifications-toggle"
+            name="notifications"
+            type="checkbox" 
+            checked={userSettings.notifications}
+            onChange={(e) => setUserSettings({...userSettings, notifications: e.target.checked})}
+            aria-label="Push Notifications"
+          />
+          <span className="slider"></span>
+        </label>
+      </PreferenceItem>
+      <PreferenceItem label="Privacy Level" description="Who can see your profile and activities">
+        <select 
+          id="privacy-select"
+          name="privacy"
+          className="preference-select"
+          value={userSettings.privacy}
+          onChange={(e) => setUserSettings({...userSettings, privacy: e.target.value})}
+          aria-label="Privacy Level"
+        >
+          <option value="public">Public</option>
+          <option value="friends">Friends Only</option>
+          <option value="private">Private</option>
+        </select>
+      </PreferenceItem>
+      <PreferenceItem label="Theme" description="Choose your preferred app theme">
+        <select 
+          id="theme-select"
+          name="theme"
+          className="preference-select"
+          value={userSettings.theme}
+          onChange={(e) => setUserSettings({...userSettings, theme: e.target.value})}
+          aria-label="Theme"
+        >
+          <option value="auto">Auto</option>
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+        </select>
+      </PreferenceItem>
+    </div>
+  </SectionCard>
+);
+
+const StatsSection = () => (
+  <SectionCard title="Account Statistics">
+    <div className="stats-grid">
+      <div className="stat-item">
+        <div className="stat-number">47</div>
+        <div className="stat-label">Days Active</div>
+      </div>
+      <div className="stat-item">
+        <div className="stat-number">23</div>
+        <div className="stat-label">Pet Adventures</div>
+      </div>
+      <div className="stat-item">
+        <div className="stat-number">156</div>
+        <div className="stat-label">Times Played</div>
+      </div>
+      <div className="stat-item">
+        <div className="stat-number">Level 8</div>
+        <div className="stat-label">Pet Bond</div>
+      </div>
+    </div>
+  </SectionCard>
+);
+
+const SDTSection = ({ sdtResults }) => {
+  const [sdtExpanded, setSdtExpanded] = useState(false);
+
+  const getSDTInfo = () => {
+    const sdtTypes = {
+      'autonomy': { title: 'Autonomy-Focused', description: 'You value independence and self-direction.', characteristics: ['🎯 Self-directed', '🔓 Freedom-seeking', '💡 Initiative-taking'] },
+      'competence': { title: 'Competence-Focused', description: 'You are driven by mastery and skill development.', characteristics: ['🏆 Achievement-oriented', '📈 Growth-minded', '💪 Challenge-seeking'] },
+      'relatedness': { title: 'Relatedness-Focused', description: 'You value connection and meaningful relationships.', characteristics: ['🤝 Connection-focused', '❤️ Empathetic', '👥 Collaborative'] }
+    };
+    return sdtTypes[sdtResults?.primaryType] || sdtTypes['autonomy'];
+  };
+
+  const sdtInfo = getSDTInfo();
+
+  return (
+    <div className={`glass-card sdt-section ${sdtExpanded ? 'expanded' : ''}`}>
+      <div className="sdt-header" onClick={() => setSdtExpanded(!sdtExpanded)}>
+        <h2 className="section-title">Your Personality Type</h2>
+        <div className="expand-icon">{sdtExpanded ? '▲' : '▼'}</div>
+      </div>
+      <div className="sdt-content">
+        <div className="sdt-type-title">{sdtInfo.title}</div>
+        <div className="sdt-description">{sdtInfo.description}</div>
+        <div className="sdt-characteristics">
+          {sdtInfo.characteristics.map((char, index) => (
+            <div key={index} className="characteristic-item">{char}</div>
+          ))}
+        </div>
+        <button className="action-btn secondary">Retake Test</button>
+      </div>
+    </div>
+  );
+};
+
+const AccountActionsSection = () => (
+  <SectionCard title="Account Actions">
+    <div className="action-buttons">
+      <button className="action-btn primary">Export Data</button>
+      <button className="action-btn secondary">Reset Progress</button>
+      <button className="action-btn danger">Delete Account</button>
+    </div>
+  </SectionCard>
+);
+
+const ImageUploadModal = ({ show, onClose, onFileSelect, onConfirm, previewImage, setPreviewImage }) => {
+  if (!show) return null;
+
+  return (
+    <div className="modal" onClick={(e) => e.target.className === 'modal' && onClose()}>
+      <div className="modal-content">
+        <h3 className="modal-title">Upload Profile Image</h3>
+        <div className="upload-options">
+          <button className="upload-btn" onClick={() => document.getElementById('fileInput').click()}>📁 From Gallery</button>
+          <button className="upload-btn" onClick={() => document.getElementById('cameraInput').click()}>📷 Use Camera</button>
+        </div>
+        {previewImage && (
+          <div className="preview-container">
+            <img className="preview-image" src={previewImage} alt="Preview" />
+            <div>
+              <button className="action-btn primary" onClick={onConfirm}>✅ Apply</button>
+              <button className="action-btn secondary" onClick={() => setPreviewImage(null)}>❌ Cancel</button>
+            </div>
+          </div>
+        )}
+        <button className="close-btn" onClick={onClose}>Close</button>
+        <input type="file" id="fileInput" name="fileInput" className="hidden-input" accept="image/*" onChange={onFileSelect} aria-label="Upload image from file" />
+        <input type="file" id="cameraInput" name="cameraInput" className="hidden-input" accept="image/*" capture="environment" onChange={onFileSelect} aria-label="Take photo with camera" />
+      </div>
+    </div>
+  );
+};
+
+const BottomNav = ({ MapsToMain, MapsToMap, MapsToCommunity, MapsToShop }) => (
+  <nav className="bottom-nav">
+    <div className="nav-items">
+      <div className="nav-item" onClick={MapsToMain}><div className="nav-icon">🏠</div><div className="nav-label">Home</div></div>
+      <div className="nav-item" onClick={MapsToMap}><div className="nav-icon">🗺️</div><div className="nav-label">Map</div></div>
+      <div className="nav-item" onClick={MapsToCommunity}><div className="nav-icon">👥</div><div className="nav-label">Community</div></div>
+      <div className="nav-item" onClick={MapsToShop}><div className="nav-icon">🛍️</div><div className="nav-label">Shop</div></div>
+      <div className="nav-item active"><div className="nav-icon">👤</div><div className="nav-label">Profile</div></div>
+    </div>
+  </nav>
+);
+
+function ProfilePage({ userData, MapsToMain, MapsToMap, MapsToCommunity, MapsToShop }) {
+  const [showImageModal, setShowImageModal] = useState(false);
+  const [avatarImage, setAvatarImage] = useState(null);
+  const [previewImage, setPreviewImage] = useState(null);
   const [userSettings, setUserSettings] = useState({
     nickname: userData?.userInfo?.nickname || 'Explorer',
     email: 'user@example.com',
     notifications: true,
     privacy: 'friends',
     theme: 'auto'
-  })
-
-  const toggleSDTInfo = () => {
-    setSdtExpanded(!sdtExpanded)
-  }
-
-  const openImageModal = () => {
-    setShowImageModal(true)
-  }
-
-  const closeImageModal = () => {
-    setShowImageModal(false)
-    setPreviewImage(null)
-  }
+  });
 
   const handleFileSelect = (event) => {
-    const file = event.target.files[0]
+    const file = event.target.files[0];
     if (file && file.type.startsWith('image/')) {
-      const reader = new FileReader()
-      reader.onload = (e) => {
-        setPreviewImage(e.target.result)
-      }
-      reader.readAsDataURL(file)
+      const reader = new FileReader();
+      reader.onload = (e) => setPreviewImage(e.target.result);
+      reader.readAsDataURL(file);
     }
-  }
+  };
 
   const confirmImage = () => {
     if (previewImage) {
-      setAvatarImage(previewImage)
-      closeImageModal()
+      setAvatarImage(previewImage);
+      setShowImageModal(false);
+      setPreviewImage(null);
     }
-  }
-
-  const getSDTInfo = () => {
-    const sdtTypes = {
-      'autonomy': {
-        title: 'Autonomy-Focused',
-        description: 'You value independence, self-direction, and making your own choices. You thrive when you have control over your decisions and environment.',
-        characteristics: ['🎯 Self-directed', '🔓 Freedom-seeking', '💡 Initiative-taking', '🌟 Goal-oriented']
-      },
-      'competence': {
-        title: 'Competence-Focused',
-        description: 'You are driven by mastery, skill development, and achieving excellence. You enjoy challenges that help you grow and improve.',
-        characteristics: ['🏆 Achievement-oriented', '📈 Growth-minded', '🎯 Skill-focused', '💪 Challenge-seeking']
-      },
-      'relatedness': {
-        title: 'Relatedness-Focused',
-        description: 'You value connection, belonging, and meaningful relationships. You thrive in collaborative and supportive environments.',
-        characteristics: ['🤝 Connection-focused', '❤️ Empathetic', '👥 Collaborative', '🌍 Community-minded']
-      }
-    }
-    
-    return sdtTypes[userData?.sdtResults?.primaryType] || sdtTypes['autonomy']
-  }
-
-  const sdtInfo = getSDTInfo()
+  };
 
   return (
     <div className="profile-page">
       <div className="container">
-        {/* Profile Header */}
-        <div className="profile-header">
-          <h1 className="page-title">Profile Settings</h1>
-          <p className="page-subtitle">Manage your personal information</p>
-        </div>
-
-        {/* Profile Picture Section */}
-        <div className="glass-card profile-picture-section">
-          <div className="section-title">Profile Picture</div>
-          <div className="avatar-container">
-            <div 
-              className="avatar large" 
-              style={avatarImage ? {
-                backgroundImage: `url(${avatarImage})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center'
-              } : {}}
-            >
-              {!avatarImage && (userData?.userInfo?.nickname?.[0]?.toUpperCase() || 'A')}
-            </div>
-            <button className="change-photo-btn" onClick={openImageModal}>
-              📷 Change Photo
-            </button>
-          </div>
-        </div>
-
-        {/* Personal Information */}
-        <div className="glass-card personal-info-section">
-          <div className="section-title">Personal Information</div>
-          <div className="info-fields">
-            <div className="info-field">
-              <label>Display Name</label>
-              <div className="field-container">
-                {editingField === 'nickname' ? (
-                  <div className="edit-container">
-                    <input 
-                      type="text" 
-                      value={editingValue} 
-                      onChange={(e) => setEditingValue(e.target.value)}
-                      className="edit-input"
-                    />
-                    <button 
-                      className="save-btn" 
-                      onClick={() => {
-                        setUserSettings({...userSettings, nickname: editingValue})
-                        setEditingField(null)
-                      }}
-                    >✓</button>
-                    <button 
-                      className="cancel-btn" 
-                      onClick={() => setEditingField(null)}
-                    >✕</button>
-                  </div>
-                ) : (
-                  <div className="field-display">
-                    <span className="field-value">{userSettings.nickname}</span>
-                    <button 
-                      className="edit-btn" 
-                      onClick={() => {
-                        setEditingField('nickname')
-                        setEditingValue(userSettings.nickname)
-                      }}
-                    >✏️</button>
-                  </div>
-                )}
-              </div>
-            </div>
-            
-            <div className="info-field">
-              <label>Email</label>
-              <div className="field-container">
-                {editingField === 'email' ? (
-                  <div className="edit-container">
-                    <input 
-                      type="email" 
-                      value={editingValue} 
-                      onChange={(e) => setEditingValue(e.target.value)}
-                      className="edit-input"
-                    />
-                    <button 
-                      className="save-btn" 
-                      onClick={() => {
-                        setUserSettings({...userSettings, email: editingValue})
-                        setEditingField(null)
-                      }}
-                    >✓</button>
-                    <button 
-                      className="cancel-btn" 
-                      onClick={() => setEditingField(null)}
-                    >✕</button>
-                  </div>
-                ) : (
-                  <div className="field-display">
-                    <span className="field-value">{userSettings.email}</span>
-                    <button 
-                      className="edit-btn" 
-                      onClick={() => {
-                        setEditingField('email')
-                        setEditingValue(userSettings.email)
-                      }}
-                    >✏️</button>
-                  </div>
-                )}
-              </div>
-            </div>
-            
-            <div className="info-field">
-              <label>Member Since</label>
-              <div className="field-container">
-                <span className="field-value readonly">March 2024</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* App Preferences */}
-        <div className="glass-card preferences-section">
-          <div className="section-title">App Preferences</div>
-          <div className="preference-items">
-            <div className="preference-item">
-              <div className="preference-info">
-                <div className="preference-label">Push Notifications</div>
-                <div className="preference-desc">Receive updates about your pet and activities</div>
-              </div>
-              <label className="toggle-switch">
-                <input 
-                  type="checkbox" 
-                  checked={userSettings.notifications}
-                  onChange={(e) => setUserSettings({...userSettings, notifications: e.target.checked})}
-                />
-                <span className="slider"></span>
-              </label>
-            </div>
-            
-            <div className="preference-item">
-              <div className="preference-info">
-                <div className="preference-label">Privacy Level</div>
-                <div className="preference-desc">Who can see your profile and activities</div>
-              </div>
-              <select 
-                className="preference-select"
-                value={userSettings.privacy}
-                onChange={(e) => setUserSettings({...userSettings, privacy: e.target.value})}
-              >
-                <option value="public">Public</option>
-                <option value="friends">Friends Only</option>
-                <option value="private">Private</option>
-              </select>
-            </div>
-            
-            <div className="preference-item">
-              <div className="preference-info">
-                <div className="preference-label">Theme</div>
-                <div className="preference-desc">Choose your preferred app theme</div>
-              </div>
-              <select 
-                className="preference-select"
-                value={userSettings.theme}
-                onChange={(e) => setUserSettings({...userSettings, theme: e.target.value})}
-              >
-                <option value="auto">Auto</option>
-                <option value="light">Light</option>
-                <option value="dark">Dark</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        {/* Account Statistics */}
-        <div className="glass-card stats-section">
-          <div className="section-title">Account Statistics</div>
-          <div className="stats-grid">
-            <div className="stat-item">
-              <div className="stat-number">47</div>
-              <div className="stat-label">Days Active</div>
-            </div>
-            <div className="stat-item">
-              <div className="stat-number">23</div>
-              <div className="stat-label">Pet Adventures</div>
-            </div>
-            <div className="stat-item">
-              <div className="stat-number">156</div>
-              <div className="stat-label">Times Played</div>
-            </div>
-            <div className="stat-item">
-              <div className="stat-number">Level 8</div>
-              <div className="stat-label">Pet Bond</div>
-            </div>
-          </div>
-        </div>
-
-        {/* SDT Personality Type */}
-        <div className={`glass-card sdt-section ${sdtExpanded ? 'expanded' : ''}`}>
-          <div className="sdt-header" onClick={toggleSDTInfo}>
-            <div className="section-title">Your Personality Type</div>
-            <div className="expand-icon">{sdtExpanded ? '▲' : '▼'}</div>
-          </div>
-          <div className="sdt-content">
-            <div className="sdt-type-title">{sdtInfo.title}</div>
-            <div className="sdt-description">{sdtInfo.description}</div>
-            <div className="sdt-characteristics">
-              {sdtInfo.characteristics.map((char, index) => (
-                <div key={index} className="characteristic-item">{char}</div>
-              ))}
-            </div>
-            <button className="retake-test-btn">Retake Personality Test</button>
-          </div>
-        </div>
-
-        {/* Account Actions */}
-        <div className="glass-card actions-section">
-          <div className="section-title">Account Actions</div>
-          <div className="action-buttons">
-            <button className="action-btn primary">Export Data</button>
-            <button className="action-btn secondary">Reset Progress</button>
-            <button className="action-btn danger">Delete Account</button>
-          </div>
-        </div>
+        <ProfileHeader 
+          nickname={userSettings.nickname} 
+          openImageModal={() => setShowImageModal(true)} 
+          avatarImage={avatarImage} 
+        />
+        <PersonalInfoSection userSettings={userSettings} setUserSettings={setUserSettings} />
+        <PreferencesSection userSettings={userSettings} setUserSettings={setUserSettings} />
+        <StatsSection />
+        <SDTSection sdtResults={userData?.sdtResults} />
+        <AccountActionsSection />
       </div>
 
-      {/* Image Upload Modal */}
-      {showImageModal && (
-        <div className="modal" onClick={(e) => e.target.className === 'modal' && closeImageModal()}>
-          <div className="modal-content">
-            <div className="modal-title">프로필 이미지 등록</div>
-            <div className="upload-options">
-              <button className="upload-btn" onClick={() => document.getElementById('fileInput').click()}>
-                📁 갤러리에서 선택
-              </button>
-              <button className="upload-btn" onClick={() => document.getElementById('cameraInput').click()}>
-                📷 카메라로 촬영
-              </button>
-            </div>
-            {previewImage && (
-              <div className="preview-container">
-                <img className="preview-image" src={previewImage} alt="Preview" />
-                <div>
-                  <button className="upload-btn" onClick={confirmImage} style={{marginRight: '8px'}}>✅ 적용</button>
-                  <button className="close-btn" onClick={() => setPreviewImage(null)}>❌ 취소</button>
-                </div>
-              </div>
-            )}
-            <button className="close-btn" onClick={closeImageModal}>닫기</button>
-            
-            <input 
-              type="file" 
-              id="fileInput" 
-              className="hidden-input" 
-              accept="image/*" 
-              onChange={handleFileSelect}
-            />
-            <input 
-              type="file" 
-              id="cameraInput" 
-              className="hidden-input" 
-              accept="image/*" 
-              capture="environment" 
-              onChange={handleFileSelect}
-            />
-          </div>
-        </div>
-      )}
+      <ImageUploadModal 
+        show={showImageModal}
+        onClose={() => setShowImageModal(false)}
+        onFileSelect={handleFileSelect}
+        onConfirm={confirmImage}
+        previewImage={previewImage}
+        setPreviewImage={setPreviewImage}
+      />
 
-      {/* Bottom Navigation */}
-      <div className="bottom-nav">
-        <div className="nav-items">
-          <div className="nav-item" onClick={MapsToMain}>
-            <div className="nav-icon">🏠</div>
-            <div className="nav-label">Home</div>
-          </div>
-          <div className="nav-item" onClick={MapsToMap}>
-            <div className="nav-icon">🗺️</div>
-            <div className="nav-label">Map</div>
-          </div>
-          <div className="nav-item" onClick={MapsToCommunity}>
-            <div className="nav-icon">👥</div>
-            <div className="nav-label">Community</div>
-          </div>
-          <div className="nav-item" onClick={MapsToShop}>
-            <div className="nav-icon">🛍️</div>
-            <div className="nav-label">Shop</div>
-          </div>
-          <div className="nav-item active">
-            <div className="nav-icon">👤</div>
-            <div className="nav-label">Profile</div>
-          </div>
-        </div>
-      </div>
+      <BottomNav 
+        MapsToMain={MapsToMain}
+        MapsToMap={MapsToMap}
+        MapsToCommunity={MapsToCommunity}
+        MapsToShop={MapsToShop}
+      />
     </div>
-  )
+  );
 }
 
-export default ProfilePage
+export default ProfilePage;
