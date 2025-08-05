@@ -1,69 +1,104 @@
 import React, { useState } from 'react';
 import '../styles/PetSelectionPage.css';
 
+// Import all pet images
+import pandaImg from '../character/panda.jpg';
+import bearImg from '../character/bear.jpg';
+import lionImg from '../character/lion.jpg';
+import eagleImg from '../character/eagle.jpg';
+import rabbitImg from '../character/rabbit.jpg';
+import unicornImg from '../character/unicorn.jpg';
+import turtleImg from '../character/turtle.jpg';
+import catImg from '../character/cat.jpg';
+import dogImg from '../character/dog.jpg';
+import dragonImg from '../character/dragon.jpg';
+import grumpyCatImg from '../character/grumpy_cat.jpg';
+import borderCollieImg from '../character/border_collie.jpg';
+
 const PETS = [
   {
     id: 'panda',
     name: 'Panda',
     emoji: '🐼',
     status: 'available',
-    image: 'src/assets/character/panda.jpg'
+    image: pandaImg
   },
   {
     id: 'bear',
     name: 'Bear',
     emoji: '🐻',
     status: 'available',
-    image: 'src/assets/character/bear.jpg'
+    image: bearImg
   },
   {
     id: 'lion',
     name: 'Lion',
     emoji: '🦁',
     status: 'available',
-    image: 'src/assets/character/lion.jpg'
+    image: lionImg
   },
   {
     id: 'eagle',
     name: 'Eagle',
     emoji: '🦅',
     status: 'available',
-    image: 'src/assets/character/eagle.jpg'
+    image: eagleImg
   },
   {
     id: 'rabbit',
     name: 'Rabbit',
     emoji: '🐰',
     status: 'available',
-    image: 'src/assets/character/rabbit.jpg'
+    image: rabbitImg
   },
   {
     id: 'unicorn',
     name: 'Unicorn',
     emoji: '🦄',
-    status: 'locked',
-    image: 'src/assets/character/unicorn.jpg'
+    status: 'available',
+    image: unicornImg
   },
   {
     id: 'turtle',
     name: 'Turtle',
     emoji: '🐢',
-    status: 'locked',
-    image: 'src/assets/character/turtle.jpg'
+    status: 'available',
+    image: turtleImg
   },
   {
     id: 'cat',
     name: 'Cat',
     emoji: '🐱',
-    status: 'locked',
-    image: 'src/assets/character/cat.jpg'
+    status: 'available',
+    image: catImg
   },
   {
     id: 'dog',
     name: 'Dog',
     emoji: '🐶',
-    status: 'locked',
-    image: 'src/assets/character/dog.jpg'
+    status: 'available',
+    image: dogImg
+  },  
+  {
+    id: 'dragon',
+    name: 'Dragon',
+    emoji: '🐉',
+    status: 'available',
+    image: dragonImg
+  },
+  {
+    id: 'grumpy_cat',
+    name: 'Grumpy Cat',
+    emoji: '😾',
+    status: 'available',
+    image: grumpyCatImg
+  },
+  {
+    id: 'border_collie',
+    name: 'Border Collie',
+    emoji: '🐕',
+    status: 'available',
+    image: borderCollieImg
   }
 ];
 
@@ -167,7 +202,15 @@ function PetSelectionPage({ userInfo, sdtResults, onComplete }) {
         onClick={handleComplete}
         disabled={!selectedPetData}
       >
-        Select Pet
+        {selectedPetData ? (
+          <>
+            🎉 Select {selectedPetData.name} as My Pet
+          </>
+        ) : (
+          <>
+            🐾 Choose a Pet First
+          </>
+        )}
       </button>
 
       {/* Success Message */}
