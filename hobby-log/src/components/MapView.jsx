@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import '../styles/MapView.css'
 
 function MapView({ MapsToMain, MapsToCommunity, MapsToShop, MapsToProfile }) {
   const [mapLoaded, setMapLoaded] = useState(false)
@@ -149,9 +150,10 @@ function MapView({ MapsToMain, MapsToCommunity, MapsToShop, MapsToProfile }) {
             <span className="info-text">San Francisco, CA</span>
           </div>
         </div>
+
       </div>
 
-      {/* Bottom Navigation */}
+      {/* Bottom Navigation - matching other pages */}
       <nav className="bottom-nav">
         <div className="nav-items">
           <div className="nav-item" onClick={MapsToMain}>
