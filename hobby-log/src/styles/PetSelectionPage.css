@@ -184,85 +184,28 @@
 .pet-selection-confirm-btn {
     width: 100%;
     max-width: 400px;
-    padding: min(16px, 4vh);
-    background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e0 100%);
-    color: #4a5568;
-    border: 2px solid #e2e8f0;
+    padding: min(14px, 3.5vh);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
     border-radius: 12px;
     font-size: min(16px, 4vw);
     font-weight: 600;
-    cursor: not-allowed;
+    cursor: pointer;
     transition: all 0.3s ease;
-    opacity: 0.6;
+    opacity: 0.5;
     pointer-events: none;
     flex-shrink: 0;
-    position: relative;
-    overflow: hidden;
-}
-
-.pet-selection-confirm-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: -1;
 }
 
 .pet-selection-confirm-btn.active {
-    background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
-    color: white;
-    border: 2px solid #22c55e;
     opacity: 1;
     pointer-events: auto;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
-    transform: translateY(-1px);
-}
-
-.pet-selection-confirm-btn.active::before {
-    opacity: 1;
 }
 
 .pet-selection-confirm-btn.active:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(34, 197, 94, 0.4);
-    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
-}
-
-.pet-selection-confirm-btn.active:active {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
-    background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
-}
-
-/* 버튼에 펄스 효과 추가 */
-.pet-selection-confirm-btn.active {
-    background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
-    color: white;
-    border: 2px solid #22c55e;
-    opacity: 1;
-    pointer-events: auto;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
-    transform: translateY(-1px);
-    animation: pulse-green 2s infinite;
-}
-
-@keyframes pulse-green {
-    0% {
-        box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
-    }
-    50% {
-        box-shadow: 0 6px 20px rgba(34, 197, 94, 0.5);
-    }
-    100% {
-        box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
-    }
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
 }
 
 .pet-selection-success-message {
@@ -434,35 +377,6 @@
         padding-bottom: max(min(20px, 4vw), env(safe-area-inset-bottom));
         padding-left: max(min(20px, 4vw), env(safe-area-inset-left));
         padding-right: max(min(20px, 4vw), env(safe-area-inset-right));
-    }
-}
-
-/* 모바일에서 버튼 개선 */
-@media (max-width: 768px) {
-    .pet-selection-confirm-btn {
-        padding: 18px;
-        font-size: 16px;
-        margin-top: 20px;
-        border-radius: 16px;
-        font-weight: 700;
-    }
-    
-    .pet-selection-confirm-btn.active {
-        box-shadow: 0 6px 20px rgba(34, 197, 94, 0.4);
-        transform: translateY(-2px);
-    }
-    
-    .pet-selection-confirm-btn.active:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 10px 30px rgba(34, 197, 94, 0.5);
-    }
-}
-
-/* 작은 화면에서 버튼 텍스트 조정 */
-@media (max-width: 480px) {
-    .pet-selection-confirm-btn {
-        font-size: 14px;
-        padding: 16px;
     }
 }
 
