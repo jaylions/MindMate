@@ -1,11 +1,37 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import LiquidBar from './LiquidBar'
+import '../styles/HomePage.css'
 
 function MainPage({ MapsToMap, MapsToCommunity, MapsToShop, MapsToChallenges, MapsToProfile, userData }) {
   const [showGoalSettings, setShowGoalSettings] = useState(false)
   const [goalFrequency, setGoalFrequency] = useState(3)
   const [goalPeriod, setGoalPeriod] = useState('days')
   const [completedToday, setCompletedToday] = useState(false)
+  const [currentTime, setCurrentTime] = useState(new Date())
+  const [selectedCategory, setSelectedCategory] = useState('active')
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date())
+    }, 60000)
+    return () => clearInterval(timer)
+  }, [])
+
+  const getGreeting = () => {
+    const hour = currentTime.getHours()
+    if (hour < 12) return 'Good Morning'
+    if (hour < 18) return 'Good Afternoon'
+    return 'Good Evening'
+  }
+
+  const getFormattedDate = () => {
+    return currentTime.toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    })
+  }
 
   const handleGoalToggle = () => {
     setCompletedToday(!completedToday)
@@ -18,229 +44,166 @@ function MainPage({ MapsToMap, MapsToCommunity, MapsToShop, MapsToChallenges, Ma
 
   return (
     <div className="main-page">
-      {/* 상단 바 */}
-      <div className="top-bar">
-        <div className="hamburger-menu">☰</div>
-        <div className="achievements">
-          <div className="trophy">🏆 692</div>
-          <div className="star">⭐ 19:147</div>
+      {/* Header Section */}
+      <div className="header">
+        <h1 className="greeting">Your Pet Companion</h1>
+        <p className="date">{getFormattedDate()}</p>
+      </div>
+
+      {/* Pet Character Section */}
+      <div className="glass-card pet-section">
+        <div className="pet-container">
+          <div className="pet-avatar">
+            <div className="pet-character" style={{
+              backgroundImage: userData?.selectedPet?.image ? `url(${userData.selectedPet.image})` : 'none'
+            }}>
+              {!userData?.selectedPet?.image && (userData?.selectedPet?.emoji || '🐰')}
+            </div>
+          </div>
+          <div className="pet-info">
+            <h3>{userData?.selectedPet?.name || 'Your Pet'}</h3>
+            <p className="pet-status">Ready for new adventures!</p>
+          </div>
+        </div>
+        <div className="experience-bar">
+          <div className="exp-label">Experience Progress</div>
+          <div className="exp-bar-container">
+            <div className="exp-bar-fill" style={{width: '65%'}}></div>
+          </div>
         </div>
       </div>
 
-      {/* 메인 콘텐츠 */}
-      <div className="main-content">
-        {/* Explorer Progress Section */}
-        <div className="explorer-progress-section">
-          <div className="progress-title">Your Explorer Journey</div>
-          <div className="explorer-progress-grid">
-            <div className="explorer-progress-item">
-              <LiquidBar 
-                value={100} 
-                maxValue={100} 
-                color="#4CAF50" 
-                height={50} 
-                label="Today's Progress"
-                animated={true}
-              />
-            </div>
-            <div className="explorer-progress-item">
-              <LiquidBar 
-                value={692} 
-                maxValue={1000} 
-                color="#66BB6A" 
-                height={50} 
-                label="Total Trophies"
-                animated={true}
-              />
-            </div>
-          </div>
-          <div className="single-explorer-progress">
+      {/* Chat Box Section */}
+      <div className="glass-card chat-box-section">
+        <div className="chat-box-header">
+          <h3 className="chat-box-title">What did you do?</h3>
+        </div>
+        <div className="chat-box-input">
+          <input type="text" placeholder="Tell me about your day..." />
+          <button>Send</button>
+        </div>
+      </div>
+
+
+      {/* Challenge Progress Overview */}
+      <div className="glass-card challenge-progress-overview">
+        <h3 className="section-title" style={{margin: '0 0 16px 0'}}>Your Challenges</h3>
+        <div className="overview-grid">
+          <div className="overview-item">
             <LiquidBar 
-              value={19} 
+              value={12} 
               maxValue={25} 
-              color="#81C784" 
-              height={45} 
-              label="Explorer Level Progress"
+              color="#4CAF50" 
+              height={60} 
+              label="Total Challenges"
+              animated={true}
+            />
+          </div>
+          <div className="overview-item">
+            <LiquidBar 
+              value={8} 
+              maxValue={12} 
+              color="#66BB6A" 
+              height={60} 
+              label="Active Challenges"
               animated={true}
             />
           </div>
         </div>
-
-        {/* 캐릭터 섹션 */}
-        <div className="character-section">
-          <div className="character">
-            <div className="character-avatar">
-              {userData?.selectedPet?.icon || '🐰'}
-            </div>
-            <div className="character-heart">❤️</div>
-          </div>
-          <div className="progress-info">
-            <div className="progress-circle">
-              <span className="progress-number">100</span>
-            </div>
-            <div className="learning-info">
-              <h2 className="learning-title">
-                {userData?.userInfo?.nickname ? `${userData.userInfo.nickname}'s Journey` : 'Hobby Explorer'}
-              </h2>
-              <div className="daily-goal">
-                Daily Goal: {getGoalText()}
-                <span className="dropdown" onClick={() => setShowGoalSettings(!showGoalSettings)}>▼</span>
-              </div>
-            </div>
-          </div>
+        <div className="single-overview">
+          <LiquidBar 
+            value={48} 
+            maxValue={100} 
+            color="#81C784" 
+            height={50} 
+            label="Overall Challenge Completion"
+            animated={true}
+          />
         </div>
+      </div>
 
-        {/* Daily Goal 설정 */}
-        {showGoalSettings && (
-          <div className="goal-settings">
-            <h3>Customize Your Goal</h3>
-            <div className="goal-inputs">
-              <div className="goal-input-group">
-                <label>Visit every:</label>
-                <input 
-                  type="number" 
-                  value={goalFrequency} 
-                  onChange={(e) => setGoalFrequency(parseInt(e.target.value) || 1)}
-                  min="1"
-                  max="30"
-                />
-              </div>
-              <div className="goal-input-group">
-                <label>Period:</label>
-                <select 
-                  value={goalPeriod} 
-                  onChange={(e) => setGoalPeriod(e.target.value)}
-                >
-                  <option value="days">Days</option>
-                  <option value="weeks">Weeks</option>
-                  <option value="months">Months</option>
-                </select>
-              </div>
+      {/* Active Challenges */}
+      <h2 className="section-title">Active Challenges</h2>
+      <div className="challenges-list">
+        <div className="glass-card challenge-item active">
+          <div className="challenge-header">
+            <div className="challenge-icon" style={{backgroundColor: '#4CAF50', width: '50px', height: '50px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', color: 'white', flexShrink: 0, boxShadow: '0 4px 15px rgba(0, 0, 0, 0.2)'}}>
+              🎾
             </div>
-            <button className="save-goal-btn" onClick={() => setShowGoalSettings(false)}>
-              Save Goal
-            </button>
-          </div>
-        )}
-
-        {/* Today's Goal */}
-        <div className="todays-goal">
-          <div className="goal-header">
-            <h3>Today's Goal</h3>
-            <span className="goal-status">1/1</span>
-          </div>
-          <div className="goal-item" onClick={handleGoalToggle}>
-            <div className={`goal-checkbox ${completedToday ? 'completed' : ''}`}>
-              {completedToday && <span>✓</span>}
-            </div>
-            <span className="goal-text">Visit a hobby place</span>
-            <button className="show-btn">Show</button>
-          </div>
-        </div>
-
-        {/* 추가 학습 버튼 */}
-        <button className="explore-button" onClick={MapsToMap}>
-          <span className="button-icon">🗺️</span>
-          Explore Nearby Hobby Places
-        </button>
-
-        {/* 학습 정보 섹션 */}
-        <div className="learning-stats">
-          <h3 className="section-title">Exploration Stats</h3>
-          <div className="stats-content">
-            <div className="stats-liquid-bars">
-              <div className="stats-bar-item">
+            <div className="challenge-info" style={{flex: 1, marginLeft: '1rem'}}>
+              <h3 className="challenge-title" style={{color: '#2E7D32', fontSize: '1.1rem', fontWeight: 'bold', marginBottom: '0.3rem'}}>Tennis Master</h3>
+              <p className="challenge-description" style={{color: '#4CAF50', fontSize: '0.9rem', marginBottom: '0.8rem', lineHeight: 1.4}}>Visit Golden Gate Tennis Courts 20 times</p>
+              <div className="challenge-progress">
                 <LiquidBar 
-                  value={12} 
+                  value={15} 
                   maxValue={20} 
-                  color="#A5D6A7" 
-                  height={40} 
-                  label="New Places"
-                  animated={false}
-                />
-              </div>
-              <div className="stats-bar-item">
-                <LiquidBar 
-                  value={8} 
-                  maxValue={15} 
-                  color="#81C784" 
-                  height={40} 
-                  label="Places Visited"
-                  animated={false}
-                />
-              </div>
-              <div className="stats-bar-item">
-                <LiquidBar 
-                  value={150} 
-                  maxValue={180} 
-                  color="#66BB6A" 
-                  height={40} 
-                  label="Total Minutes"
+                  color="#4CAF50" 
+                  height={30} 
+                  label="15/20"
                   animated={false}
                 />
               </div>
             </div>
-            <div className="main-stats-bar">
-              <LiquidBar 
-                value={83} 
-                maxValue={100} 
-                color="#4CAF50" 
-                height={60} 
-                label="Overall Exploration Score"
-                animated={true}
-              />
+            <div className="challenge-status" style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem'}}>
             </div>
           </div>
         </div>
-
-        {/* 취미 레벨 섹션 */}
-        <div className="hobby-level">
-          <h3 className="section-title">My Hobby Level</h3>
-          <div className="level-content">
-            <button className="level-check-button">Check Now</button>
-            <div className="level-date">2024-01-15</div>
-            <div className="level-ranking">Top 5.71%</div>
-          </div>
-        </div>
-
-        {/* 출석 체크 섹션 */}
-        <div className="attendance-check">
-          <h3 className="section-title">Attendance Check</h3>
-          <div className="attendance-stars">
-            <span className="star filled">⭐</span>
-            <span className="star filled">⭐</span>
-            <span className="star filled">⭐</span>
-            <span className="star">⭐</span>
-            <span className="star">⭐</span>
+        
+        <div className="glass-card challenge-item active">
+          <div className="challenge-header">
+            <div className="challenge-icon" style={{backgroundColor: '#795548', width: '50px', height: '50px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', color: 'white', flexShrink: 0, boxShadow: '0 4px 15px rgba(0, 0, 0, 0.2)'}}>
+              ☕
+            </div>
+            <div className="challenge-info" style={{flex: 1, marginLeft: '1rem'}}>
+              <h3 className="challenge-title" style={{color: '#2E7D32', fontSize: '1.1rem', fontWeight: 'bold', marginBottom: '0.3rem'}}>Coffee Connoisseur</h3>
+              <p className="challenge-description" style={{color: '#4CAF50', fontSize: '0.9rem', marginBottom: '0.8rem', lineHeight: 1.4}}>Try 10 different coffee shops</p>
+              <div className="challenge-progress">
+                <LiquidBar 
+                  value={7} 
+                  maxValue={10} 
+                  color="#795548" 
+                  height={30} 
+                  label="7/10"
+                  animated={false}
+                />
+              </div>
+            </div>
+            <div className="challenge-status" style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem'}}>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* 하단 네비게이션 */}
-      <div className="bottom-nav">
-        <div className="nav-item" onClick={MapsToChallenges}>
-          <div className="nav-icon">🎯</div>
-          <span className="nav-label">Challenges</span>
+      
+
+
+      {/* Bottom Navigation */}
+      <nav className="bottom-nav">
+        <div className="nav-items">
+          <div className="nav-item active">
+            <div className="nav-icon">🏠</div>
+            <div className="nav-label">Home</div>
+          </div>
+          <div className="nav-item" onClick={MapsToMap}>
+            <div className="nav-icon">🗺️</div>
+            <div className="nav-label">Map</div>
+          </div>
+          <div className="nav-item" onClick={MapsToCommunity}>
+            <div className="nav-icon">👥</div>
+            <div className="nav-label">Community</div>
+          </div>
+          <div className="nav-item" onClick={MapsToShop}>
+            <div className="nav-icon">🛍️</div>
+            <div className="nav-label">Shop</div>
+          </div>
+          <div className="nav-item" onClick={MapsToProfile}>
+            <div className="nav-icon">👤</div>
+            <div className="nav-label">Profile</div>
+          </div>
         </div>
-        <div className="nav-item" onClick={MapsToCommunity}>
-          <div className="nav-icon">👥</div>
-          <span className="nav-label">Community</span>
-        </div>
-        <div className="nav-item active">
-          <div className="nav-icon">🚀</div>
-          <span className="nav-label">Explorer</span>
-        </div>
-        <div className="nav-item" onClick={MapsToShop}>
-          <div className="nav-icon">🛍️</div>
-          <span className="nav-label">Shop</span>
-        </div>
-        <div className="nav-item" onClick={MapsToProfile}>
-          <div className="nav-icon">👤</div>
-          <span className="nav-label">Profile</span>
-        </div>
-      </div>
+      </nav>
     </div>
   )
 }
 
-export default MainPage 
+export default MainPage

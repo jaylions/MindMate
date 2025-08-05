@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import LiquidBar from './LiquidBar'
 
-function Community({ MapsToMain }) {
+function Community({ MapsToMain, MapsToMap, MapsToShop, MapsToProfile }) {
   const [selectedActivity, setSelectedActivity] = useState('all')
   const [chartType, setChartType] = useState('line')
   const [selectedPlace, setSelectedPlace] = useState('all')
@@ -104,49 +104,11 @@ function Community({ MapsToMain }) {
     <div className="community-page">
       {/* 상단 바 */}
       <div className="top-bar">
-        <button className="back-button" onClick={MapsToMain}>
-          ← Back
-        </button>
         <h2>Community</h2>
         <div className="search-icon">🔍</div>
       </div>
 
       <div className="community-content">
-        {/* Community Progress Indicators */}
-        <div className="community-progress">
-          <div className="progress-grid">
-            <div className="progress-item">
-              <LiquidBar 
-                value={89.7} 
-                maxValue={100} 
-                color="#4CAF50" 
-                height={60} 
-                label="Your Community Score"
-                animated={true}
-              />
-            </div>
-            <div className="progress-item">
-              <LiquidBar 
-                value={15} 
-                maxValue={25} 
-                color="#66BB6A" 
-                height={60} 
-                label="Places Explored"
-                animated={true}
-              />
-            </div>
-          </div>
-          <div className="single-progress">
-            <LiquidBar 
-              value={5} 
-              maxValue={7} 
-              color="#81C784" 
-              height={50} 
-              label="Current Streak (Days)"
-              animated={true}
-            />
-          </div>
-        </div>
 
         {/* Days in a Row */}
         <div className="streak-section">
@@ -311,16 +273,6 @@ function Community({ MapsToMain }) {
                 <div className="place-info">
                   <div className="place-name">{place.name}</div>
                   <div className="place-visits">{place.visits} visits</div>
-                  <div className="place-progress">
-                    <LiquidBar 
-                      value={place.visits} 
-                      maxValue={20} 
-                      color={place.color} 
-                      height={25} 
-                      label="Visit Progress"
-                      animated={false}
-                    />
-                  </div>
                 </div>
                 <div className="place-type" style={{backgroundColor: place.color}}>
                   {place.type}
@@ -361,6 +313,32 @@ function Community({ MapsToMain }) {
           </div>
         </div>
       </div>
+
+      {/* Bottom Navigation */}
+      <nav className="bottom-nav">
+        <div className="nav-items">
+          <div className="nav-item" onClick={MapsToMain}>
+            <div className="nav-icon">🏠</div>
+            <div className="nav-label">Home</div>
+          </div>
+          <div className="nav-item" onClick={MapsToMap}>
+            <div className="nav-icon">🗺️</div>
+            <div className="nav-label">Map</div>
+          </div>
+          <div className="nav-item active">
+            <div className="nav-icon">👥</div>
+            <div className="nav-label">Community</div>
+          </div>
+          <div className="nav-item" onClick={MapsToShop}>
+            <div className="nav-icon">🛍️</div>
+            <div className="nav-label">Shop</div>
+          </div>
+          <div className="nav-item" onClick={MapsToProfile}>
+            <div className="nav-icon">👤</div>
+            <div className="nav-label">Profile</div>
+          </div>
+        </div>
+      </nav>
     </div>
   )
 }

@@ -80,13 +80,28 @@ function App() {
         />
       )}
       {view === 'map' && (
-        <MapView MapsToMain={MapsToMain} />
+        <MapView 
+          MapsToMain={MapsToMain} 
+          MapsToCommunity={MapsToCommunity}
+          MapsToShop={MapsToShop}
+          MapsToProfile={MapsToProfile}
+        />
       )}
       {view === 'community' && (
-        <Community MapsToMain={MapsToMain} />
+        <Community 
+          MapsToMain={MapsToMain}
+          MapsToMap={MapsToMap}
+          MapsToShop={MapsToShop}
+          MapsToProfile={MapsToProfile}
+        />
       )}
       {view === 'shop' && (
-        <Shop MapsToMain={MapsToMain} />
+        <Shop 
+          MapsToMain={MapsToMain}
+          MapsToMap={MapsToMap}
+          MapsToCommunity={MapsToCommunity}
+          MapsToProfile={MapsToProfile}
+        />
       )}
       {view === 'challenges' && (
         <Challenges MapsToMain={MapsToMain} />

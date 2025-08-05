@@ -1,7 +1,16 @@
 import React, { useState } from 'react'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import L from 'leaflet'
+import 'leaflet/dist/leaflet.css'
 import LiquidBar from './LiquidBar'
+
+// Leaflet 기본 마커 아이콘 문제 해결
+delete L.Icon.Default.prototype._getIconUrl
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
+  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+})
 
 // 커스텀 마커 아이콘 생성
 const createCustomIcon = (color) => {
@@ -32,8 +41,9 @@ const createCustomIcon = (color) => {
   })
 }
 
-function MapView({ MapsToMain }) {
+function MapView({ MapsToMain, MapsToCommunity, MapsToShop, MapsToProfile }) {
   const [showStats, setShowStats] = useState(true)
+  const [mapReady, setMapReady] = useState(true)
   // 샌프란시스코의 실제 취미 장소 데이터
   const hobbyPlaces = [
     {
@@ -118,53 +128,20 @@ function MapView({ MapsToMain }) {
     }
   ]
 
+  if (!mapReady) {
+    return (
+      <div className="map-view">
+        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
+          <p>Loading Map...</p>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="map-view">
-      <button className="back-button" onClick={MapsToMain}>
-        Back
-      </button>
       
-      {/* Map Statistics Overlay */}
-      {showStats && (
-        <div className="map-stats-overlay">
-          <div className="stats-header">
-            <h3>Exploration Progress</h3>
-            <button className="close-stats" onClick={() => setShowStats(false)}>✕</button>
-          </div>
-          <div className="map-progress-grid">
-            <div className="map-progress-item">
-              <LiquidBar 
-                value={10} 
-                maxValue={20} 
-                color="#4CAF50" 
-                height={50} 
-                label="Places Found"
-                animated={true}
-              />
-            </div>
-            <div className="map-progress-item">
-              <LiquidBar 
-                value={7} 
-                maxValue={10} 
-                color="#66BB6A" 
-                height={50} 
-                label="Types Explored"
-                animated={true}
-              />
-            </div>
-          </div>
-          <div className="single-map-progress">
-            <LiquidBar 
-              value={60} 
-              maxValue={100} 
-              color="#81C784" 
-              height={40} 
-              label="Map Coverage"
-              animated={true}
-            />
-          </div>
-        </div>
-      )}
+      
       
       {/* Toggle Stats Button */}
       {!showStats && (
@@ -173,45 +150,47 @@ function MapView({ MapsToMain }) {
         </button>
       )}
       
-      <MapContainer 
-        center={[37.7749, -122.4194]} 
-        zoom={13} 
-        style={{ width: '100%', height: '100vh' }}
-      >
+      {/* Simplified Map View */}
+      <MapContainer center={[37.8715, -122.2730]} zoom={14} style={{ height: 'calc(100vh - 140px)', width: '100%' }}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
         {hobbyPlaces.map((place) => (
-          <Marker 
-            key={place.id} 
-            position={place.position}
-            icon={createCustomIcon(place.color)}
-          >
+          <Marker key={place.id} position={place.position} icon={createCustomIcon(place.color)}>
             <Popup>
-              <div style={{ textAlign: 'center', padding: '8px', minWidth: '200px' }}>
-                <h3 style={{ margin: '0 0 8px 0', color: place.color, fontSize: '16px' }}>{place.name}</h3>
-                <p style={{ margin: '0 0 5px 0', fontSize: '12px', color: '#666', textTransform: 'capitalize' }}>
-                  Type: {place.type}
-                </p>
-                <p style={{ margin: '0', fontSize: '11px', color: '#888', fontStyle: 'italic' }}>
-                  {place.description}
-                </p>
-                <div style={{ marginTop: '10px' }}>
-                  <LiquidBar 
-                    value={Math.random() * 100} 
-                    maxValue={100} 
-                    color={place.color} 
-                    height={25} 
-                    label="Popularity"
-                    animated={false}
-                  />
-                </div>
-              </div>
+              <h3>{place.name}</h3>
+              <p>{place.description}</p>
             </Popup>
           </Marker>
         ))}
       </MapContainer>
+
+      {/* Bottom Navigation */}
+      <nav className="bottom-nav">
+        <div className="nav-items">
+          <div className="nav-item" onClick={MapsToMain}>
+            <div className="nav-icon">🏠</div>
+            <div className="nav-label">Home</div>
+          </div>
+          <div className="nav-item active">
+            <div className="nav-icon">🗺️</div>
+            <div className="nav-label">Map</div>
+          </div>
+          <div className="nav-item" onClick={MapsToCommunity}>
+            <div className="nav-icon">👥</div>
+            <div className="nav-label">Community</div>
+          </div>
+          <div className="nav-item" onClick={MapsToShop}>
+            <div className="nav-icon">🛍️</div>
+            <div className="nav-label">Shop</div>
+          </div>
+          <div className="nav-item" onClick={MapsToProfile}>
+            <div className="nav-icon">👤</div>
+            <div className="nav-label">Profile</div>
+          </div>
+        </div>
+      </nav>
     </div>
   )
 }

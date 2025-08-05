@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import LiquidBar from './LiquidBar'
 
-function Shop({ MapsToMain }) {
+function Shop({ MapsToMain, MapsToMap, MapsToCommunity, MapsToProfile }) {
   const [selectedCategory, setSelectedCategory] = useState('premium')
 
   const premiumFeatures = [
@@ -67,9 +67,6 @@ function Shop({ MapsToMain }) {
     <div className="shop-page">
       {/* 상단 바 */}
       <div className="top-bar">
-        <button className="back-button" onClick={MapsToMain}>
-          ← Back
-        </button>
         <h2>Shop</h2>
         <div className="coins-display">
           <span className="coin-icon">🪙</span>
@@ -78,41 +75,6 @@ function Shop({ MapsToMain }) {
       </div>
 
       <div className="shop-content">
-        {/* Progress Indicators */}
-        <div className="progress-section">
-          <div className="progress-grid">
-            <div className="progress-item">
-              <LiquidBar 
-                value={75} 
-                maxValue={100} 
-                color="#4CAF50" 
-                height={50} 
-                label="Premium Progress"
-                animated={true}
-              />
-            </div>
-            <div className="progress-item">
-              <LiquidBar 
-                value={1250} 
-                maxValue={2000} 
-                color="#66BB6A" 
-                height={50} 
-                label="Coins Collected"
-                animated={true}
-              />
-            </div>
-          </div>
-          <div className="single-progress">
-            <LiquidBar 
-              value={45} 
-              maxValue={100} 
-              color="#81C784" 
-              height={70} 
-              label="Shop Completion Progress"
-              animated={true}
-            />
-          </div>
-        </div>
 
         {/* 카테고리 탭 */}
         <div className="shop-tabs">
@@ -252,6 +214,32 @@ function Shop({ MapsToMain }) {
           </div>
         </div>
       </div>
+
+      {/* Bottom Navigation */}
+      <nav className="bottom-nav">
+        <div className="nav-items"> 
+          <div className="nav-item" onClick={MapsToMain}>
+            <div className="nav-icon">🏠</div>
+            <div className="nav-label">Home</div>
+          </div>
+          <div className="nav-item" onClick={MapsToMap}>
+            <div className="nav-icon">🗺️</div>
+            <div className="nav-label">Map</div>
+          </div>
+          <div className="nav-item" onClick={MapsToCommunity}>
+            <div className="nav-icon">👥</div>
+            <div className="nav-label">Community</div>
+          </div>
+          <div className="nav-item active">
+            <div className="nav-icon">🛍️</div>
+            <div className="nav-label">Shop</div>
+          </div>
+          <div className="nav-item" onClick={MapsToProfile}>
+            <div className="nav-icon">👤</div>
+            <div className="nav-label">Profile</div>
+          </div>
+        </div>
+      </nav>
     </div>
   )
 }

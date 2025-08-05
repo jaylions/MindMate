@@ -1,132 +1,55 @@
 .liquid-bar-container {
   position: relative;
-  margin: 10px 0;
+  width: 100%;
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(5px);
+}
+
+.liquid-bar-background {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.liquid-bar-fill {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  border-radius: 15px;
+  transition: width 0.5s ease-in-out;
+}
+
+.liquid-bar-waves {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 100" preserveAspectRatio="none"><path d="M 0 50 C 200 0, 200 100, 400 50 S 600 0, 600 100, 800 50" fill="rgba(255,255,255,0.2)"/></svg>');
+  background-size: 400px 100%;
+  animation: wave 3s linear infinite;
+  opacity: 0.8;
 }
 
 .liquid-bar-label {
-  font-size: 14px;
-  font-weight: 600;
-  color: #2E7D32;
-  margin-bottom: 8px;
-  text-align: left;
-}
-
-.liquid-bar-wrapper {
-  position: relative;
-  border-radius: 15px;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.liquid-bar-svg {
-  display: block;
-  border-radius: 15px;
-}
-
-.liquid-fill {
-  animation: liquidFlow 3s ease-in-out infinite;
-  transform-origin: center;
-}
-
-.liquid-wave {
-  animation: waveMotion 2s ease-in-out infinite;
-}
-
-@keyframes liquidFlow {
-  0%, 100% {
-    transform: scaleY(1);
-  }
-  50% {
-    transform: scaleY(1.02);
-  }
-}
-
-@keyframes waveMotion {
-  0%, 100% {
-    transform: translateX(0);
-  }
-  25% {
-    transform: translateX(-2px);
-  }
-  75% {
-    transform: translateX(2px);
-  }
-}
-
-.liquid-bar-text {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  text-align: center;
-  z-index: 10;
-  pointer-events: none;
-}
-
-.liquid-percentage {
-  display: block;
-  font-size: 18px;
-  font-weight: bold;
   color: white;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  line-height: 1;
+  font-weight: bold;
+  font-size: 1rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-.liquid-value {
-  display: block;
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.9);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-  margin-top: 2px;
-}
-
-/* Responsive adjustments */
-@media (max-width: 480px) {
-  .liquid-percentage {
-    font-size: 16px;
-  }
-  
-  .liquid-value {
-    font-size: 11px;
-  }
-}
-
-/* Glow effect for the container */
-.liquid-bar-wrapper:hover {
-  box-shadow: 0 6px 20px rgba(76, 175, 80, 0.3);
-  transform: translateY(-1px);
-  transition: all 0.3s ease;
-}
-
-/* Different color variants */
-.liquid-bar-container.blue .liquid-fill {
-  fill: url(#blueGradient);
-}
-
-.liquid-bar-container.red .liquid-fill {
-  fill: url(#redGradient);
-}
-
-.liquid-bar-container.yellow .liquid-fill {
-  fill: url(#yellowGradient);
-}
-
-/* Pulse animation for special states */
-.liquid-bar-container.pulse .liquid-bar-wrapper {
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
+@keyframes wave {
   0% {
-    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.2);
-  }
-  50% {
-    box-shadow: 0 4px 25px rgba(76, 175, 80, 0.4);
+    transform: translateX(0);
   }
   100% {
-    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.2);
+    transform: translateX(-400px);
   }
 }

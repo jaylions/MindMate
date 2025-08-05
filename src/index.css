@@ -58,32 +58,27 @@ button:focus-visible {
 .App .main-page {
   max-width: 480px;
   margin: 0 auto;
-  height: 100vh;
-  overflow: hidden;
 }
 
 .App .map-view {
-  max-width: 480px;
-  margin: 0 auto;
+  width: 100%;
   height: 100vh;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.map-view .leaflet-container {
+  flex-grow: 1;
 }
 
 .App .community-page,
 .App .shop-page,
 .App .challenges-page {
-  max-width: 480px;
-  margin: 0 auto;
-  height: 100vh;
+  width: 100%;
+  min-height: 100vh;
   overflow-y: auto;
 }
 
-.main-page {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background: linear-gradient(135deg, #E8F5E8 0%, #C8E6C9 50%, #A5D6A7 100%);
-}
 
 /* 상단 바 */
 .top-bar {
@@ -98,20 +93,20 @@ button:focus-visible {
 
 .hamburger-menu {
   font-size: 1.5rem;
-  color: #4CAF50;
+  color: #4682B4;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .hamburger-menu:hover {
-  color: #2E7D32;
+  color: #2C5282;
   transform: scale(1.1);
 }
 
 .achievements {
   display: flex;
   gap: 1rem;
-  color: #4CAF50;
+  color: #4682B4;
   font-weight: 600;
 }
 
@@ -189,7 +184,7 @@ button:focus-visible {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: linear-gradient(45deg, #66BB6A, #81C784);
+  background: linear-gradient(45deg, #87CEEB, #B8E0FF);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -205,14 +200,14 @@ button:focus-visible {
 }
 
 .learning-title {
-  color: #2E7D32;
+  color: #2C5282;
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
 }
 
 .daily-goal {
-  color: #4CAF50;
+  color: #4682B4;
   font-size: 0.9rem;
   display: flex;
   align-items: center;
@@ -243,7 +238,7 @@ button:focus-visible {
 }
 
 .goal-settings h3 {
-  color: #2E7D32;
+  color: #2C5282;
   margin-bottom: 1rem;
   font-size: 1.2rem;
 }
@@ -262,7 +257,7 @@ button:focus-visible {
 }
 
 .goal-input-group label {
-  color: #4CAF50;
+  color: #4682B4;
   font-size: 0.9rem;
   font-weight: 600;
 }
@@ -273,7 +268,7 @@ button:focus-visible {
   border: 2px solid rgba(76, 175, 80, 0.2);
   border-radius: 12px;
   background: white;
-  color: #2E7D32;
+  color: #2C5282;
   font-size: 1rem;
   transition: all 0.3s ease;
 }
@@ -281,13 +276,13 @@ button:focus-visible {
 .goal-input-group input:focus,
 .goal-input-group select:focus {
   outline: none;
-  border-color: #4CAF50;
+  border-color: #4682B4;
   box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
 }
 
 .save-goal-btn {
   width: 100%;
-  background: linear-gradient(45deg, #66BB6A, #81C784);
+  background: linear-gradient(45deg, #87CEEB, #B8E0FF);
   color: white;
   border: none;
   border-radius: 15px;
@@ -315,12 +310,12 @@ button:focus-visible {
 }
 
 .goal-header h3 {
-  color: #2E7D32;
+  color: #2C5282;
   font-size: 1.2rem;
 }
 
 .goal-status {
-  background: linear-gradient(45deg, #66BB6A, #81C784);
+  background: linear-gradient(45deg, #87CEEB, #B8E0FF);
   color: white;
   padding: 0.3rem 0.8rem;
   border-radius: 15px;
@@ -358,19 +353,19 @@ button:focus-visible {
 }
 
 .goal-checkbox.completed {
-  background: #66BB6A;
-  border-color: #66BB6A;
+  background: #87CEEB;
+  border-color: #87CEEB;
 }
 
 .goal-text {
   flex: 1;
-  color: #2E7D32;
+  color: #2C5282;
   font-weight: 500;
 }
 
 .show-btn {
   background: rgba(76, 175, 80, 0.1);
-  color: #4CAF50;
+  color: #4682B4;
   border: none;
   border-radius: 20px;
   padding: 0.5rem 1rem;
@@ -381,7 +376,7 @@ button:focus-visible {
 /* 탐색 버튼 */
 .explore-button {
   width: 100%;
-  background: linear-gradient(45deg, #66BB6A, #81C784);
+  background: linear-gradient(45deg, #87CEEB, #B8E0FF);
   color: white;
   font-size: 1.1rem;
   font-weight: bold;
@@ -413,7 +408,7 @@ button:focus-visible {
 }
 
 .section-title {
-  color: #2E7D32;
+  color: #2C5282;
   font-size: 1.2rem;
   font-weight: bold;
   margin-bottom: 1rem;
@@ -444,7 +439,7 @@ button:focus-visible {
 
 .bar {
   flex: 1;
-  background: linear-gradient(to top, #A5D6A7, #C8E6C9);
+  background: linear-gradient(to top, #A0D1FF, #B8E0FF);
   border-radius: 6px 6px 0 0;
   min-height: 10px;
   box-shadow: 0 2px 8px rgba(165, 214, 167, 0.3);
@@ -453,11 +448,11 @@ button:focus-visible {
 .stats-percentage {
   font-size: 2rem;
   font-weight: bold;
-  color: #4CAF50;
+  color: #4682B4;
 }
 
 .stats-details {
-  color: #4CAF50;
+  color: #4682B4;
   font-size: 0.9rem;
 }
 
@@ -484,7 +479,7 @@ button:focus-visible {
 }
 
 .level-check-button {
-  background: linear-gradient(45deg, #A5D6A7, #C8E6C9);
+  background: linear-gradient(45deg, #A0D1FF, #B8E0FF);
   color: #1B5E20;
   border: none;
   border-radius: 25px;
@@ -495,12 +490,12 @@ button:focus-visible {
 }
 
 .level-date {
-  color: #4CAF50;
+  color: #4682B4;
   font-size: 0.9rem;
 }
 
 .level-ranking {
-  color: #4CAF50;
+  color: #4682B4;
   font-weight: bold;
   font-size: 0.9rem;
 }
@@ -562,7 +557,7 @@ button:focus-visible {
 }
 
 .nav-item.active {
-  color: #4CAF50;
+  color: #4682B4;
   background: rgba(76, 175, 80, 0.15);
 }
 
@@ -584,7 +579,19 @@ button:focus-visible {
 .map-view {
   position: relative;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #E6F3FF 0%, #B8E0FF 50%, #A0D1FF 100%);
+  display: flex;
+  flex-direction: column;
+}
+
+.map-view .leaflet-container {
+  flex: 1;
+  min-height: calc(100vh - 140px);
+  border-radius: 0;
+  max-width: 480px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .back-button {
@@ -593,7 +600,7 @@ button:focus-visible {
   left: 20px;
   z-index: 1000;
   background: rgba(255, 255, 255, 0.9);
-  color: #4CAF50;
+  color: #4682B4;
   padding: 0.8rem 1.5rem;
   border: none;
   border-radius: 25px;
@@ -613,9 +620,48 @@ button:focus-visible {
 
 /* Community 페이지 스타일 */
 .community-page {
-  height: 100vh;
-  background: linear-gradient(135deg, #E8F5E8 0%, #C8E6C9 50%, #A5D6A7 100%);
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #E6F3FF 0%, #B8E0FF 50%, #A0D1FF 100%);
   overflow-y: auto;
+}
+
+.community-page > * {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(184, 224, 255, 0.4);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(160, 209, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+  margin: 0 0 24px 0;
+  padding: 20px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #2C5282;
+}
+
+.progress-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.progress-item {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 15px;
+  padding: 1rem;
+  backdrop-filter: blur(5px);
 }
 
 .community-content {
@@ -629,14 +675,14 @@ button:focus-visible {
 }
 
 .community-page .top-bar h2 {
-  color: #2E7D32;
+  color: #2C5282;
   font-size: 1.5rem;
   font-weight: bold;
 }
 
 .search-icon {
   font-size: 1.2rem;
-  color: #4CAF50;
+  color: #4682B4;
   cursor: pointer;
 }
 
@@ -660,7 +706,7 @@ button:focus-visible {
 .streak-number {
   font-size: 3rem;
   font-weight: bold;
-  color: #A8E6CF;
+  color: #87CEEB;
   text-shadow: 0 2px 4px rgba(168, 230, 207, 0.3);
 }
 
@@ -684,18 +730,18 @@ button:focus-visible {
   justify-content: center;
   font-size: 0.8rem;
   font-weight: bold;
-  color: #4CAF50;
+  color: #4682B4;
   background: rgba(255, 255, 255, 0.5);
 }
 
 .checkbox.checked {
-  background: #A8E6CF;
-  border-color: #A8E6CF;
+  background: #87CEEB;
+  border-color: #87CEEB;
   color: white;
 }
 
 .longest-chain {
-  color: #4CAF50;
+  color: #4682B4;
   font-size: 0.9rem;
   font-weight: 600;
 }
@@ -722,11 +768,11 @@ button:focus-visible {
   display: flex;
   gap: 1rem;
   font-size: 1.2rem;
-  color: #4CAF50;
+  color: #4682B4;
 }
 
 .chart-subtitle {
-  color: #4CAF50;
+  color: #4682B4;
   font-size: 0.9rem;
   margin-bottom: 1rem;
 }
@@ -742,7 +788,7 @@ button:focus-visible {
   align-items: center;
   gap: 0.3rem;
   font-size: 0.8rem;
-  color: #2E7D32;
+  color: #2C5282;
 }
 
 .mood-dot {
@@ -833,7 +879,7 @@ button:focus-visible {
 }
 
 .chart-btn.active {
-  background: #4CAF50;
+  background: #4682B4;
   color: white;
 }
 
@@ -842,7 +888,7 @@ button:focus-visible {
   border: 2px solid rgba(139, 126, 200, 0.2);
   border-radius: 8px;
   background: white;
-  color: #2E7D32;
+  color: #2C5282;
   font-size: 0.9rem;
 }
 
@@ -881,7 +927,7 @@ button:focus-visible {
 .place-rank {
   font-size: 1.2rem;
   font-weight: bold;
-  color: #4CAF50;
+  color: #4682B4;
   min-width: 40px;
 }
 
@@ -890,13 +936,13 @@ button:focus-visible {
 }
 
 .place-name {
-  color: #2E7D32;
+  color: #2C5282;
   font-weight: bold;
   margin-bottom: 0.2rem;
 }
 
 .place-visits {
-  color: #4CAF50;
+  color: #4682B4;
   font-size: 0.9rem;
 }
 
@@ -972,9 +1018,15 @@ button:focus-visible {
 
 /* Shop 페이지 스타일 */
 .shop-page {
-  height: 100vh;
-  background: linear-gradient(135deg, #E8F5E8 0%, #C8E6C9 50%, #A5D6A7 100%);
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #E6F3FF 0%, #B8E0FF 50%, #A0D1FF 100%);
   overflow-y: auto;
+}
+
+.shop-page > * {
+  max-width: 480px;
+  margin: 0 auto;
 }
 
 .shop-content {
@@ -988,7 +1040,7 @@ button:focus-visible {
 }
 
 .shop-page .top-bar h2 {
-  color: #2E7D32;
+  color: #2C5282;
   font-size: 1.5rem;
   font-weight: bold;
 }
@@ -1008,7 +1060,7 @@ button:focus-visible {
 }
 
 .coins-amount {
-  color: #4CAF50;
+  color: #4682B4;
   font-weight: bold;
 }
 
@@ -1065,7 +1117,7 @@ button:focus-visible {
 .progress-title {
   font-size: 18px;
   font-weight: 700;
-  color: #2E7D32;
+  color: #2C5282;
   margin-bottom: 16px;
   text-align: center;
 }
@@ -1209,7 +1261,7 @@ button:focus-visible {
 .stats-header h3 {
   font-size: 18px;
   font-weight: 700;
-  color: #2E7D32;
+  color: #2C5282;
   margin: 0;
 }
 
@@ -1223,7 +1275,7 @@ button:focus-visible {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: #2E7D32;
+  color: #2C5282;
   font-weight: bold;
 }
 
@@ -1260,7 +1312,7 @@ button:focus-visible {
   box-shadow: 0 4px 15px rgba(76, 175, 80, 0.2);
   z-index: 1000;
   cursor: pointer;
-  color: #2E7D32;
+  color: #2C5282;
   font-weight: 600;
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
@@ -1281,13 +1333,13 @@ button:focus-visible {
   border: none;
   padding: 0.8rem;
   border-radius: 12px;
-  color: #4CAF50;
+  color: #4682B4;
   font-weight: 600;
   transition: all 0.3s ease;
 }
 
 .tab-btn.active {
-  background: #4CAF50;
+  background: #4682B4;
   color: white;
 }
 
@@ -1302,13 +1354,13 @@ button:focus-visible {
 }
 
 .premium-header h3 {
-  color: #2E7D32;
+  color: #2C5282;
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
 }
 
 .premium-header p {
-  color: #4CAF50;
+  color: #4682B4;
   font-size: 0.9rem;
 }
 
@@ -1358,7 +1410,7 @@ button:focus-visible {
 }
 
 .plan-header h4 {
-  color: #2E7D32;
+  color: #2C5282;
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
 }
@@ -1372,11 +1424,11 @@ button:focus-visible {
 .current-price {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #A8E6CF;
+  color: #87CEEB;
 }
 
 .original-price {
-  color: #4CAF50;
+  color: #4682B4;
   text-decoration: line-through;
   font-size: 0.9rem;
 }
@@ -1396,14 +1448,14 @@ button:focus-visible {
 }
 
 .plan-features li {
-  color: #2E7D32;
+  color: #2C5282;
   margin-bottom: 0.5rem;
   font-size: 0.9rem;
 }
 
 .subscribe-btn {
   width: 100%;
-  background: linear-gradient(45deg, #A8E6CF, #B8E6B8);
+  background: linear-gradient(45deg, #87CEEB, #B8E0FF);
   color: #4A6741;
   border: none;
   border-radius: 15px;
@@ -1424,7 +1476,7 @@ button:focus-visible {
 }
 
 .premium-benefits h4 {
-  color: #2E7D32;
+  color: #2C5282;
   font-size: 1.2rem;
   margin-bottom: 1rem;
   text-align: center;
@@ -1452,7 +1504,7 @@ button:focus-visible {
 }
 
 .benefit-text {
-  color: #2E7D32;
+  color: #2C5282;
   font-size: 0.9rem;
   font-weight: 600;
 }
@@ -1468,13 +1520,13 @@ button:focus-visible {
 }
 
 .items-header h3 {
-  color: #2E7D32;
+  color: #2C5282;
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
 }
 
 .items-header p {
-  color: #4CAF50;
+  color: #4682B4;
   font-size: 0.9rem;
 }
 
@@ -1513,25 +1565,25 @@ button:focus-visible {
 }
 
 .item-info h4 {
-  color: #2E7D32;
+  color: #2C5282;
   font-size: 1.1rem;
   margin-bottom: 0.3rem;
 }
 
 .item-info p {
-  color: #4CAF50;
+  color: #4682B4;
   font-size: 0.9rem;
   margin-bottom: 0.5rem;
 }
 
 .item-price {
-  color: #A8E6CF;
+  color: #87CEEB;
   font-weight: bold;
   font-size: 1rem;
 }
 
 .buy-btn {
-  background: linear-gradient(45deg, #A5D6A7, #C8E6C9);
+  background: linear-gradient(45deg, #A0D1FF, #B8E0FF);
   color: #8B5A8B;
   border: none;
   border-radius: 20px;
@@ -1552,7 +1604,7 @@ button:focus-visible {
 }
 
 .earn-coins h4 {
-  color: #2E7D32;
+  color: #2C5282;
   font-size: 1.2rem;
   margin-bottom: 1rem;
   text-align: center;
@@ -1586,12 +1638,12 @@ button:focus-visible {
 
 .task-text {
   flex: 1;
-  color: #2E7D32;
+  color: #2C5282;
   font-weight: 500;
 }
 
 .task-reward {
-  color: #A8E6CF;
+  color: #87CEEB;
   font-weight: bold;
   font-size: 0.9rem;
 }
@@ -1635,9 +1687,15 @@ button:focus-visible {
 
 /* Challenges 페이지 스타일 */
 .challenges-page {
-  height: 100vh;
-  background: linear-gradient(135deg, #E8F5E8 0%, #C8E6C9 50%, #A5D6A7 100%);
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #E6F3FF 0%, #B8E0FF 50%, #A0D1FF 100%);
   overflow-y: auto;
+}
+
+.challenges-page > * {
+  max-width: 480px;
+  margin: 0 auto;
 }
 
 .challenges-content {
@@ -1651,7 +1709,7 @@ button:focus-visible {
 }
 
 .challenges-page .top-bar h2 {
-  color: #2E7D32;
+  color: #2C5282;
   font-size: 1.5rem;
   font-weight: bold;
 }
@@ -1671,7 +1729,7 @@ button:focus-visible {
 }
 
 .stats-text {
-  color: #4CAF50;
+  color: #4682B4;
   font-weight: bold;
 }
 
@@ -1693,7 +1751,7 @@ button:focus-visible {
   border: none;
   padding: 0.8rem 0.5rem;
   border-radius: 12px;
-  color: #4CAF50;
+  color: #4682B4;
   font-weight: 600;
   font-size: 0.9rem;
   transition: all 0.3s ease;
@@ -1701,7 +1759,7 @@ button:focus-visible {
 }
 
 .challenges-tabs .tab-btn.active {
-  background: #4CAF50;
+  background: #4682B4;
   color: white;
 }
 
@@ -1733,11 +1791,11 @@ button:focus-visible {
 .summary-number {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #2E7D32;
+  color: #2C5282;
 }
 
 .summary-label {
-  color: #4CAF50;
+  color: #4682B4;
   font-size: 0.9rem;
   font-weight: 600;
 }
@@ -1766,7 +1824,7 @@ button:focus-visible {
 }
 
 .challenge-item.completed {
-  border: 2px solid #A8E6CF;
+  border: 2px solid #87CEEB;
   background: rgba(168, 230, 207, 0.1);
 }
 
@@ -1794,14 +1852,14 @@ button:focus-visible {
 }
 
 .challenge-title {
-  color: #2E7D32;
+  color: #2C5282;
   font-size: 1.1rem;
   font-weight: bold;
   margin-bottom: 0.3rem;
 }
 
 .challenge-description {
-  color: #4CAF50;
+  color: #4682B4;
   font-size: 0.9rem;
   margin-bottom: 0.8rem;
   line-height: 1.4;
@@ -1828,7 +1886,7 @@ button:focus-visible {
 }
 
 .progress-text {
-  color: #2E7D32;
+  color: #2C5282;
   font-size: 0.9rem;
   font-weight: 600;
   min-width: 40px;
@@ -1857,7 +1915,7 @@ button:focus-visible {
   padding: 0.5rem 0.8rem;
   border-radius: 15px;
   font-size: 0.8rem;
-  color: #2E7D32;
+  color: #2C5282;
   font-weight: 600;
   text-align: center;
   border: 1px solid rgba(139, 126, 200, 0.2);
@@ -1870,7 +1928,7 @@ button:focus-visible {
 }
 
 .completion-date {
-  color: #4CAF50;
+  color: #4682B4;
   font-size: 0.9rem;
   font-style: italic;
 }
@@ -1887,7 +1945,7 @@ button:focus-visible {
 }
 
 .special-challenges h3 {
-  color: #2E7D32;
+  color: #2C5282;
   font-size: 1.2rem;
   margin-bottom: 1rem;
   text-align: center;
@@ -1920,13 +1978,13 @@ button:focus-visible {
 }
 
 .special-title {
-  color: #2E7D32;
+  color: #2C5282;
   font-weight: bold;
   margin-bottom: 0.2rem;
 }
 
 .special-desc {
-  color: #4CAF50;
+  color: #4682B4;
   font-size: 0.9rem;
 }
 
@@ -1942,7 +2000,7 @@ button:focus-visible {
 }
 
 .place-selector h3 {
-  color: #2E7D32;
+  color: #2C5282;
   font-size: 1.2rem;
   margin-bottom: 1rem;
 }
@@ -1961,7 +2019,7 @@ button:focus-visible {
   background: rgba(255, 255, 255, 0.6);
   border: 2px solid rgba(139, 126, 200, 0.2);
   border-radius: 15px;
-  color: #2E7D32;
+  color: #2C5282;
   font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
@@ -1976,9 +2034,9 @@ button:focus-visible {
 }
 
 .place-btn.active {
-  background: #4CAF50;
+  background: #4682B4;
   color: white;
-  border-color: #4CAF50;
+  border-color: #4682B4;
   box-shadow: 0 4px 15px rgba(139, 126, 200, 0.3);
 }
 
@@ -2012,7 +2070,7 @@ button:focus-visible {
 }
 
 .place-stats h3 {
-  color: #2E7D32;
+  color: #2C5282;
   font-size: 1.2rem;
   margin-bottom: 1rem;
   text-align: center;
@@ -2049,11 +2107,11 @@ button:focus-visible {
 .stat-number {
   font-size: 1.3rem;
   font-weight: bold;
-  color: #2E7D32;
+  color: #2C5282;
 }
 
 .stat-label {
-  color: #4CAF50;
+  color: #4682B4;
   font-size: 0.8rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -2063,7 +2121,7 @@ button:focus-visible {
 /* Landing Page Styles */
 .landing-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #E8F5E8 0%, #C8E6C9 50%, #A5D6A7 100%);
+  background: linear-gradient(135deg, #E6F3FF 0%, #B8E0FF 50%, #A0D1FF 100%);
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
@@ -2093,7 +2151,7 @@ button:focus-visible {
 .hero-title {
   font-size: 3.5rem;
   font-weight: bold;
-  color: #2E7D32;
+  color: #2C5282;
   margin-bottom: 1rem;
   background: linear-gradient(45deg, #2E7D32, #4CAF50);
   -webkit-background-clip: text;
@@ -2103,14 +2161,14 @@ button:focus-visible {
 
 .hero-subtitle {
   font-size: 1.5rem;
-  color: #4CAF50;
+  color: #4682B4;
   margin-bottom: 1.5rem;
   font-weight: 600;
 }
 
 .hero-description {
   font-size: 1.1rem;
-  color: #2E7D32;
+  color: #2C5282;
   line-height: 1.6;
   margin-bottom: 2rem;
   opacity: 0.9;
@@ -2120,7 +2178,7 @@ button:focus-visible {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background: linear-gradient(45deg, #A8E6CF, #B8E6B8);
+  background: linear-gradient(45deg, #87CEEB, #B8E0FF);
   color: #4A6741;
   border: none;
   border-radius: 50px;
@@ -2166,7 +2224,7 @@ button:focus-visible {
 .phone-screen {
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #E8F5E8 0%, #C8E6C9 50%, #A5D6A7 100%);
+  background: linear-gradient(135deg, #E8F5E8 0%, #B8E0FF 50%, #A0D1FF 100%);
   border-radius: 25px;
   padding: 2rem;
   display: flex;
@@ -2177,7 +2235,7 @@ button:focus-visible {
 
 .mockup-content {
   text-align: center;
-  color: #2E7D32;
+  color: #2C5282;
 }
 
 .mockup-header {
@@ -2242,7 +2300,7 @@ button:focus-visible {
   text-align: center;
   font-size: 2.5rem;
   font-weight: bold;
-  color: #2E7D32;
+  color: #2C5282;
   margin-bottom: 3rem;
 }
 
@@ -2276,12 +2334,12 @@ button:focus-visible {
 .feature-card h3 {
   font-size: 1.3rem;
   font-weight: bold;
-  color: #2E7D32;
+  color: #2C5282;
   margin-bottom: 1rem;
 }
 
 .feature-card p {
-  color: #4CAF50;
+  color: #4682B4;
   line-height: 1.6;
 }
 
@@ -2314,7 +2372,7 @@ button:focus-visible {
 .step-number {
   width: 50px;
   height: 50px;
-  background: linear-gradient(45deg, #A8E6CF, #B8E6B8);
+  background: linear-gradient(45deg, #87CEEB, #B8E0FF);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -2328,12 +2386,12 @@ button:focus-visible {
 .step-content h3 {
   font-size: 1.3rem;
   font-weight: bold;
-  color: #2E7D32;
+  color: #2C5282;
   margin-bottom: 1rem;
 }
 
 .step-content p {
-  color: #4CAF50;
+  color: #4682B4;
   line-height: 1.6;
 }
 
@@ -2368,12 +2426,12 @@ button:focus-visible {
 .feature-detail-content h2 {
   font-size: 2rem;
   font-weight: bold;
-  color: #2E7D32;
+  color: #2C5282;
   margin-bottom: 1rem;
 }
 
 .feature-detail-content p {
-  color: #4CAF50;
+  color: #4682B4;
   line-height: 1.6;
   margin-bottom: 1.5rem;
   font-size: 1.1rem;
@@ -2385,7 +2443,7 @@ button:focus-visible {
 }
 
 .feature-list li {
-  color: #2E7D32;
+  color: #2C5282;
   margin-bottom: 0.5rem;
   font-size: 1rem;
   display: flex;
@@ -2413,7 +2471,7 @@ button:focus-visible {
 
 .map-placeholder {
   text-align: center;
-  color: #4CAF50;
+  color: #4682B4;
 }
 
 .map-icon {
@@ -2436,7 +2494,7 @@ button:focus-visible {
 
 .chart-bar {
   width: 30px;
-  background: linear-gradient(to top, #A5D6A7, #C8E6C9);
+  background: linear-gradient(to top, #A0D1FF, #B8E0FF);
   border-radius: 3px 3px 0 0;
   min-height: 20px;
 }
@@ -2450,7 +2508,7 @@ button:focus-visible {
 .badge {
   width: 60px;
   height: 60px;
-  background: linear-gradient(45deg, #A8E6CF, #B8E6B8);
+  background: linear-gradient(45deg, #87CEEB, #B8E0FF);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -2500,7 +2558,7 @@ button:focus-visible {
 .footer {
   background: rgba(255, 255, 255, 0.9);
   padding: 3rem 2rem 1rem;
-  color: #2E7D32;
+  color: #2C5282;
 }
 
 .footer-content {
@@ -2516,11 +2574,11 @@ button:focus-visible {
   font-size: 1.2rem;
   font-weight: bold;
   margin-bottom: 1rem;
-  color: #2E7D32;
+  color: #2C5282;
 }
 
 .footer-section p {
-  color: #4CAF50;
+  color: #4682B4;
   line-height: 1.6;
 }
 
@@ -2530,21 +2588,21 @@ button:focus-visible {
 }
 
 .footer-section ul li {
-  color: #4CAF50;
+  color: #4682B4;
   margin-bottom: 0.5rem;
   cursor: pointer;
   transition: color 0.3s ease;
 }
 
 .footer-section ul li:hover {
-  color: #2E7D32;
+  color: #2C5282;
 }
 
 .footer-bottom {
   text-align: center;
   padding-top: 2rem;
   border-top: 1px solid rgba(139, 126, 200, 0.2);
-  color: #4CAF50;
+  color: #4682B4;
 }
 
 /* Responsive Design */

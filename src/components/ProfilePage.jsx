@@ -1,10 +1,20 @@
 import React, { useState } from 'react'
+import '../styles/ProfilePage.css'
 
 function ProfilePage({ userData, MapsToMain, MapsToChallenges, MapsToMap, MapsToCommunity, MapsToShop }) {
   const [sdtExpanded, setSdtExpanded] = useState(false)
   const [showImageModal, setShowImageModal] = useState(false)
   const [avatarImage, setAvatarImage] = useState(null)
   const [previewImage, setPreviewImage] = useState(null)
+  const [editingField, setEditingField] = useState(null)
+  const [editingValue, setEditingValue] = useState('')
+  const [userSettings, setUserSettings] = useState({
+    nickname: userData?.userInfo?.nickname || 'Explorer',
+    email: 'user@example.com',
+    notifications: true,
+    privacy: 'friends',
+    theme: 'auto'
+  })
 
   const toggleSDTInfo = () => {
     setSdtExpanded(!sdtExpanded)
@@ -64,11 +74,18 @@ function ProfilePage({ userData, MapsToMain, MapsToChallenges, MapsToMap, MapsTo
   return (
     <div className="profile-page">
       <div className="container">
-        {/* Profile Section */}
-        <div className="glass-card profile-section">
+        {/* Profile Header */}
+        <div className="profile-header">
+          <h1 className="page-title">Profile Settings</h1>
+          <p className="page-subtitle">Manage your personal information</p>
+        </div>
+
+        {/* Profile Picture Section */}
+        <div className="glass-card profile-picture-section">
+          <div className="section-title">Profile Picture</div>
           <div className="avatar-container">
             <div 
-              className="avatar" 
+              className="avatar large" 
               style={avatarImage ? {
                 backgroundImage: `url(${avatarImage})`,
                 backgroundSize: 'cover',
@@ -77,93 +94,202 @@ function ProfilePage({ userData, MapsToMain, MapsToChallenges, MapsToMap, MapsTo
             >
               {!avatarImage && (userData?.userInfo?.nickname?.[0]?.toUpperCase() || 'A')}
             </div>
-            <div className="avatar-edit-btn" onClick={openImageModal}>📷</div>
+            <button className="change-photo-btn" onClick={openImageModal}>
+              📷 Change Photo
+            </button>
           </div>
-          <div className="profile-name">{userData?.userInfo?.nickname || 'Mind Mate Explorer'}</div>
-          <div className="join-date">Member since March 2024</div>
         </div>
 
-        {/* SDT Type Information */}
-        <div className={`sdt-info-card ${sdtExpanded ? 'expanded' : ''}`} onClick={toggleSDTInfo}>
-          <div className="sdt-header">
-            <div className="sdt-type-title">{sdtInfo.title}</div>
-            <div className="expand-icon">{sdtExpanded ? '▲' : '▼'}</div>
-          </div>
-          <div className="sdt-content">
-            <div className="sdt-description">{sdtInfo.description}</div>
-            <div className="sdt-characteristics">
-              {sdtInfo.characteristics.map((char, index) => (
-                <div key={index} className="characteristic-item">{char}</div>
-              ))}
+        {/* Personal Information */}
+        <div className="glass-card personal-info-section">
+          <div className="section-title">Personal Information</div>
+          <div className="info-fields">
+            <div className="info-field">
+              <label>Display Name</label>
+              <div className="field-container">
+                {editingField === 'nickname' ? (
+                  <div className="edit-container">
+                    <input 
+                      type="text" 
+                      value={editingValue} 
+                      onChange={(e) => setEditingValue(e.target.value)}
+                      className="edit-input"
+                    />
+                    <button 
+                      className="save-btn" 
+                      onClick={() => {
+                        setUserSettings({...userSettings, nickname: editingValue})
+                        setEditingField(null)
+                      }}
+                    >✓</button>
+                    <button 
+                      className="cancel-btn" 
+                      onClick={() => setEditingField(null)}
+                    >✕</button>
+                  </div>
+                ) : (
+                  <div className="field-display">
+                    <span className="field-value">{userSettings.nickname}</span>
+                    <button 
+                      className="edit-btn" 
+                      onClick={() => {
+                        setEditingField('nickname')
+                        setEditingValue(userSettings.nickname)
+                      }}
+                    >✏️</button>
+                  </div>
+                )}
+              </div>
+            </div>
+            
+            <div className="info-field">
+              <label>Email</label>
+              <div className="field-container">
+                {editingField === 'email' ? (
+                  <div className="edit-container">
+                    <input 
+                      type="email" 
+                      value={editingValue} 
+                      onChange={(e) => setEditingValue(e.target.value)}
+                      className="edit-input"
+                    />
+                    <button 
+                      className="save-btn" 
+                      onClick={() => {
+                        setUserSettings({...userSettings, email: editingValue})
+                        setEditingField(null)
+                      }}
+                    >✓</button>
+                    <button 
+                      className="cancel-btn" 
+                      onClick={() => setEditingField(null)}
+                    >✕</button>
+                  </div>
+                ) : (
+                  <div className="field-display">
+                    <span className="field-value">{userSettings.email}</span>
+                    <button 
+                      className="edit-btn" 
+                      onClick={() => {
+                        setEditingField('email')
+                        setEditingValue(userSettings.email)
+                      }}
+                    >✏️</button>
+                  </div>
+                )}
+              </div>
+            </div>
+            
+            <div className="info-field">
+              <label>Member Since</label>
+              <div className="field-container">
+                <span className="field-value readonly">March 2024</span>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Core Stats */}
-        <div className="glass-card">
-          <div className="section-title">My Progress</div>
+        {/* App Preferences */}
+        <div className="glass-card preferences-section">
+          <div className="section-title">App Preferences</div>
+          <div className="preference-items">
+            <div className="preference-item">
+              <div className="preference-info">
+                <div className="preference-label">Push Notifications</div>
+                <div className="preference-desc">Receive updates about your pet and activities</div>
+              </div>
+              <label className="toggle-switch">
+                <input 
+                  type="checkbox" 
+                  checked={userSettings.notifications}
+                  onChange={(e) => setUserSettings({...userSettings, notifications: e.target.checked})}
+                />
+                <span className="slider"></span>
+              </label>
+            </div>
+            
+            <div className="preference-item">
+              <div className="preference-info">
+                <div className="preference-label">Privacy Level</div>
+                <div className="preference-desc">Who can see your profile and activities</div>
+              </div>
+              <select 
+                className="preference-select"
+                value={userSettings.privacy}
+                onChange={(e) => setUserSettings({...userSettings, privacy: e.target.value})}
+              >
+                <option value="public">Public</option>
+                <option value="friends">Friends Only</option>
+                <option value="private">Private</option>
+              </select>
+            </div>
+            
+            <div className="preference-item">
+              <div className="preference-info">
+                <div className="preference-label">Theme</div>
+                <div className="preference-desc">Choose your preferred app theme</div>
+              </div>
+              <select 
+                className="preference-select"
+                value={userSettings.theme}
+                onChange={(e) => setUserSettings({...userSettings, theme: e.target.value})}
+              >
+                <option value="auto">Auto</option>
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        {/* Account Statistics */}
+        <div className="glass-card stats-section">
+          <div className="section-title">Account Statistics</div>
           <div className="stats-grid">
             <div className="stat-item">
               <div className="stat-number">47</div>
               <div className="stat-label">Days Active</div>
             </div>
             <div className="stat-item">
+              <div className="stat-number">23</div>
+              <div className="stat-label">Pet Adventures</div>
+            </div>
+            <div className="stat-item">
               <div className="stat-number">156</div>
-              <div className="stat-label">Places Visited</div>
+              <div className="stat-label">Times Played</div>
             </div>
             <div className="stat-item">
-              <div className="stat-number">8</div>
-              <div className="stat-label">Challenges Done</div>
-            </div>
-            <div className="stat-item">
-              <div className="stat-number">1,247</div>
-              <div className="stat-label">Points Earned</div>
+              <div className="stat-number">Level 8</div>
+              <div className="stat-label">Pet Bond</div>
             </div>
           </div>
         </div>
 
-        {/* Current Mood */}
-        <div className="glass-card">
-          <div className="section-title">Current Mood</div>
-          <div className="mood-display">
-            <span className="mood-emoji">😊</span>
-            <div className="mood-label">Feeling Good</div>
-            <div className="mood-time">Updated 2 hours ago</div>
+        {/* SDT Personality Type */}
+        <div className={`glass-card sdt-section ${sdtExpanded ? 'expanded' : ''}`}>
+          <div className="sdt-header" onClick={toggleSDTInfo}>
+            <div className="section-title">Your Personality Type</div>
+            <div className="expand-icon">{sdtExpanded ? '▲' : '▼'}</div>
+          </div>
+          <div className="sdt-content">
+            <div className="sdt-type-title">{sdtInfo.title}</div>
+            <div className="sdt-description">{sdtInfo.description}</div>
+            <div className="sdt-characteristics">
+              {sdtInfo.characteristics.map((char, index) => (
+                <div key={index} className="characteristic-item">{char}</div>
+              ))}
+            </div>
+            <button className="retake-test-btn">Retake Personality Test</button>
           </div>
         </div>
 
-        {/* Recent Activity */}
-        <div className="glass-card">
-          <div className="section-title">Recent Activity</div>
-          <div className="activity-item">
-            <div className="activity-icon">🎯</div>
-            <div className="activity-content">
-              <div className="activity-title">Completed daily challenge</div>
-              <div className="activity-time">3 hours ago</div>
-            </div>
-          </div>
-          <div className="activity-item">
-            <div className="activity-icon">🗺️</div>
-            <div className="activity-content">
-              <div className="activity-title">Visited new hobby place</div>
-              <div className="activity-time">5 hours ago</div>
-            </div>
-          </div>
-          <div className="activity-item">
-            <div className="activity-icon">🏆</div>
-            <div className="activity-content">
-              <div className="activity-title">Earned new badge</div>
-              <div className="activity-time">1 day ago</div>
-            </div>
-          </div>
-        </div>
-
-        {/* Quick Actions */}
-        <div className="glass-card">
-          <div className="section-title">Quick Actions</div>
-          <div className="quick-actions">
-            <button className="action-btn" onClick={MapsToMap}>Explore Places</button>
-            <button className="action-btn secondary" onClick={MapsToChallenges}>View Challenges</button>
+        {/* Account Actions */}
+        <div className="glass-card actions-section">
+          <div className="section-title">Account Actions</div>
+          <div className="action-buttons">
+            <button className="action-btn primary">Export Data</button>
+            <button className="action-btn secondary">Reset Progress</button>
+            <button className="action-btn danger">Delete Account</button>
           </div>
         </div>
       </div>
@@ -215,12 +341,12 @@ function ProfilePage({ userData, MapsToMain, MapsToChallenges, MapsToMap, MapsTo
       <div className="bottom-nav">
         <div className="nav-items">
           <div className="nav-item" onClick={MapsToMain}>
-            <div className="nav-icon">🚀</div>
-            <div className="nav-label">Explorer</div>
+            <div className="nav-icon">🏠</div>
+            <div className="nav-label">Home</div>
           </div>
-          <div className="nav-item" onClick={MapsToChallenges}>
-            <div className="nav-icon">🎯</div>
-            <div className="nav-label">Challenges</div>
+          <div className="nav-item" onClick={MapsToMap}>
+            <div className="nav-icon">🗺️</div>
+            <div className="nav-label">Map</div>
           </div>
           <div className="nav-item" onClick={MapsToCommunity}>
             <div className="nav-icon">👥</div>
