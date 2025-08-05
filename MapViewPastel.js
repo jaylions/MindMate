@@ -426,30 +426,56 @@ const MapViewPastel = () => {
         </div>
 
         {/* Hobby place markers scattered around the map */}
-        {hobbyPlaces.map((place, index) => (
-          <div
-            key={place.id}
-            style={{
-              ...getMarkerStyle(place.type),
-              // Demo positioning - in real app, these would be calculated from lat/lng
-              left: `${30 + (index * 20)}%`,
-              top: `${40 + (index * 10)}%`,
-            }}
-            onClick={() => handlePlaceClick(place)}
-            onMouseEnter={(e) => {
-              // Hover effect for gentle scaling
-              e.target.style.transform = 'scale(1.1)';
-              e.target.style.boxShadow = `0 6px 20px ${colors.gentleShadow}, 0 0 15px ${colors.lavender}40`;
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.transform = 'scale(1)';
-              e.target.style.boxShadow = `0 3px 12px ${colors.gentleShadow}`;
-            }}
-            title={`Discover ${place.name}`}
-          >
-            {place.icon}
-          </div>
-        ))}
+        {hobbyPlaces.map((place, index) => {
+          const isRecommended = place.recommended;
+          const markerStyle = {
+            ...getMarkerStyle(place.type),
+            left: `${30 + (index * 20)}%`,
+            top: `${40 + (index * 10)}%`,
+            ...(isRecommended ? {
+              borderColor: '#3498db',
+              boxShadow: `0 6px 24px #3498db80, 0 0 20px #ffd70080`,
+              animation: 'recommendedBounce 1.5s infinite',
+            } : {})
+          };
+          return (
+            <div
+              key={place.id}
+              className={isRecommended ? 'recommended-marker-simple' : ''}
+              style={markerStyle}
+              onClick={() => handlePlaceClick(place)}
+              onMouseEnter={(e) => {
+                e.target.style.transform = 'scale(1.1)';
+                e.target.style.boxShadow = isRecommended
+                  ? `0 8px 32px #3498db80, 0 0 30px #ffd700a0`
+                  : `0 6px 20px ${colors.gentleShadow}, 0 0 15px ${colors.lavender}40`;
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.transform = 'scale(1)';
+                e.target.style.boxShadow = isRecommended
+                  ? `0 6px 24px #3498db80, 0 0 20px #ffd70080`
+                  : `0 3px 12px ${colors.gentleShadow}`;
+              }}
+              title={`Discover ${place.name}`}
+            >
+              {place.icon}
+              {isRecommended && (
+                <span style={{
+                  position: 'absolute',
+                  top: '-18px',
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  color: '#ffd700',
+                  fontWeight: 'bold',
+                  fontSize: '1.1rem',
+                  textShadow: '0 0 8px #fff',
+                  pointerEvents: 'none',
+                  animation: 'sparkle 1.2s infinite'
+                }}>★ 추천</span>
+              )}
+            </div>
+          );
+        })}
       </div>
 
       {/* Helpful tooltip for user guidance */}
