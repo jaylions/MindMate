@@ -77,6 +77,276 @@ const LocationBottomSheet = ({ isOpen, location, onClose }) => {
           date: '4 days ago',
           avatar: '👩‍💼'
         }
+      ],
+      "The Book Club Café": [
+        {
+          id: 1,
+          author: 'BookWorm Jane',
+          rating: 5,
+          comment: 'Perfect combination of great coffee and intellectual conversations. Love the Wednesday book discussions!',
+          date: '2 days ago',
+          avatar: '📚'
+        },
+        {
+          id: 2,
+          author: 'Literary Lou',
+          rating: 4,
+          comment: 'Cozy atmosphere and good book selection. Sometimes gets crowded during book club nights.',
+          date: '1 week ago',
+          avatar: '👓'
+        }
+      ],
+      "Mission Rock Music Studio": [
+        {
+          id: 1,
+          author: 'RockStar Jake',
+          rating: 5,
+          comment: 'Amazing sound quality and top-notch equipment. Our band recorded our first album here!',
+          date: '3 days ago',
+          avatar: '🎸'
+        },
+        {
+          id: 2,
+          author: 'Indie Annie',
+          rating: 4,
+          comment: 'Great studio but can be pricey. Worth it for the professional setup though.',
+          date: '1 week ago',
+          avatar: '🎤'
+        }
+      ],
+      "GameOn Arcade": [
+        {
+          id: 1,
+          author: 'RetroGamer',
+          rating: 5,
+          comment: 'Nostalgic heaven! They have all the classic games plus modern ones. Tournament nights are epic!',
+          date: '1 day ago',
+          avatar: '🎮'
+        },
+        {
+          id: 2,
+          author: 'Pac-Man Pro',
+          rating: 4,
+          comment: 'Great selection of games but can get noisy on weekends. Perfect for date nights though!',
+          date: '4 days ago',
+          avatar: '👾'
+        }
+      ],
+      "Castro Climbing Co.": [
+        {
+          id: 1,
+          author: 'ClimbHigh Sarah',
+          rating: 5,
+          comment: 'Personal training here is incredible! My technique improved so much in just a month.',
+          date: '2 days ago',
+          avatar: '🧗‍♀️'
+        },
+        {
+          id: 2,
+          author: 'Boulder Brad',
+          rating: 4,
+          comment: 'Boutique feel with great instructors. A bit expensive but quality is top-tier.',
+          date: '6 days ago',
+          avatar: '🏔️'
+        }
+      ],
+      "Maker Workshop SF": [
+        {
+          id: 1,
+          author: 'Crafty Kate',
+          rating: 5,
+          comment: 'Love the variety of workshops! Made my first pottery bowl and learned woodworking basics.',
+          date: '3 days ago',
+          avatar: '🔨'
+        },
+        {
+          id: 2,
+          author: 'DIY Dave',
+          rating: 4,
+          comment: 'Great tools and helpful staff. Wish they had more weekend slots available.',
+          date: '1 week ago',
+          avatar: '🛠️'
+        }
+      ],
+      "Tennis Club Marina": [
+        {
+          id: 1,
+          author: 'Pro Tennis Pat',
+          rating: 5,
+          comment: 'Premium facilities with amazing bay views! The coaching staff is world-class.',
+          date: '2 days ago',
+          avatar: '🎾'
+        },
+        {
+          id: 2,
+          author: 'Marina Mike',
+          rating: 4,
+          comment: 'Beautiful location and well-maintained courts. Membership fees are steep but worth it.',
+          date: '5 days ago',
+          avatar: '🏆'
+        }
+      ],
+      "Sunset Book Exchange": [
+        {
+          id: 1,
+          author: 'Page Turner',
+          rating: 5,
+          comment: 'Hidden gem! Great selection of used books and the author readings are always fantastic.',
+          date: '1 day ago',
+          avatar: '📖'
+        },
+        {
+          id: 2,
+          author: 'Novel Nancy',
+          rating: 4,
+          comment: 'Cozy independent bookstore with friendly staff. Could use more contemporary fiction.',
+          date: '3 days ago',
+          avatar: '📚'
+        }
+      ],
+      "Jazz Corner SF": [
+        {
+          id: 1,
+          author: 'Jazz Enthusiast',
+          rating: 5,
+          comment: 'Intimate venue with incredible acoustics. Every performance feels like a private concert!',
+          date: '2 days ago',
+          avatar: '🎷'
+        },
+        {
+          id: 2,
+          author: 'Smooth Sally',
+          rating: 4,
+          comment: 'Great atmosphere and talented musicians. Drinks are a bit pricey but the music is priceless.',
+          date: '1 week ago',
+          avatar: '🎺'
+        }
+      ],
+      "VR Gaming Lounge": [
+        {
+          id: 1,
+          author: 'VR Victor',
+          rating: 5,
+          comment: 'Mind-blowing VR experiences! The latest games and equipment make it feel like the future.',
+          date: '1 day ago',
+          avatar: '🥽'
+        },
+        {
+          id: 2,
+          author: 'Digital Dan',
+          rating: 4,
+          comment: 'Amazing technology but sometimes has long wait times. Book ahead on weekends!',
+          date: '4 days ago',
+          avatar: '🤖'
+        }
+      ],
+      "Art & Craft Collective": [
+        {
+          id: 1,
+          author: 'Creative Claire',
+          rating: 5,
+          comment: 'Such a welcoming community space! The painting classes are inspiring and fun.',
+          date: '3 days ago',
+          avatar: '🎨'
+        },
+        {
+          id: 2,
+          author: 'Artsy Amy',
+          rating: 4,
+          comment: 'Great variety of art classes. The ceramic studio could use more kiln space though.',
+          date: '6 days ago',
+          avatar: '🖌️'
+        }
+      ],
+      "Rock Climbing Outdoors": [
+        {
+          id: 1,
+          author: 'Mountain Max',
+          rating: 5,
+          comment: 'Professional guides and incredible outdoor climbing spots! Safety is their top priority.',
+          date: '2 days ago',
+          avatar: '⛰️'
+        },
+        {
+          id: 2,
+          author: 'Adventure Anna',
+          rating: 4,
+          comment: 'Great outdoor experience but weather dependent. Equipment quality is excellent.',
+          date: '1 week ago',
+          avatar: '🏔️'
+        }
+      ],
+      "Indie Music Venue": [
+        {
+          id: 1,
+          author: 'Indie Ian',
+          rating: 5,
+          comment: 'Best place to discover new bands! Intimate setting makes every show special.',
+          date: '1 day ago',
+          avatar: '🎤'
+        },
+        {
+          id: 2,
+          author: 'Music Maven',
+          rating: 4,
+          comment: 'Great sound system and diverse lineup. Can get pretty crowded for popular acts.',
+          date: '5 days ago',
+          avatar: '🎸'
+        }
+      ],
+      "Board Game Café": [
+        {
+          id: 1,
+          author: 'Strategy Steve',
+          rating: 5,
+          comment: 'Amazing game selection! Staff knows every game and gives great recommendations.',
+          date: '2 days ago',
+          avatar: '🎯'
+        },
+        {
+          id: 2,
+          author: 'Game Night Gina',
+          rating: 4,
+          comment: 'Perfect for groups and dates. Food is decent but games are the real star here.',
+          date: '4 days ago',
+          avatar: '🎲'
+        }
+      ],
+      "Knitting Circle Studio": [
+        {
+          id: 1,
+          author: 'Yarn Enthusiast',
+          rating: 5,
+          comment: 'Wonderful community of knitters! Learned so many new techniques and made great friends.',
+          date: '3 days ago',
+          avatar: '🧶'
+        },
+        {
+          id: 2,
+          author: 'Stitch Sam',
+          rating: 4,
+          comment: 'High-quality yarn and patient instructors. Classes fill up quickly so book early.',
+          date: '1 week ago',
+          avatar: '🪡'
+        }
+      ],
+      "Electronic Music Lab": [
+        {
+          id: 1,
+          author: 'Beat Maker Ben',
+          rating: 5,
+          comment: 'State-of-the-art equipment and knowledgeable instructors. Perfect for learning production!',
+          date: '1 day ago',
+          avatar: '🎧'
+        },
+        {
+          id: 2,
+          author: 'DJ Donna',
+          rating: 4,
+          comment: 'Great studio setup but could use more variety in software options. Still highly recommend!',
+          date: '3 days ago',
+          avatar: '🎛️'
+        }
       ]
     };
     
@@ -123,6 +393,111 @@ const LocationBottomSheet = ({ isOpen, location, onClose }) => {
         contact: "(510) 653-3394",
         price: "$$ - Premium coffee and pastries",
         website: "https://bluebottlecoffee.com"
+      },
+      "The Book Club Café": {
+        address: "1834 Divisadero St, San Francisco, CA 94115",
+        hours: "Mon-Sun: 7:00 AM - 9:00 PM\nBook Club: Wednesdays 7:00 PM",
+        contact: "(415) 567-8910",
+        price: "$$ - Coffee, books, and club membership",
+        website: "https://bookclubcafe.com"
+      },
+      "Mission Rock Music Studio": {
+        address: "817 Terry A Francois Blvd, San Francisco, CA 94158",
+        hours: "Daily: 10:00 AM - 12:00 AM",
+        contact: "(415) 555-ROCK",
+        price: "$$$ - Hourly studio rental and lessons",
+        website: "https://missionrockstudio.com"
+      },
+      "GameOn Arcade": {
+        address: "2435 Fillmore St, San Francisco, CA 94115",
+        hours: "Mon-Thu: 4:00 PM - 11:00 PM\nFri-Sun: 12:00 PM - 1:00 AM",
+        contact: "(415) 555-GAME",
+        price: "$$ - Pay per game or unlimited day pass",
+        website: "https://gameonarcade.com"
+      },
+      "Castro Climbing Co.": {
+        address: "2301 Market St, San Francisco, CA 94114",
+        hours: "Mon-Fri: 6:00 AM - 10:00 PM\nSat-Sun: 8:00 AM - 9:00 PM",
+        contact: "(415) 555-CLIMB",
+        price: "$$$ - Premium climbing with personal training",
+        website: "https://castroclimbing.com"
+      },
+      "Maker Workshop SF": {
+        address: "1234 Valencia St, San Francisco, CA 94110",
+        hours: "Tue-Sun: 10:00 AM - 8:00 PM\nClosed Mondays",
+        contact: "(415) 555-MAKE",
+        price: "$$ - Workshop fees and material costs",
+        website: "https://makerworkshopsf.com"
+      },
+      "Tennis Club Marina": {
+        address: "645 Marina Blvd, San Francisco, CA 94123",
+        hours: "Daily: 6:00 AM - 10:00 PM",
+        contact: "(415) 555-TENNIS",
+        price: "$$$ - Premium membership and coaching",
+        website: "https://tennisclubmarina.com"
+      },
+      "Sunset Book Exchange": {
+        address: "1234 Noriega St, San Francisco, CA 94122",
+        hours: "Mon-Sat: 10:00 AM - 8:00 PM\nSun: 11:00 AM - 6:00 PM",
+        contact: "(415) 555-BOOKS",
+        price: "$ - Used books and author events",
+        website: "https://sunsetbooks.com"
+      },
+      "Jazz Corner SF": {
+        address: "1601 Fillmore St, San Francisco, CA 94115",
+        hours: "Wed-Sun: 7:00 PM - 2:00 AM\nClosed Mon-Tue",
+        contact: "(415) 555-JAZZ",
+        price: "$$$ - Cover charge and drink minimum",
+        website: "https://jazzcornersf.com"
+      },
+      "VR Gaming Lounge": {
+        address: "789 Howard St, San Francisco, CA 94103",
+        hours: "Daily: 11:00 AM - 11:00 PM",
+        contact: "(415) 555-VR",
+        price: "$$ - Hourly VR station rental",
+        website: "https://vrgamingsf.com"
+      },
+      "Art & Craft Collective": {
+        address: "555 20th St, San Francisco, CA 94107",
+        hours: "Mon-Fri: 12:00 PM - 9:00 PM\nSat-Sun: 10:00 AM - 7:00 PM",
+        contact: "(415) 555-ART",
+        price: "$$ - Class fees and material costs",
+        website: "https://artcraftcollective.com"
+      },
+      "Rock Climbing Outdoors": {
+        address: "900 North Point St, San Francisco, CA 94109",
+        hours: "Daily: 7:00 AM - 7:00 PM\nWeather dependent",
+        contact: "(415) 555-ROCK",
+        price: "$$$ - Guided tours and equipment rental",
+        website: "https://rockclimbingoutdoors.com"
+      },
+      "Indie Music Venue": {
+        address: "456 Valencia St, San Francisco, CA 94103",
+        hours: "Thu-Sat: 8:00 PM - 2:00 AM\nSun: 7:00 PM - 12:00 AM",
+        contact: "(415) 555-INDIE",
+        price: "$$ - Cover charge varies by show",
+        website: "https://indiemusicvenue.com"
+      },
+      "Board Game Café": {
+        address: "321 Irving St, San Francisco, CA 94122",
+        hours: "Daily: 11:00 AM - 11:00 PM",
+        contact: "(415) 555-BOARD",
+        price: "$$ - Table fee plus food and drinks",
+        website: "https://boardgamecafe.com"
+      },
+      "Knitting Circle Studio": {
+        address: "789 Castro St, San Francisco, CA 94114",
+        hours: "Mon-Fri: 10:00 AM - 7:00 PM\nSat-Sun: 9:00 AM - 6:00 PM",
+        contact: "(415) 555-KNIT",
+        price: "$$ - Classes and yarn purchases",
+        website: "https://knittingcircle.com"
+      },
+      "Electronic Music Lab": {
+        address: "1010 Folsom St, San Francisco, CA 94103",
+        hours: "Tue-Sat: 2:00 PM - 11:00 PM\nSun-Mon: 3:00 PM - 9:00 PM",
+        contact: "(415) 555-BEATS",
+        price: "$$$ - Studio time and equipment rental",
+        website: "https://electronicmusiclab.com"
       }
     };
     
