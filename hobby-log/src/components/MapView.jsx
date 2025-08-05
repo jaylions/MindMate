@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import '../styles/MapView.css'
+import LocationBottomSheet from './LocationBottomSheet'
+import LocationSummaryCard from './LocationSummaryCard'
 
 function MapView({ MapsToMain, MapsToCommunity, MapsToShop, MapsToProfile }) {
   const [mapLoaded, setMapLoaded] = useState(false)
@@ -7,6 +9,9 @@ function MapView({ MapsToMain, MapsToCommunity, MapsToShop, MapsToProfile }) {
   const [TileLayer, setTileLayer] = useState(null)
   const [Marker, setMarker] = useState(null)
   const [Popup, setPopup] = useState(null)
+  const [selectedLocation, setSelectedLocation] = useState(null)
+  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false)
+  const [isSummaryOpen, setIsSummaryOpen] = useState(false)
 
   // 동적으로 react-leaflet 컴포넌트들을 로드
   useEffect(() => {
@@ -51,21 +56,44 @@ function MapView({ MapsToMain, MapsToCommunity, MapsToShop, MapsToProfile }) {
       id: 1,
       name: "Golden Gate Tennis Courts",
       position: [37.7694, -122.4862],
-      description: "Outdoor tennis courts with beautiful city views"
+      description: "Outdoor tennis courts with beautiful city views",
+      icon: "🎾"
     },
     {
       id: 2,
       name: "Touchstone Climbing Gym",
       position: [37.7749, -122.4194],
-      description: "Indoor climbing gym with bouldering and top-rope"
+      description: "Indoor climbing gym with bouldering and top-rope",
+      icon: "🧗"
     },
     {
       id: 3,
       name: "Blue Bottle Coffee",
       position: [37.7849, -122.4094],
-      description: "Artisanal coffee shop with craft brewing"
+      description: "Artisanal coffee shop with craft brewing",
+      icon: "☕"
     }
   ]
+
+  const handleMarkerClick = (place) => {
+    setSelectedLocation(place)
+    setIsSummaryOpen(true)
+  }
+
+  const handleCloseSummary = () => {
+    setIsSummaryOpen(false)
+    setSelectedLocation(null)
+  }
+
+  const handleViewDetails = () => {
+    setIsSummaryOpen(false)
+    setIsBottomSheetOpen(true)
+  }
+
+  const handleCloseBottomSheet = () => {
+    setIsBottomSheetOpen(false)
+    setSelectedLocation(null)
+  }
 
   if (!mapLoaded) {
     return (
@@ -127,7 +155,13 @@ function MapView({ MapsToMain, MapsToCommunity, MapsToShop, MapsToProfile }) {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
           {hobbyPlaces.map((place) => (
-            <Marker key={place.id} position={place.position}>
+            <Marker 
+              key={place.id} 
+              position={place.position}
+              eventHandlers={{
+                click: () => handleMarkerClick(place)
+              }}
+            >
               <Popup>
                 <div>
                   <h3 style={{ margin: '0 0 8px 0', fontSize: '16px' }}>{place.name}</h3>
@@ -178,6 +212,21 @@ function MapView({ MapsToMain, MapsToCommunity, MapsToShop, MapsToProfile }) {
           </div>
         </div>
       </nav>
+
+      {/* Location Summary Card */}
+      <LocationSummaryCard
+        isOpen={isSummaryOpen}
+        location={selectedLocation}
+        onClose={handleCloseSummary}
+        onViewDetails={handleViewDetails}
+      />
+
+      {/* Location Bottom Sheet */}
+      <LocationBottomSheet
+        isOpen={isBottomSheetOpen}
+        location={selectedLocation}
+        onClose={handleCloseBottomSheet}
+      />
     </div>
   )
 }
