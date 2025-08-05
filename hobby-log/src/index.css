@@ -2640,15 +2640,16 @@ button:focus-visible {
   display: flex;
   flex-direction: column;
   z-index: 1;
-  padding: 1rem;
   font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 480px;
+  margin: 0 auto;
 }
 
 /* Map header styles */
 .map-header {
   text-align: center;
   margin-bottom: 1.5rem;
-  padding: 0 1rem;
+  padding: 1rem 1rem 0 1rem;
 }
 
 .map-title {
@@ -2671,10 +2672,8 @@ button:focus-visible {
   flex: 1;
   display: flex;
   flex-direction: column;
-  max-width: 480px;
-  margin: 0 auto;
   width: 100%;
-  margin-bottom: 1rem;
+  padding: 0 1rem;
 }
 
 /* Map card styles */
@@ -2686,7 +2685,7 @@ button:focus-visible {
     0 2px 4px -1px rgba(0, 0, 0, 0.06),
     0 0 0 1px rgba(255, 255, 255, 0.1);
   overflow: hidden;
-  height: 400px;
+  height: 500px;
   border: 2px solid rgba(59, 130, 246, 0.1);
   position: relative;
 }
@@ -2795,7 +2794,7 @@ button:focus-visible {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 400px;
+  height: 500px;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
   z-index: 100;
@@ -2810,38 +2809,29 @@ button:focus-visible {
   font-weight: 600;
 }
 
-/* Bottom navigation styling for map */
-.map-view .bottom-nav {
-  position: sticky;
-  bottom: 0;
-  z-index: 1001;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(15px);
-  border-top: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 
-    0 -4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 -2px 4px -1px rgba(0, 0, 0, 0.06);
-  border-radius: 16px 16px 0 0;
-  margin: 0 -1rem -1rem -1rem;
-  padding: 0 1rem;
-}
 
 /* Responsive design for map */
 @media (max-width: 768px) {
   .map-view {
-    padding: 0.75rem;
+    max-width: 100%;
+    margin: 0;
   }
   
   .map-header {
     margin-bottom: 1rem;
+    padding: 0.75rem 0.75rem 0 0.75rem;
   }
   
   .map-title {
     font-size: 1.5rem;
   }
   
+  .map-container-wrapper {
+    padding: 0 0.75rem;
+  }
+  
   .map-card {
-    height: 350px;
+    height: 450px;
     border-radius: 12px;
   }
   
@@ -2856,16 +2846,20 @@ button:focus-visible {
 }
 
 @media (max-width: 480px) {
-  .map-view {
-    padding: 0.5rem;
+  .map-header {
+    padding: 0.5rem 0.5rem 0 0.5rem;
   }
   
   .map-title {
     font-size: 1.3rem;
   }
   
+  .map-container-wrapper {
+    padding: 0 0.5rem;
+  }
+  
   .map-card {
-    height: 300px;
+    height: 350px;
     border-radius: 10px;
   }
   
