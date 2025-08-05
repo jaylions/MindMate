@@ -41,29 +41,50 @@ const PETS = [
     id: 'unicorn',
     name: 'Unicorn',
     emoji: '🦄',
-    status: 'locked',
+    status: 'available',
     image: 'src/assets/character/unicorn.jpg'
   },
   {
     id: 'turtle',
     name: 'Turtle',
     emoji: '🐢',
-    status: 'locked',
+    status: 'available',
     image: 'src/assets/character/turtle.jpg'
   },
   {
     id: 'cat',
     name: 'Cat',
     emoji: '🐱',
-    status: 'locked',
+    status: 'available',
     image: 'src/assets/character/cat.jpg'
   },
   {
     id: 'dog',
     name: 'Dog',
     emoji: '🐶',
-    status: 'locked',
+    status: 'available',
     image: 'src/assets/character/dog.jpg'
+  },  
+  {
+    id: 'dragon',
+    name: 'Dragon',
+    emoji: '🐉',
+    status: 'available',
+    image: 'src/assets/character/dragon.jpg'
+  },
+  {
+    id: 'grumpy_cat',
+    name: 'Grumpy Cat',
+    emoji: '😾',
+    status: 'available',
+    image: 'src/assets/character/grumpy_cat.jpg'
+  },
+  {
+    id: 'border_collie',
+    name: 'Border Collie',
+    emoji: '🐕',
+    status: 'available',
+    image: 'src/assets/character/border_collie.jpg'
   }
 ];
 
@@ -167,7 +188,15 @@ function PetSelectionPage({ userInfo, sdtResults, onComplete }) {
         onClick={handleComplete}
         disabled={!selectedPetData}
       >
-        Select Pet
+        {selectedPetData ? (
+          <>
+            🎉 Select {selectedPetData.name} as My Pet
+          </>
+        ) : (
+          <>
+            🐾 Choose a Pet First
+          </>
+        )}
       </button>
 
       {/* Success Message */}
