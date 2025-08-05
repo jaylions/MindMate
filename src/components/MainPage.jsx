@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
+import LiquidBar from './LiquidBar'
 
-function MainPage({ MapsToMap, MapsToCommunity, MapsToShop, MapsToChallenges, userData }) {
+function MainPage({ MapsToMap, MapsToCommunity, MapsToShop, MapsToChallenges, MapsToProfile, userData }) {
   const [showGoalSettings, setShowGoalSettings] = useState(false)
   const [goalFrequency, setGoalFrequency] = useState(3)
   const [goalPeriod, setGoalPeriod] = useState('days')
@@ -28,6 +29,43 @@ function MainPage({ MapsToMap, MapsToCommunity, MapsToShop, MapsToChallenges, us
 
       {/* 메인 콘텐츠 */}
       <div className="main-content">
+        {/* Explorer Progress Section */}
+        <div className="explorer-progress-section">
+          <div className="progress-title">Your Explorer Journey</div>
+          <div className="explorer-progress-grid">
+            <div className="explorer-progress-item">
+              <LiquidBar 
+                value={100} 
+                maxValue={100} 
+                color="#4CAF50" 
+                height={50} 
+                label="Today's Progress"
+                animated={true}
+              />
+            </div>
+            <div className="explorer-progress-item">
+              <LiquidBar 
+                value={692} 
+                maxValue={1000} 
+                color="#66BB6A" 
+                height={50} 
+                label="Total Trophies"
+                animated={true}
+              />
+            </div>
+          </div>
+          <div className="single-explorer-progress">
+            <LiquidBar 
+              value={19} 
+              maxValue={25} 
+              color="#81C784" 
+              height={45} 
+              label="Explorer Level Progress"
+              animated={true}
+            />
+          </div>
+        </div>
+
         {/* 캐릭터 섹션 */}
         <div className="character-section">
           <div className="character">
@@ -110,23 +148,48 @@ function MainPage({ MapsToMap, MapsToCommunity, MapsToShop, MapsToChallenges, us
         <div className="learning-stats">
           <h3 className="section-title">Exploration Stats</h3>
           <div className="stats-content">
-            <div className="stats-chart">
-              <div className="chart-bars">
-                <div className="bar" style={{height: '60%'}}></div>
-                <div className="bar" style={{height: '80%'}}></div>
-                <div className="bar" style={{height: '40%'}}></div>
-                <div className="bar" style={{height: '90%'}}></div>
-                <div className="bar" style={{height: '70%'}}></div>
+            <div className="stats-liquid-bars">
+              <div className="stats-bar-item">
+                <LiquidBar 
+                  value={12} 
+                  maxValue={20} 
+                  color="#A5D6A7" 
+                  height={40} 
+                  label="New Places"
+                  animated={false}
+                />
+              </div>
+              <div className="stats-bar-item">
+                <LiquidBar 
+                  value={8} 
+                  maxValue={15} 
+                  color="#81C784" 
+                  height={40} 
+                  label="Places Visited"
+                  animated={false}
+                />
+              </div>
+              <div className="stats-bar-item">
+                <LiquidBar 
+                  value={150} 
+                  maxValue={180} 
+                  color="#66BB6A" 
+                  height={40} 
+                  label="Total Minutes"
+                  animated={false}
+                />
               </div>
             </div>
-            <div className="stats-percentage">
-              <span className="percentage">83%</span>
+            <div className="main-stats-bar">
+              <LiquidBar 
+                value={83} 
+                maxValue={100} 
+                color="#4CAF50" 
+                height={60} 
+                label="Overall Exploration Score"
+                animated={true}
+              />
             </div>
-          </div>
-          <div className="stats-details">
-            <div className="stat-item">• New Places Discovered: 12</div>
-            <div className="stat-item">• Places Visited: 8</div>
-            <div className="stat-item">• Total Exploration Time: 2h 30m</div>
           </div>
         </div>
 
@@ -170,6 +233,10 @@ function MainPage({ MapsToMap, MapsToCommunity, MapsToShop, MapsToChallenges, us
         <div className="nav-item" onClick={MapsToShop}>
           <div className="nav-icon">🛍️</div>
           <span className="nav-label">Shop</span>
+        </div>
+        <div className="nav-item" onClick={MapsToProfile}>
+          <div className="nav-icon">👤</div>
+          <span className="nav-label">Profile</span>
         </div>
       </div>
     </div>

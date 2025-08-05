@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import LiquidBar from './LiquidBar'
 
 function Shop({ MapsToMain }) {
   const [selectedCategory, setSelectedCategory] = useState('premium')
@@ -77,6 +78,42 @@ function Shop({ MapsToMain }) {
       </div>
 
       <div className="shop-content">
+        {/* Progress Indicators */}
+        <div className="progress-section">
+          <div className="progress-grid">
+            <div className="progress-item">
+              <LiquidBar 
+                value={75} 
+                maxValue={100} 
+                color="#4CAF50" 
+                height={50} 
+                label="Premium Progress"
+                animated={true}
+              />
+            </div>
+            <div className="progress-item">
+              <LiquidBar 
+                value={1250} 
+                maxValue={2000} 
+                color="#66BB6A" 
+                height={50} 
+                label="Coins Collected"
+                animated={true}
+              />
+            </div>
+          </div>
+          <div className="single-progress">
+            <LiquidBar 
+              value={45} 
+              maxValue={100} 
+              color="#81C784" 
+              height={70} 
+              label="Shop Completion Progress"
+              animated={true}
+            />
+          </div>
+        </div>
+
         {/* 카테고리 탭 */}
         <div className="shop-tabs">
           <button 
@@ -165,6 +202,16 @@ function Shop({ MapsToMain }) {
                     <h4>{item.name}</h4>
                     <p>{item.description}</p>
                     <div className="item-price">{item.price}</div>
+                    <div className="item-popularity">
+                      <LiquidBar 
+                        value={Math.random() * 100} 
+                        maxValue={100} 
+                        color="#A5D6A7" 
+                        height={20} 
+                        label="Popularity"
+                        animated={false}
+                      />
+                    </div>
                   </div>
                   <button className="buy-btn">
                     Buy

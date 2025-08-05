@@ -8,6 +8,7 @@ import MapView from './components/MapView'
 import Community from './components/Community'
 import Shop from './components/Shop'
 import Challenges from './components/Challenges'
+import ProfilePage from './components/ProfilePage'
 
 function App() {
   const [view, setView] = useState('landing')
@@ -49,6 +50,10 @@ function App() {
     setView('challenges')
   }
 
+  const MapsToProfile = () => {
+    setView('profile')
+  }
+
   return (
     <div className="App">
       {view === 'landing' && (
@@ -70,6 +75,7 @@ function App() {
           MapsToCommunity={MapsToCommunity}
           MapsToShop={MapsToShop}
           MapsToChallenges={MapsToChallenges}
+          MapsToProfile={MapsToProfile}
           userData={userData}
         />
       )}
@@ -84,6 +90,16 @@ function App() {
       )}
       {view === 'challenges' && (
         <Challenges MapsToMain={MapsToMain} />
+      )}
+      {view === 'profile' && (
+        <ProfilePage
+          userData={userData}
+          MapsToMain={MapsToMain}
+          MapsToChallenges={MapsToChallenges}
+          MapsToMap={MapsToMap}
+          MapsToCommunity={MapsToCommunity}
+          MapsToShop={MapsToShop}
+        />
       )}
     </div>
   )

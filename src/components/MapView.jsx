@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import L from 'leaflet'
+import LiquidBar from './LiquidBar'
 
 // 커스텀 마커 아이콘 생성
 const createCustomIcon = (color) => {
@@ -32,6 +33,7 @@ const createCustomIcon = (color) => {
 }
 
 function MapView({ MapsToMain }) {
+  const [showStats, setShowStats] = useState(true)
   // 샌프란시스코의 실제 취미 장소 데이터
   const hobbyPlaces = [
     {
@@ -121,10 +123,60 @@ function MapView({ MapsToMain }) {
       <button className="back-button" onClick={MapsToMain}>
         Back
       </button>
+      
+      {/* Map Statistics Overlay */}
+      {showStats && (
+        <div className="map-stats-overlay">
+          <div className="stats-header">
+            <h3>Exploration Progress</h3>
+            <button className="close-stats" onClick={() => setShowStats(false)}>✕</button>
+          </div>
+          <div className="map-progress-grid">
+            <div className="map-progress-item">
+              <LiquidBar 
+                value={10} 
+                maxValue={20} 
+                color="#4CAF50" 
+                height={50} 
+                label="Places Found"
+                animated={true}
+              />
+            </div>
+            <div className="map-progress-item">
+              <LiquidBar 
+                value={7} 
+                maxValue={10} 
+                color="#66BB6A" 
+                height={50} 
+                label="Types Explored"
+                animated={true}
+              />
+            </div>
+          </div>
+          <div className="single-map-progress">
+            <LiquidBar 
+              value={60} 
+              maxValue={100} 
+              color="#81C784" 
+              height={40} 
+              label="Map Coverage"
+              animated={true}
+            />
+          </div>
+        </div>
+      )}
+      
+      {/* Toggle Stats Button */}
+      {!showStats && (
+        <button className="show-stats-btn" onClick={() => setShowStats(true)}>
+          📊 Stats
+        </button>
+      )}
+      
       <MapContainer 
         center={[37.7749, -122.4194]} 
         zoom={13} 
-        style={{ width: '100%', height: '80vh' }}
+        style={{ width: '100%', height: '100vh' }}
       >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -145,6 +197,16 @@ function MapView({ MapsToMain }) {
                 <p style={{ margin: '0', fontSize: '11px', color: '#888', fontStyle: 'italic' }}>
                   {place.description}
                 </p>
+                <div style={{ marginTop: '10px' }}>
+                  <LiquidBar 
+                    value={Math.random() * 100} 
+                    maxValue={100} 
+                    color={place.color} 
+                    height={25} 
+                    label="Popularity"
+                    animated={false}
+                  />
+                </div>
               </div>
             </Popup>
           </Marker>

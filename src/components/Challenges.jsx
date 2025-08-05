@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import LiquidBar from './LiquidBar'
 
 function Challenges({ MapsToMain }) {
   const [selectedCategory, setSelectedCategory] = useState('active')
@@ -166,6 +167,42 @@ function Challenges({ MapsToMain }) {
       </div>
 
       <div className="challenges-content">
+        {/* Challenge Progress Overview */}
+        <div className="challenge-progress-overview">
+          <div className="overview-grid">
+            <div className="overview-item">
+              <LiquidBar 
+                value={12} 
+                maxValue={25} 
+                color="#4CAF50" 
+                height={60} 
+                label="Total Challenges"
+                animated={true}
+              />
+            </div>
+            <div className="overview-item">
+              <LiquidBar 
+                value={8} 
+                maxValue={12} 
+                color="#66BB6A" 
+                height={60} 
+                label="Active Challenges"
+                animated={true}
+              />
+            </div>
+          </div>
+          <div className="single-overview">
+            <LiquidBar 
+              value={48} 
+              maxValue={100} 
+              color="#81C784" 
+              height={50} 
+              label="Overall Challenge Completion"
+              animated={true}
+            />
+          </div>
+        </div>
+
         {/* 카테고리 탭 */}
         <div className="challenges-tabs">
           <button 
@@ -232,18 +269,14 @@ function Challenges({ MapsToMain }) {
                   <p className="challenge-description">{challenge.description}</p>
                   {challenge.status === 'active' && (
                     <div className="challenge-progress">
-                      <div className="progress-bar">
-                        <div 
-                          className="progress-fill" 
-                          style={{
-                            width: `${getProgressPercentage(challenge.progress, challenge.total)}%`,
-                            backgroundColor: challenge.color
-                          }}
-                        ></div>
-                      </div>
-                      <span className="progress-text">
-                        {challenge.progress}/{challenge.total}
-                      </span>
+                      <LiquidBar 
+                        value={challenge.progress} 
+                        maxValue={challenge.total} 
+                        color={challenge.color} 
+                        height={30} 
+                        label={`${challenge.progress}/${challenge.total}`}
+                        animated={false}
+                      />
                     </div>
                   )}
                 </div>

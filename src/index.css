@@ -82,7 +82,7 @@ button:focus-visible {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(135deg, #FFE5E5 0%, #E8F4FD 50%, #F0E6FF 100%);
+  background: linear-gradient(135deg, #E8F5E8 0%, #C8E6C9 50%, #A5D6A7 100%);
 }
 
 /* 상단 바 */
@@ -98,20 +98,20 @@ button:focus-visible {
 
 .hamburger-menu {
   font-size: 1.5rem;
-  color: #8B7EC8;
+  color: #4CAF50;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .hamburger-menu:hover {
-  color: #6B5B95;
+  color: #2E7D32;
   transform: scale(1.1);
 }
 
 .achievements {
   display: flex;
   gap: 1rem;
-  color: #8B7EC8;
+  color: #4CAF50;
   font-weight: 600;
 }
 
@@ -153,14 +153,14 @@ button:focus-visible {
 
 .character-avatar {
   font-size: 4rem;
-  background: linear-gradient(135deg, #FFE4E1, #FFF0F5);
+  background: linear-gradient(135deg, #E8F5E8, #F1F8E9);
   border-radius: 50%;
   width: 80px;
   height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 25px rgba(255, 228, 225, 0.4);
+  box-shadow: 0 8px 25px rgba(165, 214, 167, 0.4);
   border: 3px solid rgba(255, 255, 255, 0.8);
 }
 
@@ -189,14 +189,14 @@ button:focus-visible {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: linear-gradient(45deg, #A8E6CF, #B8E6B8);
+  background: linear-gradient(45deg, #66BB6A, #81C784);
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
   font-weight: bold;
   font-size: 1.2rem;
-  box-shadow: 0 6px 20px rgba(168, 230, 207, 0.4);
+  box-shadow: 0 6px 20px rgba(102, 187, 106, 0.4);
   border: 3px solid rgba(255, 255, 255, 0.8);
 }
 
@@ -205,14 +205,14 @@ button:focus-visible {
 }
 
 .learning-title {
-  color: #6B5B95;
+  color: #2E7D32;
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
 }
 
 .daily-goal {
-  color: #8B7EC8;
+  color: #4CAF50;
   font-size: 0.9rem;
   display: flex;
   align-items: center;
@@ -243,7 +243,7 @@ button:focus-visible {
 }
 
 .goal-settings h3 {
-  color: #6B5B95;
+  color: #2E7D32;
   margin-bottom: 1rem;
   font-size: 1.2rem;
 }
@@ -262,7 +262,7 @@ button:focus-visible {
 }
 
 .goal-input-group label {
-  color: #8B7EC8;
+  color: #4CAF50;
   font-size: 0.9rem;
   font-weight: 600;
 }
@@ -270,10 +270,10 @@ button:focus-visible {
 .goal-input-group input,
 .goal-input-group select {
   padding: 0.8rem;
-  border: 2px solid rgba(139, 126, 200, 0.2);
+  border: 2px solid rgba(76, 175, 80, 0.2);
   border-radius: 12px;
   background: white;
-  color: #6B5B95;
+  color: #2E7D32;
   font-size: 1rem;
   transition: all 0.3s ease;
 }
@@ -281,14 +281,14 @@ button:focus-visible {
 .goal-input-group input:focus,
 .goal-input-group select:focus {
   outline: none;
-  border-color: #8B7EC8;
-  box-shadow: 0 0 0 3px rgba(139, 126, 200, 0.1);
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
 }
 
 .save-goal-btn {
   width: 100%;
-  background: linear-gradient(45deg, #A8E6CF, #B8E6B8);
-  color: #4A6741;
+  background: linear-gradient(45deg, #66BB6A, #81C784);
+  color: white;
   border: none;
   border-radius: 15px;
   padding: 1rem;
@@ -315,13 +315,13 @@ button:focus-visible {
 }
 
 .goal-header h3 {
-  color: #6B5B95;
+  color: #2E7D32;
   font-size: 1.2rem;
 }
 
 .goal-status {
-  background: linear-gradient(45deg, #A8E6CF, #B8E6B8);
-  color: #4A6741;
+  background: linear-gradient(45deg, #66BB6A, #81C784);
+  color: white;
   padding: 0.3rem 0.8rem;
   border-radius: 15px;
   font-weight: bold;
@@ -347,7 +347,7 @@ button:focus-visible {
 .goal-checkbox {
   width: 24px;
   height: 24px;
-  border: 2px solid #8B7EC8;
+  border: 2px solid #4CAF50;
   border-radius: 6px;
   display: flex;
   align-items: center;
@@ -358,19 +358,19 @@ button:focus-visible {
 }
 
 .goal-checkbox.completed {
-  background: #A8E6CF;
-  border-color: #A8E6CF;
+  background: #66BB6A;
+  border-color: #66BB6A;
 }
 
 .goal-text {
   flex: 1;
-  color: #6B5B95;
+  color: #2E7D32;
   font-weight: 500;
 }
 
 .show-btn {
-  background: rgba(139, 126, 200, 0.1);
-  color: #8B7EC8;
+  background: rgba(76, 175, 80, 0.1);
+  color: #4CAF50;
   border: none;
   border-radius: 20px;
   padding: 0.5rem 1rem;
@@ -381,8 +381,8 @@ button:focus-visible {
 /* 탐색 버튼 */
 .explore-button {
   width: 100%;
-  background: linear-gradient(45deg, #B8E6B8, #A8E6CF);
-  color: #4A6741;
+  background: linear-gradient(45deg, #66BB6A, #81C784);
+  color: white;
   font-size: 1.1rem;
   font-weight: bold;
   padding: 1.2rem;
@@ -393,7 +393,7 @@ button:focus-visible {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  box-shadow: 0 8px 25px rgba(184, 230, 184, 0.4);
+  box-shadow: 0 8px 25px rgba(102, 187, 106, 0.4);
   border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
@@ -413,7 +413,7 @@ button:focus-visible {
 }
 
 .section-title {
-  color: #6B5B95;
+  color: #2E7D32;
   font-size: 1.2rem;
   font-weight: bold;
   margin-bottom: 1rem;
@@ -444,20 +444,20 @@ button:focus-visible {
 
 .bar {
   flex: 1;
-  background: linear-gradient(to top, #FFB6C1, #FFC0CB);
+  background: linear-gradient(to top, #A5D6A7, #C8E6C9);
   border-radius: 6px 6px 0 0;
   min-height: 10px;
-  box-shadow: 0 2px 8px rgba(255, 182, 193, 0.3);
+  box-shadow: 0 2px 8px rgba(165, 214, 167, 0.3);
 }
 
 .stats-percentage {
   font-size: 2rem;
   font-weight: bold;
-  color: #8B7EC8;
+  color: #4CAF50;
 }
 
 .stats-details {
-  color: #8B7EC8;
+  color: #4CAF50;
   font-size: 0.9rem;
 }
 
@@ -484,23 +484,23 @@ button:focus-visible {
 }
 
 .level-check-button {
-  background: linear-gradient(45deg, #FFB6C1, #FFC0CB);
-  color: #8B5A8B;
+  background: linear-gradient(45deg, #A5D6A7, #C8E6C9);
+  color: #1B5E20;
   border: none;
   border-radius: 25px;
   padding: 0.6rem 1.2rem;
   font-size: 0.9rem;
   font-weight: bold;
-  box-shadow: 0 4px 15px rgba(255, 182, 193, 0.3);
+  box-shadow: 0 4px 15px rgba(165, 214, 167, 0.3);
 }
 
 .level-date {
-  color: #8B7EC8;
+  color: #4CAF50;
   font-size: 0.9rem;
 }
 
 .level-ranking {
-  color: #8B7EC8;
+  color: #4CAF50;
   font-weight: bold;
   font-size: 0.9rem;
 }
@@ -538,8 +538,8 @@ button:focus-visible {
   display: flex;
   background: rgba(255, 255, 255, 0.9);
   padding: 0.8rem 0;
-  border-top: 1px solid rgba(139, 126, 200, 0.2);
-  box-shadow: 0 -4px 20px rgba(139, 126, 200, 0.1);
+  border-top: 1px solid rgba(76, 175, 80, 0.2);
+  box-shadow: 0 -4px 20px rgba(76, 175, 80, 0.1);
   backdrop-filter: blur(15px);
 }
 
@@ -557,13 +557,13 @@ button:focus-visible {
 }
 
 .nav-item:hover {
-  background: rgba(139, 126, 200, 0.1);
+  background: rgba(76, 175, 80, 0.1);
   transform: translateY(-2px);
 }
 
 .nav-item.active {
-  color: #8B7EC8;
-  background: rgba(139, 126, 200, 0.15);
+  color: #4CAF50;
+  background: rgba(76, 175, 80, 0.15);
 }
 
 .nav-icon {
@@ -593,14 +593,14 @@ button:focus-visible {
   left: 20px;
   z-index: 1000;
   background: rgba(255, 255, 255, 0.9);
-  color: #8B7EC8;
+  color: #4CAF50;
   padding: 0.8rem 1.5rem;
   border: none;
   border-radius: 25px;
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(139, 126, 200, 0.2);
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.2);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
@@ -608,13 +608,13 @@ button:focus-visible {
 .back-button:hover {
   background: rgba(255, 255, 255, 1);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(139, 126, 200, 0.3);
+  box-shadow: 0 6px 20px rgba(76, 175, 80, 0.3);
 }
 
 /* Community 페이지 스타일 */
 .community-page {
   height: 100vh;
-  background: linear-gradient(135deg, #FFE5E5 0%, #E8F4FD 50%, #F0E6FF 100%);
+  background: linear-gradient(135deg, #E8F5E8 0%, #C8E6C9 50%, #A5D6A7 100%);
   overflow-y: auto;
 }
 
@@ -629,14 +629,14 @@ button:focus-visible {
 }
 
 .community-page .top-bar h2 {
-  color: #6B5B95;
+  color: #2E7D32;
   font-size: 1.5rem;
   font-weight: bold;
 }
 
 .search-icon {
   font-size: 1.2rem;
-  color: #8B7EC8;
+  color: #4CAF50;
   cursor: pointer;
 }
 
@@ -677,14 +677,14 @@ button:focus-visible {
 .checkbox {
   width: 30px;
   height: 30px;
-  border: 2px solid #8B7EC8;
+  border: 2px solid #4CAF50;
   border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.8rem;
   font-weight: bold;
-  color: #8B7EC8;
+  color: #4CAF50;
   background: rgba(255, 255, 255, 0.5);
 }
 
@@ -695,7 +695,7 @@ button:focus-visible {
 }
 
 .longest-chain {
-  color: #8B7EC8;
+  color: #4CAF50;
   font-size: 0.9rem;
   font-weight: 600;
 }
@@ -722,11 +722,11 @@ button:focus-visible {
   display: flex;
   gap: 1rem;
   font-size: 1.2rem;
-  color: #8B7EC8;
+  color: #4CAF50;
 }
 
 .chart-subtitle {
-  color: #8B7EC8;
+  color: #4CAF50;
   font-size: 0.9rem;
   margin-bottom: 1rem;
 }
@@ -742,7 +742,7 @@ button:focus-visible {
   align-items: center;
   gap: 0.3rem;
   font-size: 0.8rem;
-  color: #6B5B95;
+  color: #2E7D32;
 }
 
 .mood-dot {
@@ -833,7 +833,7 @@ button:focus-visible {
 }
 
 .chart-btn.active {
-  background: #8B7EC8;
+  background: #4CAF50;
   color: white;
 }
 
@@ -842,7 +842,7 @@ button:focus-visible {
   border: 2px solid rgba(139, 126, 200, 0.2);
   border-radius: 8px;
   background: white;
-  color: #6B5B95;
+  color: #2E7D32;
   font-size: 0.9rem;
 }
 
@@ -881,7 +881,7 @@ button:focus-visible {
 .place-rank {
   font-size: 1.2rem;
   font-weight: bold;
-  color: #8B7EC8;
+  color: #4CAF50;
   min-width: 40px;
 }
 
@@ -890,13 +890,13 @@ button:focus-visible {
 }
 
 .place-name {
-  color: #6B5B95;
+  color: #2E7D32;
   font-weight: bold;
   margin-bottom: 0.2rem;
 }
 
 .place-visits {
-  color: #8B7EC8;
+  color: #4CAF50;
   font-size: 0.9rem;
 }
 
@@ -973,7 +973,7 @@ button:focus-visible {
 /* Shop 페이지 스타일 */
 .shop-page {
   height: 100vh;
-  background: linear-gradient(135deg, #FFE5E5 0%, #E8F4FD 50%, #F0E6FF 100%);
+  background: linear-gradient(135deg, #E8F5E8 0%, #C8E6C9 50%, #A5D6A7 100%);
   overflow-y: auto;
 }
 
@@ -988,7 +988,7 @@ button:focus-visible {
 }
 
 .shop-page .top-bar h2 {
-  color: #6B5B95;
+  color: #2E7D32;
   font-size: 1.5rem;
   font-weight: bold;
 }
@@ -1008,8 +1008,261 @@ button:focus-visible {
 }
 
 .coins-amount {
-  color: #8B7EC8;
+  color: #4CAF50;
   font-weight: bold;
+}
+
+/* Progress Section */
+.progress-section {
+  margin-bottom: 1.5rem;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 20px;
+  padding: 1.5rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 25px rgba(76, 175, 80, 0.1);
+}
+
+.progress-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.progress-item {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 15px;
+  padding: 1rem;
+  backdrop-filter: blur(5px);
+}
+
+.single-progress {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 15px;
+  padding: 1rem;
+  backdrop-filter: blur(5px);
+}
+
+.item-popularity {
+  margin-top: 8px;
+}
+
+.item-popularity .liquid-bar-label {
+  font-size: 11px;
+  margin-bottom: 4px;
+}
+
+/* Explorer Progress Section */
+.explorer-progress-section {
+  margin-bottom: 1.5rem;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 20px;
+  padding: 1.5rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 25px rgba(76, 175, 80, 0.1);
+}
+
+.progress-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #2E7D32;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.explorer-progress-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.explorer-progress-item {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 15px;
+  padding: 1rem;
+  backdrop-filter: blur(5px);
+}
+
+.single-explorer-progress {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 15px;
+  padding: 1rem;
+  backdrop-filter: blur(5px);
+}
+
+/* Stats Liquid Bars */
+.stats-liquid-bars {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.stats-bar-item {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 10px;
+  backdrop-filter: blur(5px);
+}
+
+.main-stats-bar {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 15px;
+  padding: 1rem;
+  backdrop-filter: blur(5px);
+}
+
+/* Community Progress */
+.community-progress {
+  margin-bottom: 1.5rem;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 20px;
+  padding: 1.5rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 25px rgba(76, 175, 80, 0.1);
+}
+
+.community-progress .progress-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.community-progress .progress-item {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 15px;
+  padding: 1rem;
+  backdrop-filter: blur(5px);
+}
+
+.community-progress .single-progress {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 15px;
+  padding: 1rem;
+  backdrop-filter: blur(5px);
+}
+
+.place-progress {
+  margin-top: 8px;
+}
+
+.place-progress .liquid-bar-label {
+  font-size: 11px;
+  margin-bottom: 4px;
+}
+
+/* Challenge Progress Overview */
+.challenge-progress-overview {
+  margin-bottom: 1.5rem;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 20px;
+  padding: 1.5rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 25px rgba(76, 175, 80, 0.1);
+}
+
+.overview-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.overview-item {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 15px;
+  padding: 1rem;
+  backdrop-filter: blur(5px);
+}
+
+.single-overview {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 15px;
+  padding: 1rem;
+  backdrop-filter: blur(5px);
+}
+
+/* Map Stats Overlay */
+.map-stats-overlay {
+  position: absolute;
+  top: 80px;
+  left: 20px;
+  width: 280px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  padding: 1.5rem;
+  backdrop-filter: blur(15px);
+  box-shadow: 0 8px 25px rgba(76, 175, 80, 0.2);
+  z-index: 1000;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.stats-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.stats-header h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #2E7D32;
+  margin: 0;
+}
+
+.close-stats {
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #2E7D32;
+  font-weight: bold;
+}
+
+.map-progress-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.map-progress-item {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 15px;
+  padding: 1rem;
+  backdrop-filter: blur(5px);
+}
+
+.single-map-progress {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 15px;
+  padding: 1rem;
+  backdrop-filter: blur(5px);
+}
+
+.show-stats-btn {
+  position: absolute;
+  top: 80px;
+  left: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 20px;
+  padding: 12px 16px;
+  backdrop-filter: blur(15px);
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.2);
+  z-index: 1000;
+  cursor: pointer;
+  color: #2E7D32;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 /* Shop Tabs */
@@ -1028,13 +1281,13 @@ button:focus-visible {
   border: none;
   padding: 0.8rem;
   border-radius: 12px;
-  color: #8B7EC8;
+  color: #4CAF50;
   font-weight: 600;
   transition: all 0.3s ease;
 }
 
 .tab-btn.active {
-  background: #8B7EC8;
+  background: #4CAF50;
   color: white;
 }
 
@@ -1049,13 +1302,13 @@ button:focus-visible {
 }
 
 .premium-header h3 {
-  color: #6B5B95;
+  color: #2E7D32;
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
 }
 
 .premium-header p {
-  color: #8B7EC8;
+  color: #4CAF50;
   font-size: 0.9rem;
 }
 
@@ -1105,7 +1358,7 @@ button:focus-visible {
 }
 
 .plan-header h4 {
-  color: #6B5B95;
+  color: #2E7D32;
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
 }
@@ -1123,7 +1376,7 @@ button:focus-visible {
 }
 
 .original-price {
-  color: #8B7EC8;
+  color: #4CAF50;
   text-decoration: line-through;
   font-size: 0.9rem;
 }
@@ -1143,7 +1396,7 @@ button:focus-visible {
 }
 
 .plan-features li {
-  color: #6B5B95;
+  color: #2E7D32;
   margin-bottom: 0.5rem;
   font-size: 0.9rem;
 }
@@ -1171,7 +1424,7 @@ button:focus-visible {
 }
 
 .premium-benefits h4 {
-  color: #6B5B95;
+  color: #2E7D32;
   font-size: 1.2rem;
   margin-bottom: 1rem;
   text-align: center;
@@ -1199,7 +1452,7 @@ button:focus-visible {
 }
 
 .benefit-text {
-  color: #6B5B95;
+  color: #2E7D32;
   font-size: 0.9rem;
   font-weight: 600;
 }
@@ -1215,13 +1468,13 @@ button:focus-visible {
 }
 
 .items-header h3 {
-  color: #6B5B95;
+  color: #2E7D32;
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
 }
 
 .items-header p {
-  color: #8B7EC8;
+  color: #4CAF50;
   font-size: 0.9rem;
 }
 
@@ -1260,13 +1513,13 @@ button:focus-visible {
 }
 
 .item-info h4 {
-  color: #6B5B95;
+  color: #2E7D32;
   font-size: 1.1rem;
   margin-bottom: 0.3rem;
 }
 
 .item-info p {
-  color: #8B7EC8;
+  color: #4CAF50;
   font-size: 0.9rem;
   margin-bottom: 0.5rem;
 }
@@ -1278,7 +1531,7 @@ button:focus-visible {
 }
 
 .buy-btn {
-  background: linear-gradient(45deg, #FFB6C1, #FFC0CB);
+  background: linear-gradient(45deg, #A5D6A7, #C8E6C9);
   color: #8B5A8B;
   border: none;
   border-radius: 20px;
@@ -1299,7 +1552,7 @@ button:focus-visible {
 }
 
 .earn-coins h4 {
-  color: #6B5B95;
+  color: #2E7D32;
   font-size: 1.2rem;
   margin-bottom: 1rem;
   text-align: center;
@@ -1333,7 +1586,7 @@ button:focus-visible {
 
 .task-text {
   flex: 1;
-  color: #6B5B95;
+  color: #2E7D32;
   font-weight: 500;
 }
 
@@ -1383,7 +1636,7 @@ button:focus-visible {
 /* Challenges 페이지 스타일 */
 .challenges-page {
   height: 100vh;
-  background: linear-gradient(135deg, #FFE5E5 0%, #E8F4FD 50%, #F0E6FF 100%);
+  background: linear-gradient(135deg, #E8F5E8 0%, #C8E6C9 50%, #A5D6A7 100%);
   overflow-y: auto;
 }
 
@@ -1398,7 +1651,7 @@ button:focus-visible {
 }
 
 .challenges-page .top-bar h2 {
-  color: #6B5B95;
+  color: #2E7D32;
   font-size: 1.5rem;
   font-weight: bold;
 }
@@ -1418,7 +1671,7 @@ button:focus-visible {
 }
 
 .stats-text {
-  color: #8B7EC8;
+  color: #4CAF50;
   font-weight: bold;
 }
 
@@ -1440,7 +1693,7 @@ button:focus-visible {
   border: none;
   padding: 0.8rem 0.5rem;
   border-radius: 12px;
-  color: #8B7EC8;
+  color: #4CAF50;
   font-weight: 600;
   font-size: 0.9rem;
   transition: all 0.3s ease;
@@ -1448,7 +1701,7 @@ button:focus-visible {
 }
 
 .challenges-tabs .tab-btn.active {
-  background: #8B7EC8;
+  background: #4CAF50;
   color: white;
 }
 
@@ -1480,11 +1733,11 @@ button:focus-visible {
 .summary-number {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #6B5B95;
+  color: #2E7D32;
 }
 
 .summary-label {
-  color: #8B7EC8;
+  color: #4CAF50;
   font-size: 0.9rem;
   font-weight: 600;
 }
@@ -1541,14 +1794,14 @@ button:focus-visible {
 }
 
 .challenge-title {
-  color: #6B5B95;
+  color: #2E7D32;
   font-size: 1.1rem;
   font-weight: bold;
   margin-bottom: 0.3rem;
 }
 
 .challenge-description {
-  color: #8B7EC8;
+  color: #4CAF50;
   font-size: 0.9rem;
   margin-bottom: 0.8rem;
   line-height: 1.4;
@@ -1575,7 +1828,7 @@ button:focus-visible {
 }
 
 .progress-text {
-  color: #6B5B95;
+  color: #2E7D32;
   font-size: 0.9rem;
   font-weight: 600;
   min-width: 40px;
@@ -1604,7 +1857,7 @@ button:focus-visible {
   padding: 0.5rem 0.8rem;
   border-radius: 15px;
   font-size: 0.8rem;
-  color: #6B5B95;
+  color: #2E7D32;
   font-weight: 600;
   text-align: center;
   border: 1px solid rgba(139, 126, 200, 0.2);
@@ -1617,7 +1870,7 @@ button:focus-visible {
 }
 
 .completion-date {
-  color: #8B7EC8;
+  color: #4CAF50;
   font-size: 0.9rem;
   font-style: italic;
 }
@@ -1634,7 +1887,7 @@ button:focus-visible {
 }
 
 .special-challenges h3 {
-  color: #6B5B95;
+  color: #2E7D32;
   font-size: 1.2rem;
   margin-bottom: 1rem;
   text-align: center;
@@ -1667,13 +1920,13 @@ button:focus-visible {
 }
 
 .special-title {
-  color: #6B5B95;
+  color: #2E7D32;
   font-weight: bold;
   margin-bottom: 0.2rem;
 }
 
 .special-desc {
-  color: #8B7EC8;
+  color: #4CAF50;
   font-size: 0.9rem;
 }
 
@@ -1689,7 +1942,7 @@ button:focus-visible {
 }
 
 .place-selector h3 {
-  color: #6B5B95;
+  color: #2E7D32;
   font-size: 1.2rem;
   margin-bottom: 1rem;
 }
@@ -1708,7 +1961,7 @@ button:focus-visible {
   background: rgba(255, 255, 255, 0.6);
   border: 2px solid rgba(139, 126, 200, 0.2);
   border-radius: 15px;
-  color: #6B5B95;
+  color: #2E7D32;
   font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
@@ -1723,9 +1976,9 @@ button:focus-visible {
 }
 
 .place-btn.active {
-  background: #8B7EC8;
+  background: #4CAF50;
   color: white;
-  border-color: #8B7EC8;
+  border-color: #4CAF50;
   box-shadow: 0 4px 15px rgba(139, 126, 200, 0.3);
 }
 
@@ -1759,7 +2012,7 @@ button:focus-visible {
 }
 
 .place-stats h3 {
-  color: #6B5B95;
+  color: #2E7D32;
   font-size: 1.2rem;
   margin-bottom: 1rem;
   text-align: center;
@@ -1796,11 +2049,11 @@ button:focus-visible {
 .stat-number {
   font-size: 1.3rem;
   font-weight: bold;
-  color: #6B5B95;
+  color: #2E7D32;
 }
 
 .stat-label {
-  color: #8B7EC8;
+  color: #4CAF50;
   font-size: 0.8rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -1810,7 +2063,7 @@ button:focus-visible {
 /* Landing Page Styles */
 .landing-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #FFE5E5 0%, #E8F4FD 50%, #F0E6FF 100%);
+  background: linear-gradient(135deg, #E8F5E8 0%, #C8E6C9 50%, #A5D6A7 100%);
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
@@ -1840,9 +2093,9 @@ button:focus-visible {
 .hero-title {
   font-size: 3.5rem;
   font-weight: bold;
-  color: #6B5B95;
+  color: #2E7D32;
   margin-bottom: 1rem;
-  background: linear-gradient(45deg, #6B5B95, #8B7EC8);
+  background: linear-gradient(45deg, #2E7D32, #4CAF50);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -1850,14 +2103,14 @@ button:focus-visible {
 
 .hero-subtitle {
   font-size: 1.5rem;
-  color: #8B7EC8;
+  color: #4CAF50;
   margin-bottom: 1.5rem;
   font-weight: 600;
 }
 
 .hero-description {
   font-size: 1.1rem;
-  color: #6B5B95;
+  color: #2E7D32;
   line-height: 1.6;
   margin-bottom: 2rem;
   opacity: 0.9;
@@ -1913,7 +2166,7 @@ button:focus-visible {
 .phone-screen {
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #FFE5E5 0%, #E8F4FD 50%, #F0E6FF 100%);
+  background: linear-gradient(135deg, #E8F5E8 0%, #C8E6C9 50%, #A5D6A7 100%);
   border-radius: 25px;
   padding: 2rem;
   display: flex;
@@ -1924,7 +2177,7 @@ button:focus-visible {
 
 .mockup-content {
   text-align: center;
-  color: #6B5B95;
+  color: #2E7D32;
 }
 
 .mockup-header {
@@ -1989,7 +2242,7 @@ button:focus-visible {
   text-align: center;
   font-size: 2.5rem;
   font-weight: bold;
-  color: #6B5B95;
+  color: #2E7D32;
   margin-bottom: 3rem;
 }
 
@@ -2023,12 +2276,12 @@ button:focus-visible {
 .feature-card h3 {
   font-size: 1.3rem;
   font-weight: bold;
-  color: #6B5B95;
+  color: #2E7D32;
   margin-bottom: 1rem;
 }
 
 .feature-card p {
-  color: #8B7EC8;
+  color: #4CAF50;
   line-height: 1.6;
 }
 
@@ -2075,12 +2328,12 @@ button:focus-visible {
 .step-content h3 {
   font-size: 1.3rem;
   font-weight: bold;
-  color: #6B5B95;
+  color: #2E7D32;
   margin-bottom: 1rem;
 }
 
 .step-content p {
-  color: #8B7EC8;
+  color: #4CAF50;
   line-height: 1.6;
 }
 
@@ -2115,12 +2368,12 @@ button:focus-visible {
 .feature-detail-content h2 {
   font-size: 2rem;
   font-weight: bold;
-  color: #6B5B95;
+  color: #2E7D32;
   margin-bottom: 1rem;
 }
 
 .feature-detail-content p {
-  color: #8B7EC8;
+  color: #4CAF50;
   line-height: 1.6;
   margin-bottom: 1.5rem;
   font-size: 1.1rem;
@@ -2132,7 +2385,7 @@ button:focus-visible {
 }
 
 .feature-list li {
-  color: #6B5B95;
+  color: #2E7D32;
   margin-bottom: 0.5rem;
   font-size: 1rem;
   display: flex;
@@ -2160,7 +2413,7 @@ button:focus-visible {
 
 .map-placeholder {
   text-align: center;
-  color: #8B7EC8;
+  color: #4CAF50;
 }
 
 .map-icon {
@@ -2183,7 +2436,7 @@ button:focus-visible {
 
 .chart-bar {
   width: 30px;
-  background: linear-gradient(to top, #FFB6C1, #FFC0CB);
+  background: linear-gradient(to top, #A5D6A7, #C8E6C9);
   border-radius: 3px 3px 0 0;
   min-height: 20px;
 }
@@ -2209,7 +2462,7 @@ button:focus-visible {
 /* CTA Section */
 .cta-section {
   padding: 4rem 2rem;
-  background: linear-gradient(45deg, #6B5B95, #8B7EC8);
+  background: linear-gradient(45deg, #2E7D32, #4CAF50);
   text-align: center;
   color: white;
 }
@@ -2247,7 +2500,7 @@ button:focus-visible {
 .footer {
   background: rgba(255, 255, 255, 0.9);
   padding: 3rem 2rem 1rem;
-  color: #6B5B95;
+  color: #2E7D32;
 }
 
 .footer-content {
@@ -2263,11 +2516,11 @@ button:focus-visible {
   font-size: 1.2rem;
   font-weight: bold;
   margin-bottom: 1rem;
-  color: #6B5B95;
+  color: #2E7D32;
 }
 
 .footer-section p {
-  color: #8B7EC8;
+  color: #4CAF50;
   line-height: 1.6;
 }
 
@@ -2277,21 +2530,21 @@ button:focus-visible {
 }
 
 .footer-section ul li {
-  color: #8B7EC8;
+  color: #4CAF50;
   margin-bottom: 0.5rem;
   cursor: pointer;
   transition: color 0.3s ease;
 }
 
 .footer-section ul li:hover {
-  color: #6B5B95;
+  color: #2E7D32;
 }
 
 .footer-bottom {
   text-align: center;
   padding-top: 2rem;
   border-top: 1px solid rgba(139, 126, 200, 0.2);
-  color: #8B7EC8;
+  color: #4CAF50;
 }
 
 /* Responsive Design */
