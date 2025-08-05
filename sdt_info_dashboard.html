@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - SDT Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #FFDDD2 0%, #DCC6E0 100%);
+            min-height: 100vh;
+            color: #333;
+            overflow-x: hidden;
+            padding-bottom: 80px;
+        }
+
+        .container {
+            max-width: 375px;
+            margin: 0 auto;
+            padding: 20px 16px;
+            position: relative;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 20px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* SDT Type Selector - Now shows current type */
+        .current-type-display {
+            text-align: center;
+            margin-bottom: 24px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .type-label {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .current-type {
+            font-size: 20px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #FF8A72, #FFE066);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+
+        .type-description {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .type-switcher {
+            display: flex;
+            gap: 6px;
+            margin-top: 12px;
+            justify-content: center;
+        }
+
+        .type-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .type-dot.active {
+            background: linear-gradient(135deg, #FF8A72, #FFE066);
+            transform: scale(1.2);
+        }
+
+        .profile-section {
+            text-align: center;
+            position: relative;
+        }
+
+        .avatar-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 16px;
+        }
+
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FF8A72, #FFE066);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 8px 24px rgba(255, 138, 114, 0.3);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .avatar:hover {
+            transform: scale(1.05);
+        }
+
+        .avatar-edit-btn {
+            position: absolute;
+            bottom: -4px;
+            right: -4px;
+            width: 28px;
+            height: 28px;
+            background: rgba(255, 138, 114, 0.7);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 12px;
+            color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(255, 138, 114, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .avatar-edit-btn:hover {
+            background: rgba(230, 126, 96, 0.9);
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(255, 138, 114, 0.5);
+        }
+
+        /* Image Upload Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+            margin: 15% auto;
+            padding: 30px;
+            border-radius: 20px;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .upload-options {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .upload-btn {
+            padding: 16px;
+            border: 2px dashed #FF8A72;
+            border-radius: 16px;
+            background: rgba(255, 138, 114, 0.1);
+            color: #FF8A72;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+
+        .upload-btn:hover {
+            background: rgba(255, 138, 114, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .close-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .preview-container {
+            margin: 16px 0;
+            display: none;
+        }
+
+        .preview-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #FF8A72;
+            margin-bottom: 12px;
+        }
+
+        .hidden-input {
+            display: none;
+        }
+
+        .profile-name {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .join-date {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* SDT Information */
+        .sdt-info-card {
+            background: linear-gradient(135deg, rgba(255, 138, 114, 0.15), rgba(255, 224, 102, 0.15));
+            border: 1px solid rgba(255, 138, 114, 0.2);
+            border-radius: 20px;
+            padding: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .sdt-info-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(255, 138, 114, 0.2);
+        }
+
+        .sdt-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .sdt-type-title {
+            font-size: 22px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #FF8A72, #f37641);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .expand-icon {
+            font-size: 18px;
+            color: #ff2a00;
+            transition: transform 0.3s ease;
+        }
+
+        .sdt-info-card.expanded .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        .sdt-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .sdt-info-card.expanded .sdt-content {
+            max-height: 300px;
+            opacity: 1;
+            margin-top: 16px;
+        }
+
+        .sdt-description {
+            font-size: 16px;
+            color: #555;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .sdt-characteristics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .characteristic-item {
+            background: rgba(255, 255, 255, 0.3);
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* Core Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px 16px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+        }
+
+        .stat-number {
+            font-size: 28px;
+            font-weight: 700;
+            color: #FF8A72;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* Current Mood */
+        .mood-display {
+            text-align: center;
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            margin: 20px 0;
+        }
+
+        .mood-emoji {
+            font-size: 48px;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .mood-label {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .mood-time {
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* Recent Activity */
+        .activity-item {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            margin-bottom: 12px;
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #B8EAEA, #DCC6E0);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+            font-size: 18px;
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 2px;
+            color: #333;
+        }
+
+        .activity-time {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #333;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            max-width: 320px;
+            width: calc(100% - 48px);
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            padding: 12px 0;
+            box-shadow: 0 8px 32px rgba(255, 221, 210, 0.3);
+        }
+
+        .bottom-nav::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            border-radius: 25px 25px 0 0;
+        }
+
+        .nav-items {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 4px;
+            align-items: center;
+            padding: 0 8px;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: rgba(102, 102, 102, 0.8);
+            padding: 8px 4px;
+            min-width: 50px;
+            min-height: 44px;
+            transition: all 0.2s ease;
+            border-radius: 12px;
+            gap: 4px;
+        }
+
+        .nav-item.active {
+            color: #FF8A72;
+            background: rgba(255, 138, 114, 0.15);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .nav-icon {
+            font-size: 18px;
+        }
+
+        .nav-label {
+            font-size: 12px;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .action-btn {
+            padding: 16px;
+            background: linear-gradient(135deg, #FFE066, #FF8A72);
+            border: none;
+            border-radius: 16px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            min-height: 44px;
+            font-size: 14px;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .action-btn.secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Profile Section -->
+        <div class="glass-card profile-section">
+            <div class="avatar-container">
+                <div class="avatar" id="avatar">A</div>
+                <div class="avatar-edit-btn" onclick="openImageModal()">📷</div>
+            </div>
+            <div class="profile-name" id="profileName">Mingi Kim</div>
+            <div class="join-date">Member since March 2024</div>
+        </div>
+
+        <!-- SDT Type Information -->
+        <div class="sdt-info-card" id="sdtCard" onclick="toggleSDTInfo()">
+            <div class="sdt-header">
+                <div class="sdt-type-title" id="sdtType">Autonomy-Focused</div>
+                <div class="expand-icon" id="expandIcon">▼</div>
+            </div>
+            <div class="sdt-content" id="sdtContent">
+                <div class="sdt-description" id="sdtDescription">
+                    You value independence, self-direction, and making your own choices. You thrive when you have control over your decisions and environment.
+                </div>
+                <div class="sdt-characteristics">
+                    <div class="characteristic-item">🎯 Self-directed</div>
+                    <div class="characteristic-item">🔓 Freedom-seeking</div>
+                    <div class="characteristic-item">💡 Initiative-taking</div>
+                    <div class="characteristic-item">🌟 Goal-oriented</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Core Stats -->
+        <div class="glass-card">
+            <div class="section-title">My Progress</div>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">47</div>
+                    <div class="stat-label">Days Active</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">156</div>
+                    <div class="stat-label">Mood Entries</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label">Challenges Done</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">1,247</div>
+                    <div class="stat-label">Tokens Earned</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Current Mood -->
+        <div class="glass-card">
+            <div class="section-title">Current Mood</div>
+            <div class="mood-display">
+                <span class="mood-emoji">😊</span>
+                <div class="mood-label">Feeling Good</div>
+                <div class="mood-time">Updated 2 hours ago</div>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="glass-card">
+            <div class="section-title">Recent Activity</div>
+            <div class="activity-item">
+                <div class="activity-icon">🎯</div>
+                <div class="activity-content">
+                    <div class="activity-title">Completed daily challenge</div>
+                    <div class="activity-time">3 hours ago</div>
+                </div>
+            </div>
+            <div class="activity-item">
+                <div class="activity-icon">📝</div>
+                <div class="activity-content">
+                    <div class="activity-title">Logged mood entry</div>
+                    <div class="activity-time">5 hours ago</div>
+                </div>
+            </div>
+            <div class="activity-item">
+                <div class="activity-icon">🏆</div>
+                <div class="activity-content">
+                    <div class="activity-title">Earned new badge</div>
+                    <div class="activity-time">1 day ago</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="glass-card">
+            <div class="section-title">Quick Actions</div>
+            <div class="quick-actions">
+                <button class="action-btn">Log Mood</button>
+                <button class="action-btn secondary">View Insights</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Upload Modal -->
+    <div id="imageModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-title">프로필 이미지 등록</div>
+            <div class="upload-options">
+                <button class="upload-btn" onclick="triggerFileInput()">
+                    📁 갤러리에서 선택
+                </button>
+                <button class="upload-btn" onclick="triggerCameraInput()">
+                    📷 카메라로 촬영
+                </button>
+            </div>
+            <div class="preview-container" id="previewContainer">
+                <img id="previewImage" class="preview-image" src="" alt="Preview">
+                <div>
+                    <button class="upload-btn" onclick="confirmImage()" style="margin-right: 8px;">✅ 적용</button>
+                    <button class="close-btn" onclick="cancelImage()">❌ 취소</button>
+                </div>
+            </div>
+            <button class="close-btn" onclick="closeImageModal()">닫기</button>
+            
+            <!-- Hidden file inputs -->
+            <input type="file" id="fileInput" class="hidden-input" accept="image/*" onchange="handleFileSelect(event)">
+            <input type="file" id="cameraInput" class="hidden-input" accept="image/*" capture="environment" onchange="handleFileSelect(event)">
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <div class="nav-items">
+            <div class="nav-item">
+                <div class="nav-icon">🏠</div>
+                <div class="nav-label">Home</div>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon">📊</div>
+                <div class="nav-label">Insights</div>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon">🎯</div>
+                <div class="nav-label">Challenges</div>
+            </div>
+            <div class="nav-item active">
+                <div class="nav-icon">👤</div>
+                <div class="nav-label">Profile</div>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon">⚙️</div>
+                <div class="nav-label">Settings</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Single User Data
+        const userData = {
+            name: "Mingi Kim",
+            avatar: "B",
+            sdtType: "Autonomy-Focused",
+            description: "You value independence, self-direction, and making your own choices. You thrive when you have control over your decisions and environment.",
+            characteristics: ["🎯 Self-directed", "🔓 Freedom-seeking", "💡 Initiative-taking", "🌟 Goal-oriented"]
+        };
+
+        // Avatar edit functionality
+        let selectedImageFile = null;
+
+        function openImageModal() {
+            document.getElementById('imageModal').style.display = 'block';
+        }
+
+        function closeImageModal() {
+            document.getElementById('imageModal').style.display = 'none';
+            document.getElementById('previewContainer').style.display = 'none';
+            selectedImageFile = null;
+        }
+
+        function triggerFileInput() {
+            document.getElementById('fileInput').click();
+        }
+
+        function triggerCameraInput() {
+            document.getElementById('cameraInput').click();
+        }
+
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (file && file.type.startsWith('image/')) {
+                selectedImageFile = file;
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('previewImage').src = e.target.result;
+                    document.getElementById('previewContainer').style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function confirmImage() {
+            if (selectedImageFile) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const avatar = document.getElementById('avatar');
+                    avatar.style.backgroundImage = `url(${e.target.result})`;
+                    avatar.style.backgroundSize = 'cover';
+                    avatar.style.backgroundPosition = 'center';
+                    avatar.textContent = ''; // Remove text when image is set
+                    
+                    // Add animation
+                    avatar.style.transform = 'scale(1.2)';
+                    setTimeout(() => {
+                        avatar.style.transform = 'scale(1)';
+                    }, 200);
+                    
+                    // Store in userData
+                    userData.avatarImage = e.target.result;
+                };
+                reader.readAsDataURL(selectedImageFile);
+                closeImageModal();
+            }
+        }
+
+        function cancelImage() {
+            document.getElementById('previewContainer').style.display = 'none';
+            selectedImageFile = null;
+        }
+
+        // Legacy text avatar function (keeping for backup)
+        function editAvatar() {
+            const newAvatar = prompt("Enter a new avatar (single character or emoji):", userData.avatar);
+            if (newAvatar && newAvatar.length > 0) {
+                userData.avatar = newAvatar.charAt(0).toUpperCase();
+                const avatar = document.getElementById('avatar');
+                avatar.style.backgroundImage = 'none'; // Remove image
+                avatar.textContent = userData.avatar;
+                
+                // Add animation
+                avatar.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    avatar.style.transform = 'scale(1)';
+                }, 200);
+            }
+        }
+
+        // SDT Info toggle functionality
+        function toggleSDTInfo() {
+            const sdtCard = document.getElementById('sdtCard');
+            const expandIcon = document.getElementById('expandIcon');
+            
+            sdtCard.classList.toggle('expanded');
+            
+            if (sdtCard.classList.contains('expanded')) {
+                expandIcon.textContent = '▲';
+            } else {
+                expandIcon.textContent = '▼';
+            }
+        }
+
+        // Initialize display
+        function initializeProfile() {
+            document.getElementById('avatar').textContent = userData.avatar;
+            document.getElementById('profileName').textContent = userData.name;
+            document.getElementById('sdtType').textContent = userData.sdtType;
+            document.getElementById('sdtDescription').textContent = userData.description;
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', initializeProfile);
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target === modal) {
+                closeImageModal();
+            }
+        }
+
+        // Bottom navigation
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+                item.classList.add('active');
+            });
+        });
+
+        // Quick action buttons
+        document.querySelectorAll('.action-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                btn.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    btn.style.transform = '';
+                }, 150);
+            });
+        });
+
+        // Mood emoji rotation for fun
+        const moodEmojis = ['😊', '😌', '🤗', '😎', '🥰'];
+        let moodIndex = 0;
+        
+        setInterval(() => {
+            moodIndex = (moodIndex + 1) % moodEmojis.length;
+            document.querySelector('.mood-emoji').textContent = moodEmojis[moodIndex];
+        }, 5000);
+    </script>
+</body>
+</html>
