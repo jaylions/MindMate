@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import '../styles/PetSelectionPage.css';
 
 // Import all pet images
+
 import pandaImg from '../assets/character/panda.jpg';
 import bearImg from '../assets/character/bear.jpg';
 import lionImg from '../assets/character/lion.jpg';
@@ -14,6 +15,7 @@ import dogImg from '../assets/character/dog.jpg';
 import dragonImg from '../assets/character/dragon.jpg';
 import grumpyCatImg from '../assets/character/grumpy_cat.jpg';
 import borderCollieImg from '../assets/character/border_collie.jpg';
+
 
 const PETS = [
   {
