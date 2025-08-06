@@ -413,6 +413,6 @@ We welcome contributions to Mind Mate! Please read our [Contributing Guidelines]
 
 **Made with ❤️ for hobby enthusiasts and personal growth seekers worldwide**
 
-[🌐 Live Demo](https://jaylions.github.io/SNU_IN_SV_MindMate/) • [📧 Contact](mailto:contact@mindmate.app) • [🐛 Report Bug](https://github.com/jaylions/SNU_IN_SV_MindMate/issues) • [✨ Request Feature](https://github.com/jaylions/SNU_IN_SV_MindMate/issues)
+[🌐 Live Demo](https://mind-mate-one.vercel.app) • [📧 Contact](mailto:contact@mindmate.app) • [🐛 Report Bug](https://github.com/jaylions/SNU_IN_SV_MindMate/issues) • [✨ Request Feature](https://github.com/jaylions/SNU_IN_SV_MindMate/issues)
 
 </div>
