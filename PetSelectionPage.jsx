@@ -2,18 +2,18 @@ import React, { useState } from 'react';
 import '../styles/PetSelectionPage.css';
 
 // Import all pet images
-import pandaImg from '../character/panda.jpg';
-import bearImg from '../character/bear.jpg';
-import lionImg from '../character/lion.jpg';
-import eagleImg from '../character/eagle.jpg';
-import rabbitImg from '../character/rabbit.jpg';
-import unicornImg from '../character/unicorn.jpg';
-import turtleImg from '../character/turtle.jpg';
-import catImg from '../character/cat.jpg';
-import dogImg from '../character/dog.jpg';
-import dragonImg from '../character/dragon.jpg';
-import grumpyCatImg from '../character/grumpy_cat.jpg';
-import borderCollieImg from '../character/border_collie.jpg';
+import pandaImg from '../../../character/panda.jpg';
+import bearImg from '../../../character/bear.jpg';
+import lionImg from '../../../character/lion.jpg';
+import eagleImg from '../../../character/eagle.jpg';
+import rabbitImg from '../../../character/rabbit.jpg';
+import unicornImg from '../../../character/unicorn.jpg';
+import turtleImg from '../../../character/turtle.jpg';
+import catImg from '../../../character/cat.jpg';
+import dogImg from '../../../character/dog.jpg';
+import dragonImg from '../../../character/dragon.jpg';
+import grumpyCatImg from '../../../character/grumpy_cat.jpg';
+import borderCollieImg from '../../../character/border_collie.jpg';
 
 const PETS = [
   {

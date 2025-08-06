@@ -4,51 +4,78 @@
   box-sizing: border-box;
 }
 
+/* ProfilePage.css 파일 최상단에 추가하세요 */
+body {
+  display: flex;
+  justify-content: center; /* 수평 중앙 정렬 */
+  align-items: center;     /* 수직 중앙 정렬 */
+  min-height: 100vh;
+  background-color: #f0f8ff; /* 앱 뒤에 보일 전체 페이지 배경색 (AliceBlue) */
+  padding: 20px 0; /* 화면 위아래에 약간의 여백 주기 */
+}
+
 .profile-page {
+  /* --- 역할 변경에 따른 핵심 수정 --- */
+  max-width: 500px;   /* 최대 너비를 여기에 직접 지정 */
+  width: 100%;
+  max-height: 95vh;   /* 화면보다 카드가 커지지 않도록 제한 */
+  border-radius: 24px;/* 카드처럼 보이도록 둥근 모서리 추가 */
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); /* 입체감을 위한 그림자 */
+
+  /* --- 기존 스타일 유지 및 수정 --- */
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background: linear-gradient(135deg, #E6F3FF 0%, #B8E0FF 50%, #A0D1FF 100%);
-  min-height: 100vh;
-  color: #2C5282;
+  overflow-y: auto;   /* 내용이 길어지면 이 카드 안에서만 스크롤됨 */
   overflow-x: hidden;
-  padding-bottom: 80px;
+  position: relative;
+  padding: 0 24px 120px 24px; /* 좌우 여백 추가 및 하단 네비게이션을 위한 공간 확보 */
+  -webkit-font-smoothing: antialiased;
+  color: #2C5282;
+  
+  /* 스크롤바 숨기기 */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.profile-page::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 .container {
-  max-width: 500px !important; /* 컨테이너 최대 너비 고정 */
-  width: 500px !important; /* 고정 너비 */
-  min-width: 500px !important; /* 최소 너비도 500px로 고정 */
-  margin: 0 auto;
-  padding: 20px 16px;
+  width: 100%;
+  margin: 0;
+  padding: 20px 0;
   position: relative;
-  box-sizing: border-box; /* 패딩 포함한 너비 계산 */
-  display: block; /* 일관된 display 타입 */
-}
-
-/* 모든 탭에서 동일한 너비 강제 적용 */
-.glass-card,
-.glass-card * {
-  box-sizing: border-box !important;
+  box-sizing: border-box;
 }
 
 .glass-card {
   background: rgba(255, 255, 255, 0.35);
   backdrop-filter: blur(20px);
-  border-radius: 20px;
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(184, 224, 255, 0.4);
-  margin-bottom: 20px;
-  padding: 24px;
+  border-radius: 20px;
   box-shadow: 0 8px 32px rgba(160, 209, 255, 0.3);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  width: 468px !important; /* 고정된 너비 (container 500px - padding 32px) */
-  max-width: 468px !important; /* 고정된 최대 너비 */
-  min-width: 468px !important; /* 고정된 최소 너비 */
-  margin-left: auto !important;
-  margin-right: auto !important;
+  position: relative;
+  overflow: hidden;
+  margin: 0 0 32px 0;
+  padding: 24px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(184, 224, 255, 0.6), transparent);
 }
 
 .glass-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 35px rgba(160, 209, 255, 0.35);
 }
 
 .profile-section {
@@ -296,26 +323,36 @@
 .section-title {
   font-size: 18px;
   font-weight: 700;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   color: #2C5282;
 }
 
 /* Quick Actions */
 .quick-actions {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
 }
 
 .action-btn {
-  padding: 16px;
+  padding: 8px 4px;
   border: none;
-  border-radius: 16px;
+  border-radius: 12px;
   font-weight: 600;
   cursor: pointer;
   transition: transform 0.3s ease;
-  min-height: 44px;
-  font-size: 14px;
+  min-height: 40px;
+  font-size: 11px;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  word-wrap: break-word;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .action-btn.primary {
@@ -439,6 +476,7 @@
   border-radius: 25px;
   padding: 12px 0;
   box-shadow: 0 8px 32px rgba(160, 209, 255, 0.3);
+  z-index: 1000;
 }
 
 .bottom-nav::before {
@@ -499,11 +537,8 @@
 
 /* Tab Navigation Styles */
 .tab-navigation {
-  margin-bottom: 24px;
-  width: 468px !important; /* 고정 너비 */
-  max-width: 468px !important; /* 고정 최대 너비 */
-  margin-left: auto !important;
-  margin-right: auto !important;
+  margin: 16px 0 24px 0;
+  width: 100%;
 }
 
 .tab-container {
@@ -513,68 +548,71 @@
   border: 1px solid rgba(184, 224, 255, 0.4);
   padding: 4px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr; /* 정확히 4등분 */
+  grid-template-columns: repeat(4, 1fr);
   gap: 2px;
   box-shadow: 0 4px 16px rgba(160, 209, 255, 0.2);
-  width: 400px !important; /* 고정 너비 */
-  max-width: 400px !important; /* 고정 최대 너비 */
-  min-width: 400px !important; /* 고정 최소 너비 */
+  width: 100%;
+  max-width: 100%;
   margin: 0 auto;
 }
 
 .tab-button {
-  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 4px;
-  padding: 12px 4px;
+  padding: 12px 8px;
   border: none;
   background: transparent;
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
   color: #4A90A4;
-  min-width: 70px;
-  max-width: 90px;
-  width: calc(25% - 1px); /* 정확히 4등분, gap 고려 */
-  box-sizing: border-box; /* 패딩 포함한 너비 계산 */
+  box-sizing: border-box;
+  min-height: 60px;
+  width: 100%;
 }
 
 .tab-button.active {
   background: rgba(255, 255, 255, 0.4);
   color: #2C5282;
   box-shadow: 0 2px 8px rgba(160, 209, 255, 0.3);
+  transform: translateY(-1px);
 }
 
 .tab-button:hover:not(.active) {
   background: rgba(255, 255, 255, 0.2);
   color: #2C5282;
+  transform: translateY(-1px);
 }
 
 .tab-icon {
-  font-size: 16px;
+  font-size: 18px;
+  margin-bottom: 2px;
 }
 
 .tab-label {
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 11px;
+  font-weight: 600;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  text-align: center;
+  line-height: 1.2;
 }
 
 .tab-content {
   animation: fadeIn 0.3s ease-in-out;
-  width: 468px !important; /* 고정된 너비 */
-  max-width: 468px !important; /* 고정된 최대 너비 */
-  min-width: 468px !important; /* 고정된 최소 너비 */
-  min-height: 400px; /* 최소 높이로 레이아웃 안정성 확보 */
-  box-sizing: border-box; /* 패딩 포함한 너비 계산 */
-  margin: 0 auto; /* 중앙 정렬 */
-  display: block; /* 일관된 display 타입 */
-  position: relative; /* 위치 안정성 */
-  overflow-x: hidden; /* 가로 스크롤 방지 */
+  width: 100%;
+  min-height: 400px;
+  box-sizing: border-box;
+  margin: 0;
+  display: block;
+  overflow: hidden;
+}
+
+/* 탭 내부 컨텐츠 간 간격 추가 */
+.tab-content > *:not(:last-child) {
+  margin-bottom: 18px;
 }
 
 @keyframes fadeIn {
@@ -864,7 +902,7 @@
   color: #2C5282;
 }
 
-/* Section-specific styles with consistent width - 완전 고정 */
+/* Section-specific styles with flexible width */
 .profile-info-section,
 .mood-health-section,
 .recommendation-section,
@@ -877,16 +915,14 @@
 .actions-section,
 .support-section,
 .app-info-section {
-  width: 468px !important; /* 고정 너비 */
-  max-width: 468px !important; /* 고정 최대 너비 */
-  min-width: 468px !important; /* 고정 최소 너비 */
-  flex: none !important; /* flex 크기 자동 조정 방지 */
-  box-sizing: border-box !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
+  width: 100%;
+  max-width: 100%;
+  flex: 1;
+  box-sizing: border-box;
+  margin: 0 auto;
 }
 
-/* 모든 내부 컨텐츠도 너비 제한 */
+/* 모든 내부 컨텐츠도 반응형 */
 .profile-info-section *,
 .mood-health-section *,
 .recommendation-section *,
@@ -899,8 +935,8 @@
 .actions-section *,
 .support-section *,
 .app-info-section * {
-  max-width: 100% !important;
-  box-sizing: border-box !important;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 /* Enhanced Profile Section Styles */
