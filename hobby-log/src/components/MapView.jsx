@@ -50,28 +50,97 @@ function MapView({ MapsToMain, MapsToCommunity, MapsToShop, MapsToProfile }) {
     loadMapComponents()
   }, [])
 
-  // 샘플 취미 장소 데이터
+  // 다양한 취미 장소 데이터 (일부 추천 장소 포함)
   const hobbyPlaces = [
     {
       id: 1,
       name: "Golden Gate Tennis Courts",
       position: [37.7694, -122.4862],
       description: "Outdoor tennis courts with beautiful city views",
-      icon: "🎾"
+      icon: "🎾",
+      type: 'tennis',
+      recommended: true
     },
     {
       id: 2,
       name: "Touchstone Climbing Gym",
       position: [37.7749, -122.4194],
       description: "Indoor climbing gym with bouldering and top-rope",
-      icon: "🧗"
+      icon: "🧗",
+      type: 'climbing',
+      recommended: true
     },
     {
       id: 3,
       name: "Blue Bottle Coffee",
       position: [37.7849, -122.4094],
       description: "Artisanal coffee shop with craft brewing",
-      icon: "☕"
+      icon: "☕",
+      type: 'cafe',
+      recommended: false
+    },
+    {
+      id: 4,
+      name: "Ping Pong Social Club",
+      position: [37.7810, -122.4110],
+      description: "Trendy ping pong bar and lounge",
+      icon: "🏓",
+      type: 'pingpong',
+      recommended: false
+    },
+    {
+      id: 5,
+      name: "Artisan Sculpture Studio",
+      position: [37.7705, -122.4470],
+      description: "Community sculpture and pottery classes",
+      icon: "🗿",
+      type: 'sculpture',
+      recommended: true
+    },
+    {
+      id: 6,
+      name: "Metal Craft Workshop",
+      position: [37.7650, -122.4300],
+      description: "Learn metalworking and jewelry making",
+      icon: "⚒️",
+      type: 'metal',
+      recommended: false
+    },
+    {
+      id: 7,
+      name: "Sunset Table Tennis",
+      position: [37.7620, -122.4780],
+      description: "Friendly table tennis club for all levels",
+      icon: "🏓",
+      type: 'pingpong',
+      recommended: false
+    },
+    {
+      id: 8,
+      name: "Dream Tennis Academy",
+      position: [37.7590, -122.4660],
+      description: "Tennis lessons and tournaments for all ages",
+      icon: "🎾",
+      type: 'tennis',
+      recommended: false
+    },
+    {
+      id: 9,
+      name: "Urban Climb Center",
+      position: [37.7680, -122.4150],
+      description: "Modern climbing gym with classes and events",
+      icon: "🧗",
+      type: 'climbing',
+      recommended: false
+    },
+    {
+      id: 10,
+      name: "Gallery of Modern Art",
+      position: [37.7850, -122.4010],
+      description: "Contemporary art exhibitions and workshops",
+      icon: "🖼️",
+      type: 'art',
+      recommended: true
     }
   ]
 
@@ -139,7 +208,7 @@ function MapView({ MapsToMain, MapsToCommunity, MapsToShop, MapsToProfile }) {
       {/* Header */}
       <div className="map-header">
         <h1 className="map-title">🗺️ Discover Hobby Spots</h1>
-        <p className="map-subtitle">Find amazing places around you</p>
+        <p className="map-subtitle">Check the red places recommended for you!</p>
       </div>
 
       {/* Map Container with Card Style */}
@@ -154,22 +223,34 @@ function MapView({ MapsToMain, MapsToCommunity, MapsToShop, MapsToProfile }) {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
-          {hobbyPlaces.map((place) => (
-            <Marker 
-              key={place.id} 
-              position={place.position}
-              eventHandlers={{
-                click: () => handleMarkerClick(place)
-              }}
-            >
-              <Popup>
-                <div>
-                  <h3 style={{ margin: '0 0 8px 0', fontSize: '16px' }}>{place.name}</h3>
-                  <p style={{ margin: 0, fontSize: '14px' }}>{place.description}</p>
-                </div>
-              </Popup>
-            </Marker>
-          ))}
+          {hobbyPlaces.map((place) => {
+            // 모든 마커에 이모티콘, 추천 장소는 빨간 테두리, 나머지는 파란 테두리
+            let markerOptions = {};
+            if (window.L) {
+              markerOptions.icon = window.L.divIcon({
+                className: place.recommended ? 'recommended-marker-simple' : 'normal-marker-simple',
+                iconSize: [36, 36],
+                html: `<div style="background:#fff;border:3px solid ${place.recommended ? '#e74c3c' : '#3498db'};border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 16px ${place.recommended ? '#e74c3c80' : '#3498db80'};"><span style='font-size:22px;'>${place.icon}</span></div>`
+              });
+            }
+            return (
+              <Marker 
+                key={place.id} 
+                position={place.position}
+                eventHandlers={{
+                  click: () => handleMarkerClick(place)
+                }}
+                {...markerOptions}
+              >
+                <Popup>
+                  <div>
+                    <h3 style={{ margin: '0 0 8px 0', fontSize: '16px' }}>{place.name} {place.recommended && <span style={{color:'#e74c3c',fontWeight:'bold',marginLeft:'6px'}}>Recommended</span>}</h3>
+                    <p style={{ margin: 0, fontSize: '14px' }}>{place.description}</p>
+                  </div>
+                </Popup>
+              </Marker>
+            );
+          })}
         </MapContainer>
         </div>
         
