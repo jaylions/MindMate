@@ -10,7 +10,6 @@
 [![Vite](https://img.shields.io/badge/Vite-7.0.4-646CFF?style=flat&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![Leaflet](https://img.shields.io/badge/Leaflet-1.9.4-199900?style=flat&logo=leaflet&logoColor=white)](https://leafletjs.com/)
 [![OpenAI Ready](https://img.shields.io/badge/OpenAI-Integration%20Ready-412991?style=flat&logo=openai&logoColor=white)](https://openai.com/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg?style=flat)](LICENSE)
 
 </div>
 
@@ -371,10 +370,6 @@ We welcome contributions to Mind Mate! Please read our [Contributing Guidelines]
 - **Accessibility**: WCAG 2.1 AAA compliance improvements
 - **Internationalization**: Multi-language support
 - **Analytics**: Advanced user behavior analysis features
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
