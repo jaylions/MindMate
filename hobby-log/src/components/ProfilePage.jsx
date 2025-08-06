@@ -526,7 +526,7 @@ function ProfilePage({ userData, MapsToMain, MapsToChallenges, MapsToMap, MapsTo
             {/* Account Actions */}
             <div className="glass-card actions-section">
               <div className="section-title">Account Actions</div>
-              <div className="action-buttons">
+              <div className="quick-actions">
                 <button className="action-btn primary">Export Data</button>
                 <button className="action-btn secondary">Reset Progress</button>
                 <button className="action-btn danger">Delete Account</button>
