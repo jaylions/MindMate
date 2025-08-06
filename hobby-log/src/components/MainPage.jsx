@@ -53,6 +53,9 @@ function MainPage({ MapsToMap, MapsToCommunity, MapsToShop, MapsToChallenges, Ma
       {/* Pet Character Section */}
       <div className="glass-card pet-section">
         <div className="pet-container">
+          <div className="pet-speech-bubble">
+            <h3 className="chat-box-title">What did you do?</h3>
+          </div>
           <div className="pet-avatar">
             <div className="pet-character" style={{
               backgroundImage: userData?.selectedPet?.image ? `url(${userData.selectedPet.image})` : 'none'
@@ -76,7 +79,6 @@ function MainPage({ MapsToMap, MapsToCommunity, MapsToShop, MapsToChallenges, Ma
       {/* Chat Box Section */}
       <div className="glass-card chat-box-section">
         <div className="chat-box-header">
-          <h3 className="chat-box-title">What did you do?</h3>
         </div>
         <div className="chat-box-input">
           <label htmlFor="daily-input" className="sr-only">Tell me about your day</label>
