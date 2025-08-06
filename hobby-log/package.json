@@ -3,7 +3,6 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://jaylions.github.io/SNU_IN_SV_MindMate",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
