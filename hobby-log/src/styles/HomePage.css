@@ -286,14 +286,60 @@ body {
 }
 
 .chat-box-header {
+  position: relative;
   text-align: center;
   margin-bottom: 16px;
+}
+
+.pet-speech-bubble {
+  position: relative;
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  padding: 12px 20px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 2px solid rgba(135, 206, 250, 0.6);
+}
+
+.pet-speech-bubble::before {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 12px solid rgba(255, 255, 255, 0.9);
+}
+
+.pet-speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 17px solid transparent;
+  border-right: 17px solid transparent;
+  border-top: 15px solid rgba(135, 206, 250, 0.6);
+  z-index: -1;
+}
+
+.pet-container .pet-speech-bubble {
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 2;
 }
 
 .chat-box-title {
   font-size: 18px;
   font-weight: 600;
   color: #333;
+  margin: 0;
 }
 
 .chat-box-input {
