@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import LiquidBar from './LiquidBar'
 import '../styles/HomePage.css'
+import OpenAI from 'openai'
 
 function MainPage({ MapsToMap, MapsToCommunity, MapsToShop, MapsToChallenges, MapsToProfile, userData }) {
   const [showGoalSettings, setShowGoalSettings] = useState(false)
@@ -9,6 +10,9 @@ function MainPage({ MapsToMap, MapsToCommunity, MapsToShop, MapsToChallenges, Ma
   const [completedToday, setCompletedToday] = useState(false)
   const [currentTime, setCurrentTime] = useState(new Date())
   const [selectedCategory, setSelectedCategory] = useState('active')
+  const [chatMessages, setChatMessages] = useState([])
+  const [currentMessage, setCurrentMessage] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -42,6 +46,48 @@ function MainPage({ MapsToMap, MapsToCommunity, MapsToShop, MapsToChallenges, Ma
     return `${goalFrequency} ${periodText}`
   }
 
+  const handleSendMessage = async () => {
+    if (!currentMessage.trim() || isLoading) return
+
+    const userMessage = currentMessage.trim()
+    setCurrentMessage('')
+    setIsLoading(true)
+
+    const newMessages = [...chatMessages, { role: 'user', content: userMessage }]
+    setChatMessages(newMessages)
+
+    try {
+      const openai = new OpenAI({
+        apiKey: import.meta.env.VITE_OPENAI_API_KEY,
+        dangerouslyAllowBrowser: true
+      })
+
+      const completion = await openai.chat.completions.create({
+        messages: [
+          { role: 'system', content: `You are a friendly pet companion who helps users track their daily activities and hobbies. The user has a pet named ${userData?.selectedPet?.name || 'your pet'} (${userData?.selectedPet?.emoji || '🐰'}). Be encouraging and supportive about their activities. Keep responses concise and friendly.` },
+          ...newMessages
+        ],
+        model: 'gpt-3.5-turbo',
+        max_tokens: 150
+      })
+
+      const assistantMessage = completion.choices[0].message.content
+      setChatMessages([...newMessages, { role: 'assistant', content: assistantMessage }])
+    } catch (error) {
+      console.error('OpenAI API Error:', error)
+      setChatMessages([...newMessages, { role: 'assistant', content: 'Sorry, I\'m having trouble connecting right now. Please try again later!' }])
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault()
+      handleSendMessage()
+    }
+  }
+
   return (
     <div className="main-page">
       {/* Header Section */}
@@ -54,7 +100,24 @@ function MainPage({ MapsToMap, MapsToCommunity, MapsToShop, MapsToChallenges, Ma
       <div className="glass-card pet-section">
         <div className="pet-container">
           <div className="pet-speech-bubble">
-            <h3 className="chat-box-title">What did you do?</h3>
+            {chatMessages.length === 0 ? (
+              <h3 className="chat-box-title">What did you do?</h3>
+            ) : (
+              <div className="pet-response">
+                {isLoading ? (
+                  <div className="loading-message">
+                    {userData?.selectedPet?.emoji || '🐰'} is thinking...
+                  </div>
+                ) : (
+                  <div className="pet-message">
+                    {chatMessages[chatMessages.length - 1]?.role === 'assistant' 
+                      ? chatMessages[chatMessages.length - 1]?.content 
+                      : "Tell me about your day!"
+                    }
+                  </div>
+                )}
+              </div>
+            )}
           </div>
           <div className="pet-avatar">
             <div className="pet-character" style={{
@@ -79,7 +142,23 @@ function MainPage({ MapsToMap, MapsToCommunity, MapsToShop, MapsToChallenges, Ma
       {/* Chat Box Section */}
       <div className="glass-card chat-box-section">
         <div className="chat-box-header">
+          <h3>Chat with {userData?.selectedPet?.name || 'Your Pet'}</h3>
         </div>
+        
+        {chatMessages.filter(msg => msg.role === 'user').length > 0 && (
+          <div className="chat-history">
+            <h4>Recent messages:</h4>
+            <div className="user-messages">
+              {chatMessages.filter(msg => msg.role === 'user').slice(-2).map((message, index) => (
+                <div key={index} className="user-message-history">
+                  <span className="user-icon">💬</span>
+                  {message.content}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+        
         <div className="chat-box-input">
           <label htmlFor="daily-input" className="sr-only">Tell me about your day</label>
           <input 
@@ -88,8 +167,18 @@ function MainPage({ MapsToMap, MapsToCommunity, MapsToShop, MapsToChallenges, Ma
             type="text" 
             placeholder="Tell me about your day..." 
             aria-label="Tell me about your day"
+            value={currentMessage}
+            onChange={(e) => setCurrentMessage(e.target.value)}
+            onKeyPress={handleKeyPress}
+            disabled={isLoading}
           />
-          <button type="button">Send</button>
+          <button 
+            type="button" 
+            onClick={handleSendMessage}
+            disabled={isLoading || !currentMessage.trim()}
+          >
+            {isLoading ? '...' : 'Send'}
+          </button>
         </div>
       </div>
 
