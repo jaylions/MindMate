@@ -64,7 +64,7 @@ function MainPage({ MapsToMap, MapsToCommunity, MapsToShop, MapsToChallenges, Ma
 
       const completion = await openai.chat.completions.create({
         messages: [
-          { role: 'system', content: `You are a friendly pet companion who helps users track their daily activities and hobbies. The user has a pet named ${userData?.selectedPet?.name || 'your pet'} (${userData?.selectedPet?.emoji || '🐰'}). Be encouraging and supportive about their activities. Keep responses concise and friendly.` },
+          { role: 'system', content: `You are a friendly pet companion who helps users track their daily activities and hobbies. The user has a pet named ${userData?.selectedPet?.name || 'your pet'} (${userData?.selectedPet?.emoji || '🐰'}). Be encouraging and supportive about their activities. Keep responses concise and friendly, and try to ask them what they like and what thay enjoy as a mental helper` },
           ...newMessages
         ],
         model: 'gpt-3.5-turbo',
